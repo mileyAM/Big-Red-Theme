@@ -1,0 +1,29 @@
+====================================================================
+MILEYM3DIA (M3 BIG RED) — PRODUCTION CALL SHEET & ON-SET CHECKLIST
+====================================================================
+
+1. PRODUCTION METADATA
+   - Production Title: ___________________________
+   - Client / Artist:  ___________________________
+   - Shoot Date:       ___________________________
+   - Director / DP:    ___________________________
+   - General Call:     ___________________________
+
+2. CAMERA & OPTICS PREP CHECKLIST
+   [ ] Cinema Camera Body (RED / Sony FX / Blackmagic) Sensor Checked
+   [ ] Media Cards Formatted & Redundant Backup Verified
+   [ ] Frame Rate & Shutter Angle Locked (23.976fps / 180 deg)
+   [ ] Color Space & LUT Monitoring Active (S-Log3 / REDLogFilm)
+   [ ] Prime / Anamorphic Lenses Cleaned & Follow Focus Calibrated
+
+3. LIGHTING & GRIP CHECKLIST
+   [ ] Key, Fill & Rim LED Fixtures Tested
+   [ ] Diffusion, Flags & Negative Fill Staged
+   [ ] V-Mount / Gold-Mount Batteries Charged (100%)
+
+4. AUDIO & TIME-CODE CHECKLIST
+   [ ] 24-Bit / 48kHz Scratch & Boom Audio Armed
+   [ ] Timecode Slate Synced to A-Cam & Audio Recorder
+
+====================================================================
+MILEYM3DIA CREATIVE MEDIA AGENCY · ORLANDO, FL · WORLDWIDE

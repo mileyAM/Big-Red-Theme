@@ -1,0 +1,24 @@
+====================================================================
+MILEYM3DIA — BRAND IDENTITY & LOOKBOOK ARCHITECTURE GUIDE
+====================================================================
+
+1. TYPOGRAPHY HIERARCHY
+   - Display / Headline: Anton / Syne Bold (Tracking: +0.02em)
+   - Body Copy: Plus Jakarta Sans (Line Height: 1.7)
+   - Technical Metadata: JetBrains Mono (Uppercase, +0.14em)
+
+2. CORE STUDIO COLOR PALETTE
+   - Deep Obsidian Base: #06070B
+   - Elevated Surface:   #0D0F17
+   - Card Surface:       #131622
+   - Primary Crimson:    #FF2442
+   - Cyber Yellow:       #FFDD00
+   - Acid Lime:          #00FF7F
+   - Electric Blue:      #38BDF8
+
+3. DELIVERABLE EXPORT SPECS
+   - Master Video: 4K UHD (3840x2160) ProRes 422 HQ & H.264 High Bitrate
+   - Vertical Reels: 1080x1920 (9:16) 60Mbps
+   - Editorial Stills: 300 DPI TIFF + sRGB Web JPEGs
+   - Audio Masters: 24-Bit / 48kHz Uncompressed WAV (-14 LUFS Streaming)
+====================================================================

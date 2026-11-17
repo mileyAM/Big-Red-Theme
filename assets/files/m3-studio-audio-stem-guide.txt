@@ -1,0 +1,15 @@
+====================================================================
+MILEYM3DIA — STUDIO AUDIO STEM PREP & MASTERING GUIDE
+====================================================================
+
+1. STEM EXPORT REQUIREMENTS FOR MIXING
+   - Format: 24-Bit / 48kHz or 96kHz WAV (Uncompressed)
+   - Headroom: -6dB to -3dB Peak on Master Bus (No Clipper/Limiter)
+   - Consolidation: All stems exported from Bar 1, Beat 1 (00:00:00)
+   - Naming: [TrackNumber]_[InstrumentName]_[BPM]_[Key].wav
+
+2. VOCAL TRACKING DELIVERABLES
+   - Lead Vocal Dry + Reference Print
+   - Doubles (L/R) & Harmonies Separated
+   - Ad-Lib & FX Tracks Labeled
+====================================================================
