@@ -126,21 +126,21 @@ function mileym3dia_customize_register($wp_customize) {
         'priority'    => 25,
     ));
 
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_bg_color', 'mileym3dia_colors', __('Dark Base Layer 1 (Deepest Background)', 'm3-big-red'), '#050507');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_bg_elevated', 'mileym3dia_colors', __('Dark Base Layer 2 (Alternating Section Shade)', 'm3-big-red'), '#0A0B0F');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_bg_surface', 'mileym3dia_colors', __('Dark Base Layer 3 (Cards & Surfaces)', 'm3-big-red'), '#101116');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_bg_color', 'mileym3dia_colors', __('Dark Base Layer 1 (Deepest Background)', 'm3-big-red'), '#060609');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_bg_elevated', 'mileym3dia_colors', __('Dark Base Layer 2 (Alternating Section Shade)', 'm3-big-red'), '#0C0C12');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_bg_surface', 'mileym3dia_colors', __('Dark Base Layer 3 (Cards & Surfaces)', 'm3-big-red'), '#12121B');
     mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_text_color', 'mileym3dia_colors', __('Primary Text Color', 'm3-big-red'), '#F4F4F6');
 
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_red', 'mileym3dia_colors', __('Bold Red (Primary Brand Accent)', 'm3-big-red'), '#EF233C');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_yellow', 'mileym3dia_colors', __('Electric Yellow Accent', 'm3-big-red'), '#FFE600');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_lime', 'mileym3dia_colors', __('Neon Lime Green Accent', 'm3-big-red'), '#00FF66');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_blue', 'mileym3dia_colors', __('Royal Blue Accent', 'm3-big-red'), '#2563EB');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_red', 'mileym3dia_colors', __('Bold Red (Primary Brand Accent)', 'm3-big-red'), '#FF2442');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_yellow', 'mileym3dia_colors', __('Electric Yellow Accent', 'm3-big-red'), '#FFDD00');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_lime', 'mileym3dia_colors', __('Neon Lime Green Accent', 'm3-big-red'), '#00FF7F');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_blue', 'mileym3dia_colors', __('Royal Blue Accent', 'm3-big-red'), '#38BDF8');
 
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_work', 'mileym3dia_colors', __('Work / Portfolio Page Accent', 'm3-big-red'), '#EF233C');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_services', 'mileym3dia_colors', __('Services & Pricing Page Accent', 'm3-big-red'), '#00FF66');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_about', 'mileym3dia_colors', __('About Page Accent', 'm3-big-red'), '#FFE600');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_resources', 'mileym3dia_colors', __('Blog, Store & Resources Accent', 'm3-big-red'), '#2563EB');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_contact', 'mileym3dia_colors', __('Contact Page Accent', 'm3-big-red'), '#EF233C');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_work', 'mileym3dia_colors', __('Work / Portfolio Page Accent', 'm3-big-red'), '#FF2442');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_services', 'mileym3dia_colors', __('Services & Pricing Page Accent', 'm3-big-red'), '#00FF7F');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_about', 'mileym3dia_colors', __('About Page Accent', 'm3-big-red'), '#FFDD00');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_resources', 'mileym3dia_colors', __('Blog, Store & Resources Accent', 'm3-big-red'), '#38BDF8');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_contact', 'mileym3dia_colors', __('Contact Page Accent', 'm3-big-red'), '#FF2442');
 
     // ============================================
     // 2B. HOMEPAGE SECTION POSITION & ORDERING
@@ -222,6 +222,57 @@ function mileym3dia_customize_register($wp_customize) {
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_split2_title', 'mileym3dia_about', __('Process Split Headline', 'm3-big-red'), 'ONE STUDIO. EVERY CREATIVE DISCIPLINE.');
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_split2_desc', 'mileym3dia_about', __('Process Split Description', 'm3-big-red'), 'Instead of hiring separate freelancers for video, photography, branding, web development, and audio, our clients work with one unified creative team.', 'textarea');
 
+    // Missing About & Studio Controls (F2)
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_about_hero_title', 'mileym3dia_about', __('About Page Hero Title (Optional Override)', 'm3-big-red'), '');
+    mileym3dia_add_customizer_image($wp_customize, 'mileym3dia_about_hero_image', 'mileym3dia_about', __('About Page Hero Background Image (Optional)', 'm3-big-red'), '');
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_about_story_eyebrow', 'mileym3dia_about', __('About Story Split Eyebrow', 'm3-big-red'), '01 / STUDIO OVERVIEW');
+
+    // 4 Homepage Studio Pillars
+    $default_pillars = array(
+        1 => array('title' => 'CINEMA-GRADE EQUIPMENT', 'desc' => 'Shot on RED, Sony FX, and Blackmagic cinema cameras with pro lighting & audio.'),
+        2 => array('title' => 'INTEGRATED BRAND & WEB', 'desc' => 'Visual identity, graphic design, and custom web builds that match your media.'),
+        3 => array('title' => 'FAST 7–14 DAY DELIVERY', 'desc' => 'Clear milestones, direct communication, and on-time final masters.'),
+        4 => array('title' => 'FULL COMMERCIAL RIGHTS', 'desc' => 'Every package includes complete commercial licensing for your brand or release.'),
+    );
+    foreach ($default_pillars as $p_idx => $p_def) {
+        mileym3dia_add_customizer_field($wp_customize, "mileym3dia_pillar_{$p_idx}_title", 'mileym3dia_about', sprintf(__('Studio Pillar %d Title', 'm3-big-red'), $p_idx), $p_def['title']);
+        mileym3dia_add_customizer_field($wp_customize, "mileym3dia_pillar_{$p_idx}_desc", 'mileym3dia_about', sprintf(__('Studio Pillar %d Description', 'm3-big-red'), $p_idx), $p_def['desc'], 'textarea');
+    }
+
+    // 2 Homepage Studio CTA Buttons
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_about_cta_1_text', 'mileym3dia_about', __('Homepage Studio Primary CTA Text', 'm3-big-red'), 'MORE ABOUT THE STUDIO');
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_about_cta_1_url', 'mileym3dia_about', __('Homepage Studio Primary CTA URL', 'm3-big-red'), '/about/', 'url');
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_about_cta_2_text', 'mileym3dia_about', __('Homepage Studio Secondary CTA Text', 'm3-big-red'), 'BOOK A CONSULTATION');
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_about_cta_2_url', 'mileym3dia_about', __('Homepage Studio Secondary CTA URL', 'm3-big-red'), '/contact/', 'url');
+
+    // 3 About Page Checklist Items
+    $default_checks = array(
+        1 => array('title' => 'Cinematic Visuals:', 'desc' => 'Every frame is lit, directed, and color-graded to broadcast and cinema standards.'),
+        2 => array('title' => 'Cohesive Brand Identity:', 'desc' => 'Logos, typography, packaging, and web design built around a single strong brand story.'),
+        3 => array('title' => 'Studio-Grade Sound:', 'desc' => 'Clean location audio, custom scoring, mixing, and mastering handled in-house.'),
+    );
+    foreach ($default_checks as $c_idx => $c_def) {
+        mileym3dia_add_customizer_field($wp_customize, "mileym3dia_about_check_{$c_idx}_title", 'mileym3dia_about', sprintf(__('About Checklist %d Title', 'm3-big-red'), $c_idx), $c_def['title']);
+        mileym3dia_add_customizer_field($wp_customize, "mileym3dia_about_check_{$c_idx}_desc", 'mileym3dia_about', sprintf(__('About Checklist %d Description', 'm3-big-red'), $c_idx), $c_def['desc'], 'textarea');
+    }
+
+    // 15 Gear Arsenal Settings
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_gear_eyebrow', 'mileym3dia_about', __('Gear Arsenal Section Eyebrow', 'm3-big-red'), '03 / PRODUCTION ARSENAL');
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_gear_title', 'mileym3dia_about', __('Gear Arsenal Section Title', 'm3-big-red'), 'CINEMA HARDWARE & POST PIPELINE');
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_gear_desc', 'mileym3dia_about', __('Gear Arsenal Section Description', 'm3-big-red'), 'Industry-standard cinema cameras, prime and anamorphic lenses, drone systems, and dedicated post-production suites.', 'textarea');
+
+    $default_gear = array(
+        1 => array('title' => 'CINEMA CAMERAS', 'desc' => 'RED Digital Cinema, Sony FX Cinema Line, and Blackmagic 6K Pro camera packages with RAW recording.', 'tag' => '4K / 6K / 8K RAW'),
+        2 => array('title' => 'LENSES & LIGHTING', 'desc' => 'Cinema prime lenses, anamorphic glass, and full-spectrum LED studio and location lighting kits.', 'tag' => 'PRIME & ANAMORPHIC'),
+        3 => array('title' => 'AERIAL & MOTION', 'desc' => 'Licensed drone cinematography, 3-axis cinema gimbals, vehicle mounts, and wireless director monitoring.', 'tag' => 'AERIAL & STABILIZATION'),
+        4 => array('title' => 'EDIT, COLOR & AUDIO', 'desc' => 'DaVinci Resolve Studio color grading, Adobe Creative Cloud, custom web stack, and treated audio mixing suites.', 'tag' => 'POST & MASTERING'),
+    );
+    foreach ($default_gear as $g_idx => $g_def) {
+        mileym3dia_add_customizer_field($wp_customize, "mileym3dia_gear_{$g_idx}_tag", 'mileym3dia_about', sprintf(__('Gear Card %d Tag', 'm3-big-red'), $g_idx), $g_def['tag']);
+        mileym3dia_add_customizer_field($wp_customize, "mileym3dia_gear_{$g_idx}_title", 'mileym3dia_about', sprintf(__('Gear Card %d Title', 'm3-big-red'), $g_idx), $g_def['title']);
+        mileym3dia_add_customizer_field($wp_customize, "mileym3dia_gear_{$g_idx}_desc", 'mileym3dia_about', sprintf(__('Gear Card %d Description', 'm3-big-red'), $g_idx), $g_def['desc'], 'textarea');
+    }
+
     // ============================================
     // 5. SELECTED WORK / PORTFOLIO
     // ============================================
@@ -234,6 +285,7 @@ function mileym3dia_customize_register($wp_customize) {
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_show_selected_work', 'mileym3dia_portfolio', __('Show Selected Work on Homepage', 'm3-big-red'), true, 'checkbox');
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_portfolio_eyebrow', 'mileym3dia_portfolio', __('Portfolio Section Eyebrow', 'm3-big-red'), '02 / SELECTED WORK');
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_portfolio_title', 'mileym3dia_portfolio', __('Portfolio Big Headline', 'm3-big-red'), 'FEATURED PRODUCTIONS');
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_portfolio_hero_title', 'mileym3dia_portfolio', __('Portfolio Page Hero Title (Optional Override)', 'm3-big-red'), 'FEATURED PRODUCTIONS');
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_portfolio_desc', 'mileym3dia_portfolio', __('Portfolio Section Intro', 'm3-big-red'), 'Recent commercial films, music videos, brand identity systems, web builds, and photography campaigns.', 'textarea');
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_portfolio_count', 'mileym3dia_portfolio', __('Number of Projects to Display', 'm3-big-red'), 4, 'number', array('input_attrs' => array('min' => 1, 'max' => 12)));
 
@@ -267,7 +319,14 @@ function mileym3dia_customize_register($wp_customize) {
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_show_pricing', 'mileym3dia_services', __('Show Pricing Section on Homepage', 'm3-big-red'), true, 'checkbox');
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_services_eyebrow', 'mileym3dia_services', __('Services Section Eyebrow', 'm3-big-red'), '03 / WHAT WE DO');
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_services_title', 'mileym3dia_services', __('Services Big Headline', 'm3-big-red'), 'CORE CREATIVE SERVICES');
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_services_hero_title', 'mileym3dia_services', __('Services Page Hero Title', 'm3-big-red'), 'SERVICES & CAPABILITIES');
+    mileym3dia_add_customizer_image($wp_customize, 'mileym3dia_services_hero_image', 'mileym3dia_services', __('Services Page Hero Background Image', 'm3-big-red'), get_template_directory_uri() . '/assets/images/services-bg.jpg');
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_services_description', 'mileym3dia_services', __('Services Section Description', 'm3-big-red'), 'Full-spectrum production for businesses, artists, and creators who want work that stands out.', 'textarea');
+
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_pricing_eyebrow', 'mileym3dia_services', __('Pricing Section Eyebrow', 'm3-big-red'), '04 / TRANSPARENT INVESTMENT');
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_pricing_teaser_eyebrow', 'mileym3dia_services', __('Homepage Pricing Teaser Eyebrow', 'm3-big-red'), '04 / TRANSPARENT INVESTMENT');
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_pricing_teaser_title', 'mileym3dia_services', __('Homepage Pricing Teaser Headline', 'm3-big-red'), 'PACKAGES & CUSTOM BUNDLES');
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_pricing_teaser_desc', 'mileym3dia_services', __('Homepage Pricing Teaser Description', 'm3-big-red'), 'No hidden fees. Choose a ready-to-shoot package or bundle 3+ services from $95 and automatically save 10%.', 'textarea');
 
     $default_services = array(
         1 => array('title' => 'Video Production', 'tag' => 'COMMERCIALS · MUSIC VIDEOS · REELS', 'desc' => 'Cinema-grade music videos, brand commercials, documentaries, aerial drone capture, and professional DaVinci Resolve color grading.', 'subtags' => 'Music Videos, Brand Films, Drone Capture, Color Grading'),
@@ -472,6 +531,7 @@ function mileym3dia_customize_register($wp_customize) {
         'tiktok'    => __('TikTok URL', 'm3-big-red'),
         'vimeo'     => __('Vimeo URL', 'm3-big-red'),
         'behance'   => __('Behance URL', 'm3-big-red'),
+        'dribbble'  => __('Dribbble URL', 'm3-big-red'),
         'linkedin'  => __('LinkedIn URL', 'm3-big-red'),
         'facebook'  => __('Facebook URL', 'm3-big-red'),
     );

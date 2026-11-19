@@ -11,17 +11,22 @@ if (!defined('ABSPATH')) {
 }
 
 get_header();
+
+$portfolio_hero_bg = '';
+if (function_exists('has_post_thumbnail') && has_post_thumbnail()) {
+    $portfolio_hero_bg = get_the_post_thumbnail_url(get_the_ID(), 'full');
+}
 ?>
 
 <main id="primary" class="site-main portfolio-page-main">
 
     <!-- FULL-WIDTH PORTFOLIO HEADER -->
-    <section class="page-title-section portfolio-hero-section bg-shade-base">
+    <section class="page-title-section portfolio-hero-section bg-shade-base"<?php echo !empty($portfolio_hero_bg) ? ' style="background-image: linear-gradient(180deg, rgba(6,6,9,0.78) 0%, rgba(6,6,9,0.95) 100%), url(\'' . esc_url($portfolio_hero_bg) . '\'); background-size: cover; background-position: center;"' : ''; ?>>
         <div class="container container--wide">
             <div class="portfolio-hero-header">
                 <span class="page-subtitle text-red"><?php echo esc_html(get_theme_mod('mileym3dia_portfolio_eyebrow', '02 / SELECTED WORK')); ?></span>
                 <?php
-                $portfolio_raw_title = get_theme_mod('mileym3dia_portfolio_title', 'FEATURED PRODUCTIONS');
+                $portfolio_raw_title = get_theme_mod('mileym3dia_portfolio_hero_title', get_theme_mod('mileym3dia_portfolio_title', 'FEATURED PRODUCTIONS'));
                 if (strpos($portfolio_raw_title, '<') === false) {
                     $words = explode(' ', trim($portfolio_raw_title));
                     if (count($words) > 1) {
@@ -64,22 +69,40 @@ get_header();
                 <span class="filter-bar-label">FILTER BY SERVICE:</span>
                 <div class="portfolio-filter-buttons" id="portfolioFilterButtons">
                     <button type="button" class="filter-btn active" data-filter="all">ALL WORK</button>
-                    <button type="button" class="filter-btn" data-filter="video">VIDEO PRODUCTION</button>
-                    <button type="button" class="filter-btn" data-filter="photo">PHOTOGRAPHY</button>
-                    <button type="button" class="filter-btn" data-filter="branding">BRANDING &amp; WEB</button>
-                    <button type="button" class="filter-btn" data-filter="audio">MUSIC &amp; AUDIO</button>
+                    <button type="button" class="filter-btn" data-filter="video-production">VIDEO PRODUCTION</button>
+                    <button type="button" class="filter-btn" data-filter="photography">PHOTOGRAPHY</button>
+                    <button type="button" class="filter-btn" data-filter="branding-design">BRANDING &amp; DESIGN</button>
+                    <button type="button" class="filter-btn" data-filter="web-design">WEB DESIGN</button>
+                    <button type="button" class="filter-btn" data-filter="music-audio">MUSIC &amp; AUDIO</button>
                 </div>
             </div>
 
             <div class="portfolio-cinematic-grid" id="portfolioGrid">
                 <?php
-                $accent_cycle    = array('red', 'yellow', 'lime', 'blue');
+                $accent_cycle = array('red', 'yellow', 'lime', 'blue');
+                $accent_map   = array(
+                    'video-production' => 'red',
+                    'video'            => 'red',
+                    'photography'      => 'blue',
+                    'photo'            => 'blue',
+                    'branding-design'  => 'lime',
+                    'branding'         => 'lime',
+                    'web-design'       => 'yellow',
+                    'web'              => 'yellow',
+                    'music-audio'      => 'yellow',
+                    'audio'            => 'yellow',
+                );
+                $portfolio_count = max(1, (int) get_theme_mod('mileym3dia_portfolio_count', 12));
+                // If default 4 is stored in Customizer for homepage, allow up to 12 on the full Portfolio page unless explicitly set higher
+                $query_limit     = ($portfolio_count === 4) ? 12 : $portfolio_count;
+
                 $portfolio_query = null;
                 if (mileym3dia_has_projects()) {
                     $portfolio_query = new WP_Query(array(
                         'post_type'      => 'project',
-                        'posts_per_page' => 12,
+                        'posts_per_page' => $query_limit,
                         'post_status'    => 'publish',
+                        'orderby'        => array('menu_order' => 'ASC', 'ID' => 'ASC'),
                     ));
                 }
 
@@ -87,14 +110,45 @@ get_header();
                     $counter = 1;
                     while ($portfolio_query->have_posts()) :
                         $portfolio_query->the_post();
-                        $terms    = get_the_terms(get_the_ID(), 'project_category');
-                        $cat_slug = ($terms && !is_wp_error($terms)) ? $terms[0]->slug : 'video';
-                        $cat_name = ($terms && !is_wp_error($terms)) ? $terms[0]->name : 'VIDEO PRODUCTION';
-                        $accent   = $accent_cycle[($counter - 1) % 4];
-                        $year     = get_post_meta(get_the_ID(), '_project_year', true) ?: get_the_date('Y');
-                        $client   = get_post_meta(get_the_ID(), '_project_client', true);
+                        $pid          = get_the_ID();
+                        $terms        = get_the_terms($pid, 'project_category');
+                        $filter_tokens = array();
+                        $cat_names     = array();
+                        $first_slug    = '';
+
+                        if ($terms && !is_wp_error($terms)) {
+                            foreach ($terms as $t) {
+                                $cat_names[] = strtoupper($t->name);
+                                if ('' === $first_slug) {
+                                    $first_slug = $t->slug;
+                                }
+                                if (function_exists('mileym3dia_get_project_category_filter_tokens')) {
+                                    $filter_tokens = array_merge($filter_tokens, mileym3dia_get_project_category_filter_tokens($t->slug));
+                                } else {
+                                    $filter_tokens[] = $t->slug;
+                                }
+                            }
+                        }
+
+                        if (empty($filter_tokens)) {
+                            $filter_tokens = array('video-production', 'video');
+                        }
+                        $filter_attr = implode(' ', array_unique($filter_tokens));
+                        $cat_name    = !empty($cat_names) ? implode(' & ', array_slice($cat_names, 0, 2)) : 'VIDEO PRODUCTION';
+
+                        $custom_accent = get_post_meta($pid, '_project_accent', true);
+                        if (!empty($custom_accent)) {
+                            $accent = $custom_accent;
+                        } elseif ($first_slug && isset($accent_map[$first_slug])) {
+                            $accent = $accent_map[$first_slug];
+                        } else {
+                            $accent = $accent_cycle[($counter - 1) % 4];
+                        }
+
+                        $year   = get_post_meta($pid, '_project_year', true) ?: get_the_date('Y');
+                        $client = get_post_meta($pid, '_project_client', true);
                 ?>
-                    <article class="portfolio-card" data-category="<?php echo esc_attr($cat_slug); ?>">
+                    <article class="portfolio-card" data-category="<?php echo esc_attr($filter_attr); ?>">
                         <div class="card-inner">
                             <div class="card-media">
                                 <?php if (has_post_thumbnail()) : ?>
@@ -110,7 +164,7 @@ get_header();
                             <div class="card-content">
                                 <div class="card-meta">
                                     <span class="card-index"><?php echo str_pad($counter, 2, '0', STR_PAD_LEFT); ?></span>
-                                    <span class="card-category text-<?php echo esc_attr($accent); ?>"><?php echo esc_html(strtoupper($cat_name)); ?></span>
+                                    <span class="card-category text-<?php echo esc_attr($accent); ?>"><?php echo esc_html($cat_name); ?></span>
                                 </div>
                                 <h3 class="card-title"><?php the_title(); ?></h3>
                                 <p class="card-desc"><?php echo esc_html(mileym3dia_custom_excerpt(20)); ?></p>
@@ -134,10 +188,10 @@ get_header();
                     wp_reset_postdata();
                 else :
                     $fallback_items = array(
-                        1 => array('slug' => 'nightfall-apparel-campaign', 'title' => 'NIGHTFALL APPAREL CAMPAIGN', 'cat' => 'VIDEO PRODUCTION & LOOKBOOK', 'filter' => 'video', 'year' => '2026', 'client' => 'NIGHTFALL ATELIER', 'desc' => 'Full commercial video production, street lookbook photography, and social campaign rollout.', 'accent' => 'red'),
-                        2 => array('slug' => 'static-frequency-tour-visuals', 'title' => 'STATIC FREQUENCY TOUR & VISUALS', 'cat' => 'MUSIC VIDEO & AUDIO PRODUCTION', 'filter' => 'audio', 'year' => '2026', 'client' => 'STATIC FREQUENCY', 'desc' => 'Music video direction, custom live tour visuals, and surround audio mastering.', 'accent' => 'yellow'),
-                        3 => array('slug' => 'monolith-audio-hardware', 'title' => 'MONOLITH AUDIO HARDWARE', 'cat' => 'BRAND IDENTITY & WEB DESIGN', 'filter' => 'branding', 'year' => '2025', 'client' => 'MONOLITH LABS', 'desc' => 'Complete visual identity, custom typography, packaging design, and e-commerce web design.', 'accent' => 'lime'),
-                        4 => array('slug' => 'apex-motorsport-identity', 'title' => 'APEX MOTORSPORT IDENTITY', 'cat' => 'BRANDING & PHOTOGRAPHY', 'filter' => 'photo', 'year' => '2025', 'client' => 'APEX RACING CO.', 'desc' => 'Custom brand identity system, team apparel graphics, and trackside photography.', 'accent' => 'blue'),
+                        1 => array('slug' => 'nightfall-apparel-campaign', 'title' => 'NIGHTFALL APPAREL CAMPAIGN', 'cat' => 'VIDEO PRODUCTION & PHOTOGRAPHY', 'filter' => 'video-production video photography photo', 'year' => '2026', 'client' => 'NIGHTFALL ATELIER', 'desc' => 'Full commercial video production, street lookbook photography, and social campaign rollout.', 'accent' => 'red'),
+                        2 => array('slug' => 'static-frequency-tour-visuals', 'title' => 'STATIC FREQUENCY TOUR & VISUALS', 'cat' => 'MUSIC & AUDIO PRODUCTION', 'filter' => 'music-audio audio video-production video', 'year' => '2026', 'client' => 'STATIC FREQUENCY', 'desc' => 'Music video direction, custom live tour visuals, and surround audio mastering.', 'accent' => 'yellow'),
+                        3 => array('slug' => 'monolith-audio-hardware', 'title' => 'MONOLITH AUDIO HARDWARE', 'cat' => 'BRANDING & WEB DESIGN', 'filter' => 'branding-design branding web-design web', 'year' => '2025', 'client' => 'MONOLITH LABS', 'desc' => 'Complete visual identity, custom typography, packaging design, and e-commerce web design.', 'accent' => 'lime'),
+                        4 => array('slug' => 'apex-motorsport-identity', 'title' => 'APEX MOTORSPORT IDENTITY', 'cat' => 'PHOTOGRAPHY & BRANDING', 'filter' => 'photography photo branding-design branding', 'year' => '2025', 'client' => 'APEX RACING CO.', 'desc' => 'Custom brand identity system, team apparel graphics, and trackside photography.', 'accent' => 'blue'),
                     );
                     foreach ($fallback_items as $idx => $item) :
                         $p_title = get_theme_mod("mileym3dia_proj_{$idx}_title", $item['title']);

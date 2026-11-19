@@ -190,9 +190,9 @@ function mileym3dia_asset_image_url($filename) {
  * Get project fallback image URL from Customizer or theme assets.
  */
 function mileym3dia_get_project_image_url($index = 1) {
-    $slot = ((max(1, (int) $index) - 1) % 4) + 1;
+    $slot = ((max(1, (int) $index) - 1) % 8) + 1;
     $default = mileym3dia_asset_image_url("portfolio-{$slot}.jpg");
-    $custom = get_theme_mod("mileym3dia_proj_{$slot}_image", '');
+    $custom = ($slot <= 4) ? get_theme_mod("mileym3dia_proj_{$slot}_image", '') : '';
     return !empty($custom) ? $custom : $default;
 }
 
@@ -200,9 +200,9 @@ function mileym3dia_get_project_image_url($index = 1) {
  * Get blog post fallback image URL from Customizer or theme assets.
  */
 function mileym3dia_get_blog_image_url($index = 1) {
-    $slot = ((max(1, (int) $index) - 1) % 3) + 1;
+    $slot = ((max(1, (int) $index) - 1) % 4) + 1;
     $default = mileym3dia_asset_image_url("blog-{$slot}.jpg");
-    $custom = get_theme_mod("mileym3dia_blog_{$slot}_image", '');
+    $custom = ($slot <= 3) ? get_theme_mod("mileym3dia_blog_{$slot}_image", '') : '';
     return !empty($custom) ? $custom : $default;
 }
 
@@ -555,6 +555,27 @@ function mileym3dia_newsletter_box($args = array()) {
  */
 function mileym3dia_render_pricing_packages() {
     $contact_url = mileym3dia_get_page_url('contact');
+
+    $tier1_features = get_theme_mod(
+        'mileym3dia_tier_1_features',
+        "Half-Day 4K Camera Shoot or Studio Session\nOr Complete Custom Logo & Brand Mark Kit\nProfessional Color Grading or Studio Audio Mix\nFast 3–5 Business Day Turnaround\n2 Rounds of Client Revisions Included"
+    );
+    $tier1_lines = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string) $tier1_features))));
+    $tier1_btn   = get_theme_mod('mileym3dia_tier_1_btn', 'BOOK STARTER PACKAGE');
+
+    $tier2_features = get_theme_mod(
+        'mileym3dia_tier_2_features',
+        "Full-Day 4K Video Production (Music Video or Promo)\nPhotography Session (15 Retouched Lookbook/Press Stills)\n3 Vertical Cutdowns for Reels, TikTok & Shorts\nCustom Cover Art, Flyer, or Social Launch Kit\nDaVinci Resolve Color Grade & Clean Audio Master\nFull Commercial & Release Licensing"
+    );
+    $tier2_lines = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string) $tier2_features))));
+    $tier2_btn   = get_theme_mod('mileym3dia_tier_2_btn', 'BOOK LAUNCH PACKAGE ↗');
+
+    $tier3_features = get_theme_mod(
+        'mileym3dia_tier_3_features',
+        "Complete Brand Identity, Logo Suite & Style Guide\nCustom Multi-Section Website or Online Storefront\nFlagship 4K Commercial or Music Video Production\nFull Brand & Product Photography Campaign (25+ Stills)\nCustom Audio Scoring or Multi-Track Mix & Master"
+    );
+    $tier3_lines = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string) $tier3_features))));
+    $tier3_btn   = get_theme_mod('mileym3dia_tier_3_btn', 'BOOK FULL PRODUCTION');
     ?>
     <div class="pricing-grid">
         <!-- Tier 1: Starter / Single Service ($350) -->
@@ -567,14 +588,12 @@ function mileym3dia_render_pricing_packages() {
             </div>
             <p class="pricing-desc"><?php echo esc_html(get_theme_mod('mileym3dia_tier_1_desc', 'Ideal for a single promo reel shoot, photo mini-session, custom logo, or single song mix & master.')); ?></p>
             <ul class="pricing-features">
-                <li><span class="check text-lime">✓</span> Half-Day 4K Camera Shoot or Studio Session</li>
-                <li><span class="check text-lime">✓</span> Or Complete Custom Logo &amp; Brand Mark Kit</li>
-                <li><span class="check text-lime">✓</span> Professional Color Grading or Studio Audio Mix</li>
-                <li><span class="check text-lime">✓</span> Fast 3–5 Business Day Turnaround</li>
-                <li><span class="check text-lime">✓</span> 2 Rounds of Client Revisions Included</li>
+                <?php foreach ($tier1_lines as $line) : ?>
+                    <li><span class="check text-lime">✓</span> <?php echo esc_html($line); ?></li>
+                <?php endforeach; ?>
             </ul>
             <a href="<?php echo esc_url($contact_url); ?>?tier=starter" class="btn btn--streetwear-outline btn--full">
-                BOOK STARTER PACKAGE
+                <?php echo esc_html($tier1_btn); ?>
             </a>
         </div>
 
@@ -588,15 +607,12 @@ function mileym3dia_render_pricing_packages() {
             </div>
             <p class="pricing-desc"><?php echo esc_html(get_theme_mod('mileym3dia_tier_2_desc', 'Complete rollout package including a 4K promo or music video shoot, lookbook photo session, social vertical edits, and custom cover/flyer art.')); ?></p>
             <ul class="pricing-features">
-                <li><span class="check text-yellow">✓</span> Full-Day 4K Video Production (Music Video or Promo)</li>
-                <li><span class="check text-yellow">✓</span> Photography Session (15 Retouched Lookbook/Press Stills)</li>
-                <li><span class="check text-yellow">✓</span> 3 Vertical Cutdowns for Reels, TikTok &amp; Shorts</li>
-                <li><span class="check text-yellow">✓</span> Custom Cover Art, Flyer, or Social Launch Kit</li>
-                <li><span class="check text-yellow">✓</span> DaVinci Resolve Color Grade &amp; Clean Audio Master</li>
-                <li><span class="check text-yellow">✓</span> Full Commercial &amp; Release Licensing</li>
+                <?php foreach ($tier2_lines as $line) : ?>
+                    <li><span class="check text-yellow">✓</span> <?php echo esc_html($line); ?></li>
+                <?php endforeach; ?>
             </ul>
             <a href="<?php echo esc_url($contact_url); ?>?tier=launch" class="btn btn--streetwear-red btn--full">
-                BOOK LAUNCH PACKAGE ↗
+                <?php echo esc_html($tier2_btn); ?>
             </a>
         </div>
 
@@ -610,14 +626,12 @@ function mileym3dia_render_pricing_packages() {
             </div>
             <p class="pricing-desc"><?php echo esc_html(get_theme_mod('mileym3dia_tier_3_desc', 'End-to-end brand identity, custom website build, flagship video production, photography set, and studio audio.')); ?></p>
             <ul class="pricing-features">
-                <li><span class="check text-blue">✓</span> Complete Brand Identity, Logo Suite &amp; Style Guide</li>
-                <li><span class="check text-blue">✓</span> Custom Multi-Section Website or Online Storefront</li>
-                <li><span class="check text-blue">✓</span> Flagship 4K Commercial or Music Video Production</li>
-                <li><span class="check text-blue">✓</span> Full Brand &amp; Product Photography Campaign (25+ Stills)</li>
-                <li><span class="check text-blue">✓</span> Custom Audio Scoring or Multi-Track Mix &amp; Master</li>
+                <?php foreach ($tier3_lines as $line) : ?>
+                    <li><span class="check text-blue">✓</span> <?php echo esc_html($line); ?></li>
+                <?php endforeach; ?>
             </ul>
             <a href="<?php echo esc_url($contact_url); ?>?tier=full" class="btn btn--streetwear-outline btn--full">
-                BOOK FULL PRODUCTION
+                <?php echo esc_html($tier3_btn); ?>
             </a>
         </div>
     </div>

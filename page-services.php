@@ -11,18 +11,42 @@ if (!defined('ABSPATH')) {
 }
 
 get_header();
+
+$services_hero_bg = '';
+if (function_exists('has_post_thumbnail') && has_post_thumbnail()) {
+    $services_hero_bg = get_the_post_thumbnail_url(get_the_ID(), 'full');
+}
+if (empty($services_hero_bg)) {
+    $services_hero_bg = get_theme_mod('mileym3dia_services_hero_image', '');
+}
+if (empty($services_hero_bg)) {
+    $services_hero_bg = mileym3dia_asset_image_url('services-bg.jpg');
+}
+
+$services_raw_title = get_theme_mod('mileym3dia_services_hero_title', 'SERVICES & CAPABILITIES');
+if (strpos($services_raw_title, '<') === false) {
+    $s_words = explode(' ', trim($services_raw_title));
+    if (count($s_words) > 1) {
+        $s_last = array_pop($s_words);
+        $services_title_html = esc_html(implode(' ', $s_words)) . ' <span class="text-lime">' . esc_html($s_last) . '</span>';
+    } else {
+        $services_title_html = '<span class="text-lime">' . esc_html($services_raw_title) . '</span>';
+    }
+} else {
+    $services_title_html = wp_kses_post($services_raw_title);
+}
 ?>
 
 <main id="primary" class="site-main">
 
     <!-- FULL-WIDTH SERVICES HERO -->
     <section class="page-title-section services-hero-banner bg-shade-base">
-        <div class="services-hero-bg" style="background-image: url('<?php echo esc_url(mileym3dia_asset_image_url('services-bg.jpg')); ?>');"></div>
+        <div class="services-hero-bg" style="background-image: url('<?php echo esc_url($services_hero_bg); ?>');"></div>
         <div class="services-hero-overlay"></div>
         <div class="container container--wide services-hero-inner">
             <span class="page-subtitle text-lime"><?php echo esc_html(get_theme_mod('mileym3dia_services_eyebrow', '03 / WHAT WE DO')); ?></span>
             <h1 class="page-title page-title--mega">
-                SERVICES &amp; <span class="text-lime">CAPABILITIES</span>
+                <?php echo $services_title_html; ?>
             </h1>
             <p class="page-lead">
                 <?php echo esc_html(get_theme_mod('mileym3dia_services_description', 'Full-spectrum production for businesses, artists, and creators who want work that stands out.')); ?>
@@ -58,25 +82,22 @@ get_header();
             </div>
 
             <?php
-            $services_defaults = array(
-                1 => array('title' => 'Video Production', 'tag' => 'COMMERCIALS · MUSIC VIDEOS · REELS', 'desc' => 'Cinema-grade music videos, brand commercials, documentaries, aerial drone capture, and professional DaVinci Resolve color grading.', 'subtags' => 'Music Video Direction & Capture, Brand Commercials & Documentaries, Licensed Aerial Drone Cinematography, DaVinci Resolve RAW Color Grading', 'accent' => 'red'),
-                2 => array('title' => 'Photography', 'tag' => 'EDITORIAL · PRODUCT · PRESS KITS', 'desc' => 'High-impact brand lookbooks, studio & on-location portraits, artist press photos, commercial product photography, and retouching.', 'subtags' => 'Brand & Fashion Lookbooks, Artist & Musician Press Stills, Commercial Product Photography, High-Resolution Retouching', 'accent' => 'yellow'),
-                3 => array('title' => 'Branding & Graphic Design', 'tag' => 'IDENTITY · LOGOS · PACKAGING', 'desc' => 'Memorable logo systems, typography, brand guidelines, merch & apparel graphics, album artwork, and physical packaging.', 'subtags' => 'Logo & Wordmark Systems, Complete Brand Guidelines, Apparel & Merch Graphics, Album Art & Print Packaging', 'accent' => 'lime'),
-                4 => array('title' => 'Web Design & Development', 'tag' => 'CUSTOM SITES · E-COMMERCE · UI/UX', 'desc' => 'Fast, modern, custom-designed websites, artist & agency portfolios, landing pages, and WooCommerce / Shopify storefronts.', 'subtags' => 'Custom WordPress & Web Builds, E-Commerce Storefronts, Responsive UI/UX Design, High-Converting Landing Pages', 'accent' => 'blue'),
-                5 => array('title' => 'Music & Audio Production', 'tag' => 'RECORDING · MIXING · SOUND DESIGN', 'desc' => 'Original music production, custom scoring for film & commercials, vocal mixing, mastering, and clean audio post-production.', 'subtags' => 'Original Music & Custom Scoring, Studio Mixing & Mastering, Commercial Sound Design, Dialogue & Audio Post-Production', 'accent' => 'red'),
-            );
+            $services_list = function_exists('mileym3dia_get_services') ? mileym3dia_get_services() : array();
             ?>
             <div class="services-grid">
-                <?php foreach ($services_defaults as $idx => $srv) :
-                    $s_title   = get_theme_mod("mileym3dia_service_{$idx}_title", $srv['title']);
-                    $s_tag     = get_theme_mod("mileym3dia_service_{$idx}_tag", $srv['tag']);
-                    $s_desc    = get_theme_mod("mileym3dia_service_{$idx}_desc", $srv['desc']);
-                    $s_subtags = array_filter(array_map('trim', explode(',', get_theme_mod("mileym3dia_service_{$idx}_subtags", $srv['subtags']))));
-                    $accent    = $srv['accent'];
+                <?php foreach ($services_list as $idx => $srv) :
+                    $s_num     = !empty($srv['num']) ? $srv['num'] : str_pad((string) ($idx + 1), 2, '0', STR_PAD_LEFT);
+                    $s_title   = $srv['title'];
+                    $s_tag     = $srv['tag'];
+                    $s_desc    = $srv['desc'];
+                    $s_subtags = !empty($srv['subtags']) && is_array($srv['subtags']) ? $srv['subtags'] : array();
+                    $accent    = !empty($srv['accent']) ? $srv['accent'] : 'red';
+                    $cta_text  = !empty($srv['cta_text']) ? $srv['cta_text'] : sprintf(__('BOOK %s', 'mileym3dia'), strtoupper($s_title));
+                    $cta_url   = !empty($srv['cta_url']) ? $srv['cta_url'] : add_query_arg('discipline', rawurlencode($s_title), mileym3dia_get_page_url('contact'));
                 ?>
                     <article class="service-card service-card--<?php echo esc_attr($accent); ?>">
                         <div class="service-card-header">
-                            <span class="service-card-num">0<?php echo (int) $idx; ?></span>
+                            <span class="service-card-num"><?php echo esc_html($s_num); ?></span>
                             <span class="service-card-tag text-<?php echo esc_attr($accent); ?>"><?php echo esc_html($s_tag); ?></span>
                         </div>
                         <div class="service-card-body">
@@ -91,8 +112,8 @@ get_header();
                             <?php endif; ?>
                         </div>
                         <div class="service-card-footer">
-                            <a href="<?php echo esc_url(add_query_arg('discipline', rawurlencode($s_title), mileym3dia_get_page_url('contact'))); ?>" class="service-card-action">
-                                <span><?php printf(esc_html__('BOOK %s', 'mileym3dia'), esc_html(strtoupper($s_title))); ?></span>
+                            <a href="<?php echo esc_url($cta_url); ?>" class="service-card-action">
+                                <span><?php echo esc_html($cta_text); ?></span>
                                 <span class="action-arrow">↗</span>
                             </a>
                         </div>

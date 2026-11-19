@@ -32,6 +32,18 @@ $location      = get_theme_mod('mileym3dia_contact_location', 'ORLANDO, FL');
         </div>
     </section>
 
+    <?php while (have_posts()) : the_post(); ?>
+        <?php if (trim(get_the_content())) : ?>
+            <section class="section-loose page-editor-content bg-shade-base">
+                <div class="container">
+                    <div class="entry-content">
+                        <?php the_content(); ?>
+                    </div>
+                </div>
+            </section>
+        <?php endif; ?>
+    <?php endwhile; ?>
+
     <section class="section-loose bg-shade-elevated">
         <div class="container container--wide">
             <div class="legal-grid">

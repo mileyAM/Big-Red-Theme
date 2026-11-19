@@ -20,16 +20,29 @@ $split2_img = get_theme_mod('mileym3dia_about_split2_image', mileym3dia_asset_im
 if (empty($split2_img)) {
     $split2_img = mileym3dia_asset_image_url('hero-cinematic.jpg');
 }
+
+$about_hero_bg = '';
+if (function_exists('has_post_thumbnail') && has_post_thumbnail()) {
+    $about_hero_bg = get_the_post_thumbnail_url(get_the_ID(), 'full');
+}
+if (empty($about_hero_bg)) {
+    $about_hero_bg = get_theme_mod('mileym3dia_about_hero_image', '');
+}
+$about_hero_title = get_theme_mod('mileym3dia_about_hero_title', '');
 ?>
 
 <main id="primary" class="site-main">
 
     <!-- FULL-WIDTH PAGE HERO -->
-    <section class="page-title-section page-title-section--about bg-shade-base">
+    <section class="page-title-section page-title-section--about bg-shade-base"<?php echo !empty($about_hero_bg) ? ' style="background-image: linear-gradient(180deg, rgba(6,6,9,0.78) 0%, rgba(6,6,9,0.95) 100%), url(\'' . esc_url($about_hero_bg) . '\'); background-size: cover; background-position: center;"' : ''; ?>>
         <div class="container container--wide">
             <span class="page-subtitle text-yellow"><?php echo esc_html(get_theme_mod('mileym3dia_about_eyebrow', '01 / WHO WE ARE')); ?></span>
             <h1 class="page-title page-title--mega">
-                ABOUT <span class="text-yellow"><?php echo esc_html(get_theme_mod('mileym3dia_brand_prefix', 'MILEYM')); ?><span class="brand-accent-3"><?php echo esc_html(get_theme_mod('mileym3dia_brand_accent_char', '3')); ?></span><?php echo esc_html(get_theme_mod('mileym3dia_brand_suffix', 'DIA')); ?></span>
+                <?php if (!empty($about_hero_title)) : ?>
+                    <?php echo wp_kses_post($about_hero_title); ?>
+                <?php else : ?>
+                    ABOUT <span class="text-yellow"><?php echo esc_html(get_theme_mod('mileym3dia_brand_prefix', 'MILEYM')); ?><span class="brand-accent-3"><?php echo esc_html(get_theme_mod('mileym3dia_brand_accent_char', '3')); ?></span><?php echo esc_html(get_theme_mod('mileym3dia_brand_suffix', 'DIA')); ?></span>
+                <?php endif; ?>
             </h1>
             <p class="page-lead">
                 <?php echo esc_html(get_theme_mod('mileym3dia_about_content', 'MILEYM3DIA is a full-service creative production agency uniting directors, photographers, brand designers, web developers, and audio engineers under one roof.')); ?>
@@ -54,7 +67,7 @@ if (empty($split2_img)) {
     <section class="m3-split-section bg-shade-elevated" id="overview">
         <div class="m3-split-grid">
             <div class="m3-split-content">
-                <span class="section-eyebrow text-yellow"><?php echo esc_html(get_theme_mod('mileym3dia_about_story_eyebrow', 'OUR STORY & VISION')); ?></span>
+                <span class="section-eyebrow text-yellow"><?php echo esc_html(get_theme_mod('mileym3dia_about_story_eyebrow', '01 / STUDIO OVERVIEW')); ?></span>
                 <h2 class="split-big-title">
                     <?php echo esc_html(get_theme_mod('mileym3dia_about_title', 'CREATIVE PRODUCTION WITHOUT COMPROMISE.')); ?>
                 </h2>
@@ -101,9 +114,9 @@ if (empty($split2_img)) {
                     <?php echo esc_html(get_theme_mod('mileym3dia_split2_desc', 'Instead of hiring separate freelancers for video, photography, branding, web development, and audio, our clients work with one unified creative team.')); ?>
                 </p>
                 <ul class="split-checklist">
-                    <li><span class="check-badge text-red">01</span> <strong>Cinematic Visuals:</strong> Every frame is lit, directed, and color-graded to broadcast and cinema standards.</li>
-                    <li><span class="check-badge text-yellow">02</span> <strong>Cohesive Brand Identity:</strong> Logos, typography, packaging, and web design built around a single strong brand story.</li>
-                    <li><span class="check-badge text-lime">03</span> <strong>Studio-Grade Sound:</strong> Clean location audio, custom scoring, mixing, and mastering handled in-house.</li>
+                    <li><span class="check-badge text-red">01</span> <strong><?php echo esc_html(get_theme_mod('mileym3dia_about_check_1_title', 'Cinematic Visuals:')); ?></strong> <?php echo esc_html(get_theme_mod('mileym3dia_about_check_1_desc', 'Every frame is lit, directed, and color-graded to broadcast and cinema standards.')); ?></li>
+                    <li><span class="check-badge text-yellow">02</span> <strong><?php echo esc_html(get_theme_mod('mileym3dia_about_check_2_title', 'Cohesive Brand Identity:')); ?></strong> <?php echo esc_html(get_theme_mod('mileym3dia_about_check_2_desc', 'Logos, typography, packaging, and web design built around a single strong brand story.')); ?></li>
+                    <li><span class="check-badge text-lime">03</span> <strong><?php echo esc_html(get_theme_mod('mileym3dia_about_check_3_title', 'Studio-Grade Sound:')); ?></strong> <?php echo esc_html(get_theme_mod('mileym3dia_about_check_3_desc', 'Clean location audio, custom scoring, mixing, and mastering handled in-house.')); ?></li>
                 </ul>
             </div>
         </div>
@@ -114,8 +127,8 @@ if (empty($split2_img)) {
         <div class="container container--wide">
             <div class="section-header">
                 <div class="section-header-left">
-                    <span class="section-label text-blue"><?php echo esc_html(get_theme_mod('mileym3dia_gear_eyebrow', 'IN-HOUSE EQUIPMENT & SUITES')); ?></span>
-                    <h2 class="section-title section-title--xl"><?php echo esc_html(get_theme_mod('mileym3dia_gear_title', 'PRODUCTION HARDWARE')); ?></h2>
+                    <span class="section-label text-blue"><?php echo esc_html(get_theme_mod('mileym3dia_gear_eyebrow', '03 / PRODUCTION ARSENAL')); ?></span>
+                    <h2 class="section-title section-title--xl"><?php echo esc_html(get_theme_mod('mileym3dia_gear_title', 'CINEMA HARDWARE & POST PIPELINE')); ?></h2>
                 </div>
                 <div class="section-header-right">
                     <p class="section-header-desc">

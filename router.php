@@ -13,6 +13,11 @@ if ($decoded_uri !== '/' && file_exists(__DIR__ . $decoded_uri) && !is_dir(__DIR
     return false;
 }
 
+if (PHP_SAPI !== 'cli' && session_status() === PHP_SESSION_NONE && !headers_sent()) {
+    @session_save_path(sys_get_temp_dir());
+    @session_start();
+}
+
 define('ABSPATH', __DIR__ . '/');
 if (!defined('OBJECT')) define('OBJECT', 'OBJECT');
 if (!defined('ARRAY_A')) define('ARRAY_A', 'ARRAY_A');
@@ -129,88 +134,201 @@ $GLOBALS['m3_projects'] = [
                 ['num' => '2.4M+', 'label' => 'Organic Social Reach'],
             ],
         ],
-        'terms' => [(object)['term_id' => 30, 'name' => 'Video Production & Lookbook', 'slug' => 'video']],
-    ],
-    202 => (object)[
-        'ID' => 202,
-        'post_title' => 'STATIC FREQUENCY TOUR & VISUALS',
-        'post_name' => 'static-frequency-tour-visuals',
-        'post_status' => 'publish',
-        'post_type' => 'project',
-        'post_author' => 1,
-        'post_date' => '2026-09-18 12:00:00',
-        'post_excerpt' => 'Music video direction, custom live tour visuals, and surround audio mastering for independent recording artist Static Frequency.',
-        'post_content' => '<p>Produced end-to-end by MILEYM3DIA, including music video production, tour visual packages, and studio audio mastering.</p>',
-        'thumbnail' => '/assets/images/portfolio-2.jpg?v=2.3.0',
-        'meta' => [
-            '_project_year' => '2026',
-            '_project_client' => 'STATIC FREQUENCY',
-            '_project_services' => 'Music Video / Audio Production / Live Tour Visuals',
-            '_project_url' => '',
-            '_project_challenge' => 'Static Frequency needed an immersive visual world to accompany their 18-city headline tour and lead single release. The challenge was syncing 4K stage visuals to MIDI timecode while delivering a cinematic music video with authentic studio audio fidelity.',
-            '_project_solution' => 'MILEYM3DIA built a multi-discipline pipeline: tracking 120fps high-speed camera footage, developing custom generative tour visual loops synced to audio triggers, and executing final Dolby Atmos stereo mix and mastering in our audio suite.',
-            '_project_stats' => [
-                ['num' => '18-CITY', 'label' => 'Headline Tour Visuals'],
-                ['num' => '96kHz/24b', 'label' => 'Master Audio Fidelity'],
-                ['num' => '100%', 'label' => 'Sync to MIDI Stage Rig'],
-                ['num' => '850K+', 'label' => 'Single Stream Plays'],
+            'terms' => [
+                (object)['term_id' => 30, 'name' => 'Video Production', 'slug' => 'video-production'],
+                (object)['term_id' => 33, 'name' => 'Photography', 'slug' => 'photography'],
             ],
         ],
-        'terms' => [(object)['term_id' => 31, 'name' => 'Music Video & Audio', 'slug' => 'audio']],
-    ],
-    203 => (object)[
-        'ID' => 203,
-        'post_title' => 'MONOLITH AUDIO HARDWARE',
-        'post_name' => 'monolith-audio-hardware',
-        'post_status' => 'publish',
-        'post_type' => 'project',
-        'post_author' => 1,
-        'post_date' => '2026-08-05 12:00:00',
-        'post_excerpt' => 'Complete visual identity, custom typography, packaging design, and e-commerce web design for Monolith Labs.',
-        'post_content' => '<p>Full brand identity system, product photography, packaging design, and custom e-commerce website built for Monolith Labs.</p>',
-        'thumbnail' => '/assets/images/portfolio-3.jpg?v=2.3.0',
-        'meta' => [
-            '_project_year' => '2025',
-            '_project_client' => 'MONOLITH LABS',
-            '_project_services' => 'Brand Identity / Web Design / Packaging System',
-            '_project_url' => '',
-            '_project_challenge' => 'Monolith Labs engineered a premium studio monitor controller for professional audio producers and needed a visual identity and digital storefront that commanded a $1,200 retail price tag with absolute credibility.',
-            '_project_solution' => 'We crafted a brutalist industrial brand system: custom wordmark typography, matte-black unboxing packaging with foil accents, studio macro product photography, and a lightning-fast responsive web store with 3D product previews.',
-            '_project_stats' => [
-                ['num' => '100%', 'label' => 'Sold Out Initial Run'],
-                ['num' => '0.8s', 'label' => 'E-Commerce Page Speed'],
-                ['num' => '32-ASSET', 'label' => 'Complete Brand Identity'],
-                ['num' => '$420K+', 'label' => 'Launch Month Revenue'],
+        202 => (object)[
+            'ID' => 202,
+            'post_title' => 'STATIC FREQUENCY TOUR & VISUALS',
+            'post_name' => 'static-frequency-tour-visuals',
+            'post_status' => 'publish',
+            'post_type' => 'project',
+            'post_author' => 1,
+            'post_date' => '2026-09-18 12:00:00',
+            'post_excerpt' => 'Music video direction, custom live tour visuals, and surround audio mastering for independent recording artist Static Frequency.',
+            'post_content' => '<p>Produced end-to-end by MILEYM3DIA, including music video production, tour visual packages, and studio audio mastering.</p>',
+            'thumbnail' => '/assets/images/portfolio-2.jpg?v=2.3.0',
+            'meta' => [
+                '_project_year' => '2026',
+                '_project_timeline' => '4-Week Cycle',
+                '_project_client' => 'STATIC FREQUENCY',
+                '_project_services' => 'Music Video / Audio Production / Live Tour Visuals',
+                '_project_url' => '',
+                '_project_challenge' => 'Static Frequency needed an immersive visual world to accompany their 18-city headline tour and lead single release. The challenge was syncing 4K stage visuals to MIDI timecode while delivering a cinematic music video with authentic studio audio fidelity.',
+                '_project_solution' => 'MILEYM3DIA built a multi-discipline pipeline: tracking 120fps high-speed camera footage, developing custom generative tour visual loops synced to audio triggers, and executing final Dolby Atmos stereo mix and mastering in our audio suite.',
+                '_project_stats' => [
+                    ['num' => '18-CITY', 'label' => 'Headline Tour Visuals'],
+                    ['num' => '96kHz/24b', 'label' => 'Master Audio Fidelity'],
+                    ['num' => '100%', 'label' => 'Sync to MIDI Stage Rig'],
+                    ['num' => '850K+', 'label' => 'Single Stream Plays'],
+                ],
+            ],
+            'terms' => [
+                (object)['term_id' => 31, 'name' => 'Music & Audio Production', 'slug' => 'music-audio'],
+                (object)['term_id' => 30, 'name' => 'Video Production', 'slug' => 'video-production'],
             ],
         ],
-        'terms' => [(object)['term_id' => 32, 'name' => 'Brand Identity & Web Design', 'slug' => 'branding']],
-    ],
-    204 => (object)[
-        'ID' => 204,
-        'post_title' => 'APEX MOTORSPORT IDENTITY',
-        'post_name' => 'apex-motorsport-identity',
-        'post_status' => 'publish',
-        'post_type' => 'project',
-        'post_author' => 1,
-        'post_date' => '2026-07-11 12:00:00',
-        'post_excerpt' => 'Custom brand identity system, team apparel graphics, and trackside photography for Apex Racing.',
-        'post_content' => '<p>Complete visual identity, vehicle livery design, apparel graphics, and high-speed trackside photography for Apex Racing Co.</p>',
-        'thumbnail' => '/assets/images/portfolio-4.jpg?v=2.3.0',
-        'meta' => [
-            '_project_year' => '2025',
-            '_project_client' => 'APEX RACING CO.',
-            '_project_services' => 'Branding / Photography / Apparel Graphics',
-            '_project_url' => '',
-            '_project_challenge' => 'Apex Racing needed a high-octane visual refresh for their GT3 racing campaign, requiring vehicle liveries, paddock team kits, merchandise designs, and dynamic trackside imagery that captured blistering speeds under changing track conditions.',
-            '_project_solution' => 'Our team designed full 3M wrap liveries, engineered a streetwear-inspired apparel line, and deployed trackside with high-speed telephoto setups to capture race-day drama, pit stops, and high-contrast motion blur.',
-            '_project_stats' => [
-                ['num' => '1/8000s', 'label' => 'High-Speed Action Stills'],
-                ['num' => 'GT3', 'label' => 'Full Livery Vehicle Wrap'],
-                ['num' => '14-PIECE', 'label' => 'Apparel & Paddock Line'],
-                ['num' => '4.2M+', 'label' => 'Season Impressions'],
+        203 => (object)[
+            'ID' => 203,
+            'post_title' => 'MONOLITH AUDIO HARDWARE',
+            'post_name' => 'monolith-audio-hardware',
+            'post_status' => 'publish',
+            'post_type' => 'project',
+            'post_author' => 1,
+            'post_date' => '2026-08-05 12:00:00',
+            'post_excerpt' => 'Complete visual identity, custom typography, packaging design, and e-commerce web design for Monolith Labs.',
+            'post_content' => '<p>Full brand identity system, product photography, packaging design, and custom e-commerce website built for Monolith Labs.</p>',
+            'thumbnail' => '/assets/images/portfolio-3.jpg?v=2.3.0',
+            'meta' => [
+                '_project_year' => '2025',
+                '_project_timeline' => '4-Week Cycle',
+                '_project_client' => 'MONOLITH LABS',
+                '_project_services' => 'Brand Identity / Web Design / Packaging System',
+                '_project_url' => '',
+                '_project_challenge' => 'Monolith Labs engineered a premium studio monitor controller for professional audio producers and needed a visual identity and digital storefront that commanded a $1,200 retail price tag with absolute credibility.',
+                '_project_solution' => 'We crafted a brutalist industrial brand system: custom wordmark typography, matte-black unboxing packaging with foil accents, studio macro product photography, and a lightning-fast responsive web store with 3D product previews.',
+                '_project_stats' => [
+                    ['num' => '100%', 'label' => 'Sold Out Initial Run'],
+                    ['num' => '0.8s', 'label' => 'E-Commerce Page Speed'],
+                    ['num' => '32-ASSET', 'label' => 'Complete Brand Identity'],
+                    ['num' => '$420K+', 'label' => 'Launch Month Revenue'],
+                ],
+            ],
+            'terms' => [
+                (object)['term_id' => 32, 'name' => 'Branding & Graphic Design', 'slug' => 'branding-design'],
+                (object)['term_id' => 34, 'name' => 'Web Design & Development', 'slug' => 'web-design'],
             ],
         ],
-        'terms' => [(object)['term_id' => 33, 'name' => 'Branding & Photography', 'slug' => 'photo']],
+        204 => (object)[
+            'ID' => 204,
+            'post_title' => 'APEX MOTORSPORT IDENTITY',
+            'post_name' => 'apex-motorsport-identity',
+            'post_status' => 'publish',
+            'post_type' => 'project',
+            'post_author' => 1,
+            'post_date' => '2026-07-11 12:00:00',
+            'post_excerpt' => 'Custom brand identity system, team apparel graphics, and trackside photography for Apex Racing.',
+            'post_content' => '<p>Complete visual identity, vehicle livery design, apparel graphics, and high-speed trackside photography for Apex Racing Co.</p>',
+            'thumbnail' => '/assets/images/portfolio-4.jpg?v=2.3.0',
+            'meta' => [
+                '_project_year' => '2025',
+                '_project_timeline' => '4-Week Cycle',
+                '_project_client' => 'APEX RACING CO.',
+                '_project_services' => 'Branding / Photography / Apparel Graphics',
+                '_project_url' => '',
+                '_project_challenge' => 'Apex Racing needed a high-octane visual refresh for their GT3 racing campaign, requiring vehicle liveries, paddock team kits, merchandise designs, and dynamic trackside imagery that captured blistering speeds under changing track conditions.',
+                '_project_solution' => 'Our team designed full 3M wrap liveries, engineered a streetwear-inspired apparel line, and deployed trackside with high-speed telephoto setups to capture race-day drama, pit stops, and high-contrast motion blur.',
+                '_project_stats' => [
+                    ['num' => '1/8000s', 'label' => 'High-Speed Action Stills'],
+                    ['num' => 'GT3', 'label' => 'Full Livery Vehicle Wrap'],
+                    ['num' => '14-PIECE', 'label' => 'Apparel & Paddock Line'],
+                    ['num' => '4.2M+', 'label' => 'Season Impressions'],
+                ],
+            ],
+            'terms' => [
+                (object)['term_id' => 33, 'name' => 'Photography', 'slug' => 'photography'],
+                (object)['term_id' => 32, 'name' => 'Branding & Graphic Design', 'slug' => 'branding-design'],
+            ],
+        ],
+    ];
+
+$GLOBALS['m3_services'] = [
+    301 => (object)[
+        'ID' => 301,
+        'post_title' => 'Video Production',
+        'post_name' => 'video-production',
+        'post_status' => 'publish',
+        'post_type' => 'service',
+        'menu_order' => 1,
+        'post_excerpt' => 'Cinema-grade music videos, brand commercials, documentaries, aerial drone capture, and professional DaVinci Resolve color grading.',
+        'post_content' => '<p>Cinema-grade music videos, brand commercials, documentaries, aerial drone capture, and professional DaVinci Resolve color grading.</p>',
+        'meta' => [
+            '_service_number' => '01',
+            '_service_tag' => '4K / 8K CINEMA · COMMERCIALS · MUSIC VIDEOS',
+            '_service_deliverables' => 'Commercials & Brand Films, Music Videos & Performance, Color Grading & VFX, Documentary & Aerial',
+            '_service_accent' => 'red',
+            '_service_cta_text' => 'BOOK VIDEO PRODUCTION',
+            '_service_cta_url' => '',
+            '_service_category_slug' => 'video-production',
+        ],
+    ],
+    302 => (object)[
+        'ID' => 302,
+        'post_title' => 'Photography',
+        'post_name' => 'photography',
+        'post_status' => 'publish',
+        'post_type' => 'service',
+        'menu_order' => 2,
+        'post_excerpt' => 'High-impact brand lookbooks, studio & on-location portraits, artist press photos, commercial product photography, and retouching.',
+        'post_content' => '<p>High-impact brand lookbooks, studio & on-location portraits, artist press photos, commercial product photography, and retouching.</p>',
+        'meta' => [
+            '_service_number' => '02',
+            '_service_tag' => 'EDITORIAL · PRODUCT · CAMPAIGN STILLS',
+            '_service_deliverables' => 'Lookbooks & Apparel, Product & Studio Stills, Artist Press & Portraits, Event & BTS Coverage',
+            '_service_accent' => 'blue',
+            '_service_cta_text' => 'BOOK PHOTOGRAPHY',
+            '_service_cta_url' => '',
+            '_service_category_slug' => 'photography',
+        ],
+    ],
+    303 => (object)[
+        'ID' => 303,
+        'post_title' => 'Branding & Graphic Design',
+        'post_name' => 'branding-design',
+        'post_status' => 'publish',
+        'post_type' => 'service',
+        'menu_order' => 3,
+        'post_excerpt' => 'Memorable logo systems, typography, brand guidelines, merch & apparel graphics, album artwork, and physical packaging.',
+        'post_content' => '<p>Memorable logo systems, typography, brand guidelines, merch & apparel graphics, album artwork, and physical packaging.</p>',
+        'meta' => [
+            '_service_number' => '03',
+            '_service_tag' => 'VISUAL IDENTITY · PACKAGING · KEY ART',
+            '_service_deliverables' => 'Logo & Identity Systems, Album & Tour Key Art, Packaging & Merch Design, Brand Guidelines',
+            '_service_accent' => 'lime',
+            '_service_cta_text' => 'BOOK BRANDING & GRAPHIC DESIGN',
+            '_service_cta_url' => '',
+            '_service_category_slug' => 'branding-design',
+        ],
+    ],
+    304 => (object)[
+        'ID' => 304,
+        'post_title' => 'Web Design & Development',
+        'post_name' => 'web-design',
+        'post_status' => 'publish',
+        'post_type' => 'service',
+        'menu_order' => 4,
+        'post_excerpt' => 'Fast, modern, custom-designed websites, artist & agency portfolios, landing pages, and WooCommerce / Shopify storefronts.',
+        'post_content' => '<p>Fast, modern, custom-designed websites, artist & agency portfolios, landing pages, and WooCommerce / Shopify storefronts.</p>',
+        'meta' => [
+            '_service_number' => '04',
+            '_service_tag' => 'CUSTOM WORDPRESS · E-COMMERCE · INTERACTIVE',
+            '_service_deliverables' => 'Custom WordPress Themes, WooCommerce Storefronts, Interactive Launch Sites, Performance & SEO',
+            '_service_accent' => 'yellow',
+            '_service_cta_text' => 'BOOK WEB DESIGN & DEVELOPMENT',
+            '_service_cta_url' => '',
+            '_service_category_slug' => 'web-design',
+        ],
+    ],
+    305 => (object)[
+        'ID' => 305,
+        'post_title' => 'Music & Audio Production',
+        'post_name' => 'music-audio',
+        'post_status' => 'publish',
+        'post_type' => 'service',
+        'menu_order' => 5,
+        'post_excerpt' => 'Original music production, custom scoring for film & commercials, vocal mixing, mastering, and clean audio post-production.',
+        'post_content' => '<p>Original music production, custom scoring for film & commercials, vocal mixing, mastering, and clean audio post-production.</p>',
+        'meta' => [
+            '_service_number' => '05',
+            '_service_tag' => 'MIXING · MASTERING · SOUND DESIGN · SCORING',
+            '_service_deliverables' => 'Dolby Atmos & Stereo Mixing, Commercial Sound Design, Original Film Scoring, Stem Mastering',
+            '_service_accent' => 'red',
+            '_service_cta_text' => 'BOOK MUSIC & AUDIO PRODUCTION',
+            '_service_cta_url' => '',
+            '_service_category_slug' => 'music-audio',
+        ],
     ],
 ];
 
@@ -298,6 +416,19 @@ if ($GLOBALS['m3_route']['is_search']) {
     $GLOBALS['m3_route']['singular_type'] = 'project';
     $GLOBALS['m3_Current_Posts'] = [$found];
     $template_to_load = __DIR__ . '/single-project.php';
+} elseif (strpos($clean_path, 'product/') === 0) {
+    $GLOBALS['m3_route']['is_page'] = true;
+    $GLOBALS['m3_route']['page_slug'] = 'store';
+    $GLOBALS['m3_wc_preview_view'] = 'product';
+    $GLOBALS['m3_wc_preview_slug'] = basename($clean_path);
+    $GLOBALS['m3_Current_Posts'] = [];
+    $template_to_load = null;
+} elseif (in_array($clean_path, ['cart', 'checkout', 'my-account'], true)) {
+    $GLOBALS['m3_route']['is_page'] = true;
+    $GLOBALS['m3_route']['page_slug'] = 'store';
+    $GLOBALS['m3_wc_preview_view'] = $clean_path;
+    $GLOBALS['m3_Current_Posts'] = [];
+    $template_to_load = null;
 } elseif (strpos($clean_path, 'category/') === 0 || strpos($clean_path, 'tag/') === 0) {
     $GLOBALS['m3_route']['is_archive'] = true;
     $GLOBALS['m3_Current_Posts'] = array_values($GLOBALS['m3_posts']);
@@ -321,6 +452,14 @@ class WP_Query {
         $post_type = $args['post_type'] ?? 'post';
         if ($post_type === 'project') {
             $pool = array_values($GLOBALS['m3_projects']);
+            if (!empty($args['posts_per_page']) && $args['posts_per_page'] > 0) {
+                $pool = array_slice($pool, 0, (int)$args['posts_per_page']);
+            }
+        } elseif ($post_type === 'service') {
+            $pool = array_values($GLOBALS['m3_services']);
+            if (!empty($args['posts_per_page']) && $args['posts_per_page'] > 0) {
+                $pool = array_slice($pool, 0, (int)$args['posts_per_page']);
+            }
         } elseif (is_array($args) && !empty($args)) {
             $pool = array_values($GLOBALS['m3_posts']);
             if (!empty($args['post__not_in'])) {
@@ -370,12 +509,16 @@ function esc_attr($text) { return htmlspecialchars((string)$text, ENT_QUOTES, 'U
 function esc_attr__($text, $domain = 'default') { return esc_attr($text); }
 function esc_attr_e($text, $domain = 'default') { echo esc_attr($text); }
 function esc_url($url) { return htmlspecialchars((string)$url, ENT_QUOTES, 'UTF-8'); }
+function esc_url_raw($url) { return (string)$url; }
+function esc_textarea($text) { return htmlspecialchars((string)$text, ENT_QUOTES, 'UTF-8'); }
 function esc_js($text) { return addslashes((string)$text); }
 function wp_kses($string, $allowed_html = []) { return (string)$string; }
 function wp_kses_post($string) { return (string)$string; }
 function absint($maybeint) { return abs((int)$maybeint); }
 function sanitize_hex_color($color) { return preg_match('/^#([A-Fa-f0-9]{3}){1,2}$/', (string)$color) ? $color : ''; }
 function sanitize_html_class($class, $fallback = '') { return preg_replace('/[^A-Za-z0-9_-]/', '', (string)$class) ?: $fallback; }
+function sanitize_key($key) { return preg_replace('/[^a-z0-9_\-]/', '', strtolower((string)$key)); }
+function sanitize_title($title) { return trim(preg_replace('/[^a-z0-9\-]+/', '-', strtolower((string)$title)), '-'); }
 function sanitize_text_field($str) { return trim(strip_tags((string)$str)); }
 function sanitize_textarea_field($str) { return trim(strip_tags((string)$str)); }
 function sanitize_email($email) { return filter_var($email, FILTER_SANITIZE_EMAIL); }
@@ -535,7 +678,35 @@ function is_tag($tag = '') { return false; }
 function is_author($author = '') { return false; }
 function is_search() { return (bool)$GLOBALS['m3_route']['is_search']; }
 function is_404() { return (bool)$GLOBALS['m3_route']['is_404']; }
-function is_user_logged_in() { return false; }
+function is_user_logged_in() { return !empty($_SESSION['m3_user']); }
+function get_current_user_id() { return !empty($_SESSION['m3_user']['ID']) ? (int)$_SESSION['m3_user']['ID'] : 0; }
+function get_user_meta($user_id, $key = '', $single = false) {
+    if (empty($_SESSION['m3_user'])) return $single ? '' : [];
+    $val = $_SESSION['m3_user'][$key] ?? '';
+    return $single ? $val : [$val];
+}
+function update_user_meta($user_id, $key, $value) {
+    if (!empty($_SESSION['m3_user'])) {
+        $_SESSION['m3_user'][$key] = $value;
+    }
+    return true;
+}
+function wp_create_nonce($action = -1) { return 'm3-preview'; }
+function wp_redirect($location, $status = 302) { header('Location: ' . $location, true, $status); }
+function wp_json_encode($data, $options = 0, $depth = 512) { return json_encode($data, $options, $depth); }
+function wp_strip_all_tags($string, $remove_breaks = false) { return trim(strip_tags((string)$string)); }
+function wp_get_document_title() { return 'MILEYM3DIA — Creative Media Agency'; }
+function wp_get_referer() { return $_SERVER['HTTP_REFERER'] ?? '/'; }
+function mileym3dia_preview_get_cart_count() {
+    $count = 0;
+    foreach (($_SESSION['m3_cart'] ?? []) as $item) {
+        $count += (int)($item['qty'] ?? 1);
+    }
+    return $count;
+}
+function mileym3dia_preview_get_briefs() {
+    return $_SESSION['m3_briefs'] ?? [];
+}
 function is_active_sidebar($index) { return false; }
 function dynamic_sidebar($index = 1) { return false; }
 function has_custom_logo() { return false; }
@@ -590,7 +761,7 @@ function get_template_part($slug, $name = null, $args = []) {
     }
 }
 
-function post_type_exists($post_type) { return in_array($post_type, ['post', 'page', 'project'], true); }
+function post_type_exists($post_type) { return in_array($post_type, ['post', 'page', 'project', 'service'], true); }
 function taxonomy_exists($taxonomy) { return in_array($taxonomy, ['category', 'post_tag', 'project_category'], true); }
 function get_page_by_path($page_path, $output = OBJECT, $post_type = 'page') {
     $slug = trim($page_path, '/');
@@ -598,6 +769,14 @@ function get_page_by_path($page_path, $output = OBJECT, $post_type = 'page') {
         foreach ($GLOBALS['m3_projects'] as $p) {
             if ($p->post_name === $slug) {
                 return $p;
+            }
+        }
+        return null;
+    }
+    if ($post_type === 'service') {
+        foreach ($GLOBALS['m3_services'] as $s) {
+            if ($s->post_name === $slug) {
+                return $s;
             }
         }
         return null;
@@ -628,6 +807,7 @@ function get_post($post = null) {
         $id = (int)$post;
         if (isset($GLOBALS['m3_posts'][$id])) return $GLOBALS['m3_posts'][$id];
         if (isset($GLOBALS['m3_projects'][$id])) return $GLOBALS['m3_projects'][$id];
+        if (isset($GLOBALS['m3_services'][$id])) return $GLOBALS['m3_services'][$id];
     }
     return $GLOBALS['post'] ?? reset($GLOBALS['m3_posts']);
 }
@@ -839,7 +1019,12 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = []) { re
 function wp_login_url($redirect = '', $force_reauth = false) { return '#'; }
 function wp_logout_url($redirect = '') { return '#'; }
 
-function wp_get_current_user() { return (object)['ID' => 0, 'display_name' => 'Guest', 'user_email' => '']; }
+function wp_get_current_user() {
+    if (!empty($_SESSION['m3_user'])) {
+        return (object) $_SESSION['m3_user'];
+    }
+    return (object) ['ID' => 0, 'user_login' => '', 'display_name' => 'Guest', 'user_email' => '', 'user_url' => '', 'description' => ''];
+}
 function wp_unslash($value) { return is_string($value) ? stripslashes($value) : $value; }
 function wp_safe_redirect($location, $status = 302) { header('Location: ' . $location, true, $status); }
 
@@ -848,36 +1033,356 @@ require_once __DIR__ . '/functions.php';
 do_action('after_setup_theme');
 do_action('widgets_init');
 
-// Preview POST handling for Registration, Sign-In, and Store Order
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!empty($_POST['mileym3dia_action']) || !empty($_POST['m3_action']))) {
-    $action = sanitize_text_field($_POST['mileym3dia_action'] ?? $_POST['m3_action']);
-    if ($action === 'register_user') {
-        $email = sanitize_email($_POST['reg_email'] ?? $_POST['user_email'] ?? '');
-        $name  = sanitize_text_field($_POST['reg_fullname'] ?? $_POST['user_name'] ?? '');
-        $pass  = $_POST['reg_password'] ?? $_POST['user_pass'] ?? '';
-        if ($email && is_email($email) && !empty($pass)) {
-            header('Location: /creator-hub/?tab=login&auth=registered&name=' . rawurlencode($name ?: 'Creator') . '#portal-access');
+// Protected resource download endpoint in preview
+if (isset($_GET['m3_download_resource']) && function_exists('mileym3dia_handle_protected_resource_download')) {
+    mileym3dia_handle_protected_resource_download();
+}
+
+// WooCommerce preview cart GET actions (`?add-to-cart=<id>`, `?remove_cart_item=<id>`)
+if (isset($_GET['add-to-cart'])) {
+    $add_id   = absint($_GET['add-to-cart']);
+    $add_size = isset($_GET['size']) ? sanitize_text_field($_GET['size']) : '';
+    $catalog  = mileym3dia_get_default_store_products();
+    foreach ($catalog as $prod) {
+        if ((int)$prod['id'] === $add_id) {
+            $_SESSION['m3_cart'] = $_SESSION['m3_cart'] ?? [];
+            $key = $add_id . ($add_size ? '_' . $add_size : '');
+            if (isset($_SESSION['m3_cart'][$key])) {
+                $_SESSION['m3_cart'][$key]['qty']++;
+            } else {
+                $_SESSION['m3_cart'][$key] = [
+                    'id'              => $prod['id'],
+                    'slug'            => $prod['slug'],
+                    'title'           => $prod['title'] . ($add_size ? ' (Size: ' . $add_size . ')' : ''),
+                    'price'           => (float)$prod['regular_price'],
+                    'image'           => $prod['image'],
+                    'is_downloadable' => $prod['is_downloadable'],
+                    'is_physical'     => $prod['is_physical'],
+                    'download_file'   => $prod['download_file'],
+                    'grants_tier'     => $prod['grants_tier'],
+                    'qty'             => 1,
+                ];
+            }
+            header('Location: /cart/?added=' . $add_id);
             exit;
         }
-        header('Location: /creator-hub/?tab=register&auth_error=' . rawurlencode('Please enter a valid email and password.') . '#portal-access');
+    }
+}
+if (isset($_GET['remove_cart_item'])) {
+    $rm_key = sanitize_text_field($_GET['remove_cart_item']);
+    if (isset($_SESSION['m3_cart'][$rm_key])) {
+        unset($_SESSION['m3_cart'][$rm_key]);
+    }
+    header('Location: /cart/');
+    exit;
+}
+
+// Preview POST handling for Newsletter, Creator Hub Auth/Profile/Briefs, and WooCommerce Checkout
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['m3_newsletter_email'])) {
+        $sub_email = sanitize_email($_POST['m3_newsletter_email']);
+        $ref       = $_SERVER['HTTP_REFERER'] ?? '/';
+        $sep       = strpos($ref, '?') === false ? '?' : '&';
+        header('Location: ' . $ref . $sep . 'subscribed=' . ($sub_email && is_email($sub_email) ? '1' : 'invalid'));
+        exit;
+    }
+
+    $action = sanitize_key($_POST['mileym3dia_action'] ?? $_POST['m3_action'] ?? '');
+    if ($action === 'register_user') {
+        $email    = sanitize_email($_POST['reg_email'] ?? '');
+        $username = sanitize_text_field($_POST['reg_username'] ?? '');
+        $name     = sanitize_text_field($_POST['reg_fullname'] ?? '');
+        $company  = sanitize_text_field($_POST['reg_company'] ?? '');
+        $acc_type = sanitize_key($_POST['reg_account_type'] ?? 'creator');
+        $pass     = (string)($_POST['reg_password'] ?? '');
+        if ($email && is_email($email) && strlen($pass) >= 6) {
+            $_SESSION['m3_user'] = [
+                'ID'                 => 901,
+                'user_login'         => $username ?: strstr($email, '@', true),
+                'display_name'       => $name ?: ($username ?: 'Creator'),
+                'user_email'         => $email,
+                'user_url'           => '',
+                'description'        => '',
+                'm3_company'         => $company,
+                'm3_account_type'    => $acc_type,
+                'm3_membership_tier' => 'free',
+            ];
+            header('Location: /creator-hub/?auth=registered#portal-access');
+            exit;
+        }
+        header('Location: /creator-hub/?tab=register&auth_error=' . rawurlencode('Please enter a valid email and password (min 6 chars).') . '#portal-access');
         exit;
     } elseif ($action === 'login_user') {
         $login = sanitize_text_field($_POST['log'] ?? '');
-        if ($login && !empty($_POST['pwd'])) {
-            header('Location: /creator-hub/?tab=login&auth=logged_in#portal-access');
+        $pass  = (string)($_POST['pwd'] ?? '');
+        if ($login && $pass) {
+            $_SESSION['m3_user'] = [
+                'ID'                 => 901,
+                'user_login'         => $login,
+                'display_name'       => ucfirst(strstr($login, '@', true) ?: $login),
+                'user_email'         => is_email($login) ? $login : ($login . '@studio.local'),
+                'user_url'           => '',
+                'description'        => '',
+                'm3_company'         => 'MILEYM3DIA Member',
+                'm3_account_type'    => 'creator',
+                'm3_membership_tier' => 'free',
+            ];
+            header('Location: /creator-hub/?auth=logged_in#portal-access');
             exit;
         }
         header('Location: /creator-hub/?tab=login&auth_error=' . rawurlencode('Invalid username or password.') . '#portal-access');
         exit;
-    } elseif ($action === 'store_order') {
-        $email = sanitize_email($_POST['order_email'] ?? '');
-        if ($email && is_email($email)) {
-            header('Location: /store/?order=placed#checkout');
+    } elseif ($action === 'logout_user') {
+        unset($_SESSION['m3_user']);
+        header('Location: /creator-hub/?tab=login&auth=logged_out#portal-access');
+        exit;
+    } elseif ($action === 'lost_password') {
+        $u = sanitize_text_field($_POST['user_login'] ?? '');
+        if ($u) {
+            header('Location: /creator-hub/?tab=reset&auth=reset_sent#portal-access');
             exit;
         }
-        header('Location: /store/?order=error#checkout');
+        header('Location: /creator-hub/?tab=reset&auth_error=' . rawurlencode('Please enter your username or email.') . '#portal-access');
+        exit;
+    } elseif ($action === 'update_profile' && !empty($_SESSION['m3_user'])) {
+        $_SESSION['m3_user']['display_name']    = sanitize_text_field($_POST['profile_display_name'] ?? $_SESSION['m3_user']['display_name']);
+        $_SESSION['m3_user']['user_email']      = sanitize_email($_POST['profile_email'] ?? $_SESSION['m3_user']['user_email']);
+        $_SESSION['m3_user']['m3_company']      = sanitize_text_field($_POST['profile_company'] ?? '');
+        $_SESSION['m3_user']['m3_account_type'] = sanitize_key($_POST['profile_account_type'] ?? 'creator');
+        $_SESSION['m3_user']['user_url']        = esc_url_raw($_POST['profile_website'] ?? '');
+        $_SESSION['m3_user']['description']     = sanitize_textarea_field($_POST['profile_bio'] ?? '');
+        header('Location: /creator-hub/?auth=profile_updated#portal-access');
+        exit;
+    } elseif ($action === 'submit_brief' && !empty($_SESSION['m3_user'])) {
+        $title = sanitize_text_field($_POST['brief_title'] ?? '');
+        if ($title) {
+            $_SESSION['m3_briefs'] = $_SESSION['m3_briefs'] ?? [];
+            array_unshift($_SESSION['m3_briefs'], [
+                'title'      => $title,
+                'discipline' => sanitize_text_field($_POST['brief_discipline'] ?? 'Video Production'),
+                'timeline'   => sanitize_text_field($_POST['brief_timeline'] ?? 'Next 30 Days'),
+                'status'     => 'IN REVIEW',
+                'progress'   => 20,
+            ]);
+        }
+        header('Location: /creator-hub/?auth=brief_submitted#portal-access');
+        exit;
+    } elseif ($action === 'wc_place_order') {
+        $cart = $_SESSION['m3_cart'] ?? [];
+        if (!empty($cart)) {
+            $order_id = 'M3-' . rand(10000, 99999);
+            $total    = 0;
+            $dls      = [];
+            foreach ($cart as $ci) {
+                $total += ((float)$ci['price'] * (int)$ci['qty']);
+                if (!empty($ci['is_downloadable']) && !empty($ci['download_file'])) {
+                    $dls[] = ['title' => $ci['title'], 'file' => $ci['download_file']];
+                }
+                if (!empty($ci['grants_tier']) && !empty($_SESSION['m3_user'])) {
+                    $_SESSION['m3_user']['m3_membership_tier'] = $ci['grants_tier'];
+                }
+            }
+            $_SESSION['m3_orders'] = $_SESSION['m3_orders'] ?? [];
+            array_unshift($_SESSION['m3_orders'], [
+                'id'        => $order_id,
+                'date'      => date('M d, Y'),
+                'total'     => $total,
+                'status'    => 'Completed',
+                'items'     => array_values($cart),
+                'downloads' => $dls,
+            ]);
+            $_SESSION['m3_cart'] = [];
+            header('Location: /my-account/?order_placed=' . rawurlencode($order_id));
+            exit;
+        }
+        header('Location: /cart/');
         exit;
     }
+}
+
+// Render WooCommerce Preview Views (`/product/<slug>/`, `/cart/`, `/checkout/`, `/my-account/`)
+if (!empty($GLOBALS['m3_wc_preview_view'])) {
+    $wc_view  = $GLOBALS['m3_wc_preview_view'];
+    $catalog  = mileym3dia_get_store_products();
+    $cart     = $_SESSION['m3_cart'] ?? [];
+    $orders   = $_SESSION['m3_orders'] ?? [];
+    $cart_cnt = mileym3dia_preview_get_cart_count();
+    get_header();
+    ?>
+    <main id="primary" class="site-main m3-wc-main">
+        <section class="page-title-section bg-shade-base">
+            <div class="container container--wide">
+                <span class="page-subtitle text-lime">STUDIO STORE // WOOCOMMERCE</span>
+                <h1 class="page-title page-title--mega">
+                    <?php
+                    if ($wc_view === 'product') echo 'PRODUCT <span class="text-lime">DETAILS</span>';
+                    elseif ($wc_view === 'cart') echo 'YOUR <span class="text-lime">CART</span>';
+                    elseif ($wc_view === 'checkout') echo 'STUDIO <span class="text-lime">CHECKOUT</span>';
+                    else echo 'MY <span class="text-lime">ACCOUNT</span>';
+                    ?>
+                </h1>
+                <div class="store-hero-bar">
+                    <div class="store-hero-badges">
+                        <a href="/store/" class="store-pill">← BACK TO STUDIO STORE</a>
+                        <span class="store-pill">WOOCOMMERCE DIGITAL &amp; PHYSICAL</span>
+                    </div>
+                    <div class="m3-wc-nav-actions">
+                        <a href="/cart/" class="btn btn--streetwear-red"><span>CART (<?php echo esc_html((string)$cart_cnt); ?>)</span></a>
+                        <a href="/checkout/" class="btn btn--streetwear-outline"><span>CHECKOUT</span></a>
+                        <a href="/my-account/" class="btn btn--streetwear-outline"><span>MY ACCOUNT</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-loose bg-shade-elevated">
+            <div class="container container--wide woocommerce-m3-shell">
+                <?php if ($wc_view === 'product') :
+                    $slug = $GLOBALS['m3_wc_preview_slug'] ?? '';
+                    $prod = $catalog[0];
+                    foreach ($catalog as $c) {
+                        if ($c['slug'] === $slug) { $prod = $c; break; }
+                    }
+                ?>
+                    <div class="m3-wc-single-grid">
+                        <div class="m3-wc-single-media">
+                            <img src="<?php echo esc_url($prod['image']); ?>" alt="<?php echo esc_attr($prod['title']); ?>" />
+                        </div>
+                        <div class="m3-wc-single-info">
+                            <span class="store-card__badge" style="position:static;display:inline-block;margin-bottom:1rem;"><?php echo esc_html($prod['badge']); ?></span>
+                            <h2 class="section-title" style="margin-bottom:0.75rem;"><?php echo esc_html($prod['title']); ?></h2>
+                            <div class="m3-wc-single-price text-lime"><?php echo esc_html($prod['price']); ?></div>
+                            <p class="page-lead" style="margin:1.25rem 0;"><?php echo esc_html($prod['desc']); ?></p>
+                            <div class="gear-card-specs" style="margin-bottom:1.5rem;">
+                                <div class="spec-row"><span class="spec-label">CATEGORY:</span><span class="spec-val"><?php echo esc_html($prod['category_label']); ?></span></div>
+                                <div class="spec-row"><span class="spec-label">FORMAT:</span><span class="spec-val"><?php echo esc_html($prod['format']); ?></span></div>
+                                <div class="spec-row"><span class="spec-label">FULFILLMENT:</span><span class="spec-val"><?php echo !empty($prod['is_physical']) ? 'Physical Shipping (Worldwide)' : 'Instant WooCommerce Digital Access'; ?></span></div>
+                            </div>
+                            <form method="get" action="/cart/" class="m3-wc-add-form">
+                                <input type="hidden" name="add-to-cart" value="<?php echo esc_attr((string)$prod['id']); ?>" />
+                                <?php if (!empty($prod['attributes'])) : ?>
+                                    <div class="form-group" style="margin-bottom:1rem;">
+                                        <label for="wc-size-select">SELECT SIZE</label>
+                                        <select id="wc-size-select" name="size">
+                                            <?php foreach ($prod['attributes'] as $sz) : ?>
+                                                <option value="<?php echo esc_attr($sz); ?>"><?php echo esc_html($sz); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                <?php endif; ?>
+                                <button type="submit" class="btn btn--streetwear-red btn--full"><span>ADD TO CART — <?php echo esc_html($prod['price']); ?></span></button>
+                            </form>
+                        </div>
+                    </div>
+
+                <?php elseif ($wc_view === 'cart') : ?>
+                    <?php if (empty($cart)) : ?>
+                        <div class="portal-notice">
+                            <strong>YOUR CART IS EMPTY //</strong> Browse our digital LUT packs, audio vaults, merch, and Pro passes in the <a href="/store/" class="text-lime">Studio Store →</a>
+                        </div>
+                    <?php else :
+                        $subtotal = 0;
+                    ?>
+                        <table class="shop_table cart">
+                            <thead><tr><th>PRODUCT</th><th>PRICE</th><th>QTY</th><th>SUBTOTAL</th><th></th></tr></thead>
+                            <tbody>
+                            <?php foreach ($cart as $ck => $ci) :
+                                $line = (float)$ci['price'] * (int)$ci['qty'];
+                                $subtotal += $line;
+                            ?>
+                                <tr>
+                                    <td><strong><?php echo esc_html($ci['title']); ?></strong></td>
+                                    <td>$<?php echo esc_html(number_format((float)$ci['price'], 2)); ?></td>
+                                    <td><?php echo esc_html((string)$ci['qty']); ?></td>
+                                    <td>$<?php echo esc_html(number_format($line, 2)); ?></td>
+                                    <td><a href="/cart/?remove_cart_item=<?php echo esc_attr(rawurlencode($ck)); ?>" class="text-red">Remove ×</a></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <div class="m3-wc-cart-summary">
+                            <div class="m3-wc-cart-total"><span>TOTAL</span><strong>$<?php echo esc_html(number_format($subtotal, 2)); ?></strong></div>
+                            <a href="/checkout/" class="btn btn--streetwear-red"><span>PROCEED TO CHECKOUT →</span></a>
+                        </div>
+                    <?php endif; ?>
+
+                <?php elseif ($wc_view === 'checkout') :
+                    $subtotal     = 0;
+                    $has_physical = false;
+                    foreach ($cart as $ci) {
+                        $subtotal += (float)$ci['price'] * (int)$ci['qty'];
+                        if (!empty($ci['is_physical'])) $has_physical = true;
+                    }
+                ?>
+                    <?php if (empty($cart)) : ?>
+                        <div class="portal-notice"><strong>NO ITEMS TO CHECK OUT //</strong> Add products in the <a href="/store/" class="text-lime">Studio Store →</a></div>
+                    <?php else : ?>
+                        <form method="post" action="/checkout/" class="contact-form m3-wc-checkout-grid">
+                            <input type="hidden" name="mileym3dia_action" value="wc_place_order" />
+                            <div>
+                                <h2 class="section-title" style="margin-bottom:1.25rem;">BILLING <?php echo $has_physical ? '&amp; SHIPPING ' : ''; ?>DETAILS</h2>
+                                <div class="form-row">
+                                    <div class="form-group"><label for="billing-first">FIRST NAME *</label><input type="text" id="billing-first" name="billing_first" required /></div>
+                                    <div class="form-group"><label for="billing-last">LAST NAME *</label><input type="text" id="billing-last" name="billing_last" required /></div>
+                                </div>
+                                <div class="form-group"><label for="billing-email">EMAIL ADDRESS *</label><input type="email" id="billing-email" name="billing_email" required /></div>
+                                <?php if ($has_physical) : ?>
+                                    <div class="form-group"><label for="shipping-addr">SHIPPING ADDRESS *</label><input type="text" id="shipping-addr" name="shipping_addr" placeholder="Street, City, State, ZIP" required /></div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="m3-wc-order-review">
+                                <h3 style="margin-bottom:1rem;">ORDER SUMMARY</h3>
+                                <?php foreach ($cart as $ci) : ?>
+                                    <div class="spec-row"><span><?php echo esc_html($ci['title']); ?> × <?php echo esc_html((string)$ci['qty']); ?></span><strong>$<?php echo esc_html(number_format((float)$ci['price'] * (int)$ci['qty'], 2)); ?></strong></div>
+                                <?php endforeach; ?>
+                                <div class="spec-row" style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.12);"><span>TOTAL</span><strong class="text-lime">$<?php echo esc_html(number_format($subtotal, 2)); ?></strong></div>
+                                <button type="submit" class="btn btn--streetwear-red btn--full" style="margin-top:1.5rem;"><span>PLACE WOOCOMMERCE ORDER →</span></button>
+                            </div>
+                        </form>
+                    <?php endif; ?>
+
+                <?php else : /* my-account */ ?>
+                    <?php if (!empty($_GET['order_placed'])) : ?>
+                        <div class="portal-notice portal-notice--success" role="status">
+                            <strong>ORDER CONFIRMED //</strong> Order <strong><?php echo esc_html(sanitize_text_field($_GET['order_placed'])); ?></strong> is complete. Your digital downloads are unlocked below.
+                        </div>
+                    <?php endif; ?>
+                    <div class="m3-wc-account-grid">
+                        <div class="hub-auth-card" style="padding:2rem;">
+                            <h2 style="margin-bottom:1rem;">RECENT ORDERS &amp; DIGITAL DOWNLOADS</h2>
+                            <?php if (empty($orders)) : ?>
+                                <p class="text-muted">No orders yet. Visit the <a href="/store/" class="text-lime">Studio Store</a> to purchase digital packs, merch, or a Pro Retainer Pass.</p>
+                            <?php else : ?>
+                                <?php foreach ($orders as $ord) : ?>
+                                    <div class="m3-tracker-item" style="margin-bottom:1rem;">
+                                        <div class="m3-tracker-item__top">
+                                            <strong>ORDER #<?php echo esc_html($ord['id']); ?> (<?php echo esc_html($ord['date']); ?>)</strong>
+                                            <span class="m3-tracker-status m3-tracker-status--lime"><?php echo esc_html($ord['status']); ?> — $<?php echo esc_html(number_format((float)$ord['total'], 2)); ?></span>
+                                        </div>
+                                        <?php if (!empty($ord['downloads'])) : ?>
+                                            <div style="margin-top:0.75rem;display:flex;flex-wrap:wrap;gap:0.5rem;">
+                                                <?php foreach ($ord['downloads'] as $dl) : ?>
+                                                    <a href="<?php echo esc_url($dl['file']); ?>" class="btn btn--streetwear-outline" download><span>DOWNLOAD <?php echo esc_html($dl['title']); ?> ↓</span></a>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+                        <div class="hub-auth-card" style="padding:2rem;">
+                            <h2 style="margin-bottom:1rem;">CREATOR HUB MEMBERSHIP</h2>
+                            <p class="text-muted" style="margin-bottom:1.25rem;">Manage your studio profile, submit project briefs, and unlock free &amp; Pro member vault assets.</p>
+                            <a href="/creator-hub/" class="btn btn--streetwear-red btn--full"><span>OPEN CREATOR HUB →</span></a>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </section>
+    </main>
+    <?php
+    get_footer();
+    exit;
 }
 
 // Render the matched template

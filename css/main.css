@@ -10528,6 +10528,413 @@ body.admin-bar .mobile-navigation {
     color: #9A9DB0;
 }
 
+/* ==========================================================================
+   V2.5 — SCALABLE RESOURCE LIBRARY, CREATOR HUB DASHBOARD & WOOCOMMERCE
+   ========================================================================== */
+
+/* Resource Library Directory Toolbar & Pagination */
+.m3-resource-toolbar {
+    margin-bottom: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.m3-resource-search-row {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) auto auto;
+    gap: 0.85rem;
+    align-items: stretch;
+}
+
+.m3-resource-search-field input,
+.m3-resource-select-wrap select {
+    width: 100%;
+    height: 100%;
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+    background: var(--bg-surface, #12121B);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: var(--color-white, #F4F4F6);
+    font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+    font-size: 0.92rem;
+    border-radius: 3px;
+}
+
+.m3-resource-search-field input:focus,
+.m3-resource-select-wrap select:focus {
+    outline: none;
+    border-color: var(--color-blue, #38BDF8);
+}
+
+.m3-resource-type-tabs {
+    margin-bottom: 0;
+}
+
+.m3-resource-meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    color: #9A9DB0;
+}
+
+.m3-resource-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+}
+
+.m3-resource-tag-pill {
+    padding: 0.2rem 0.55rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 2px;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.68rem;
+    color: #B4B7C9;
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.m3-resource-tag-pill:hover {
+    border-color: var(--color-blue, #38BDF8);
+    color: #FFFFFF;
+}
+
+.m3-resource-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 2.5rem;
+}
+
+/* Creator Hub Authenticated Member Dashboard & Project Tracker */
+.m3-member-topbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem 1.75rem;
+    background: var(--bg-surface, #12121B);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid var(--color-red, #FF2442);
+    margin-bottom: 2rem;
+}
+
+.m3-member-identity {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.m3-member-eyebrow {
+    display: block;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--color-blue, #38BDF8);
+    margin-bottom: 0.25rem;
+}
+
+.m3-member-name {
+    margin: 0;
+    font-family: var(--font-display, 'Anton', sans-serif);
+    font-size: 1.6rem;
+    letter-spacing: 0.03em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.m3-tier-badge {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.68rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    color: var(--color-blue, #38BDF8);
+    background: rgba(56, 189, 248, 0.08);
+}
+
+.m3-tier-badge--pro,
+.m3-tier-badge--agency {
+    border-color: rgba(255, 221, 0, 0.6);
+    color: var(--color-yellow, #FFDD00);
+    background: rgba(255, 221, 0, 0.12);
+}
+
+.m3-member-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.m3-promo-pill {
+    padding: 0.55rem 0.9rem;
+    background: rgba(255, 221, 0, 0.08);
+    border: 1px dashed rgba(255, 221, 0, 0.45);
+    font-family: var(--font-mono, monospace);
+    font-size: 0.74rem;
+    color: #F4F4F6;
+}
+
+.m3-promo-pill strong {
+    color: var(--color-yellow, #FFDD00);
+}
+
+.m3-logout-form {
+    margin: 0;
+}
+
+.m3-tracker-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.m3-tracker-item {
+    padding: 1.15rem 1.25rem;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.m3-tracker-item__top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.45rem;
+}
+
+.m3-tracker-status {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.68rem;
+    padding: 0.18rem 0.55rem;
+    background: rgba(255, 36, 66, 0.14);
+    border: 1px solid rgba(255, 36, 66, 0.4);
+    color: var(--color-red, #FF2442);
+}
+
+.m3-tracker-status--lime {
+    background: rgba(0, 255, 127, 0.1);
+    border-color: rgba(0, 255, 127, 0.4);
+    color: var(--color-lime, #00FF7F);
+}
+
+.m3-tracker-item__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.74rem;
+    color: #9A9DB0;
+    margin-bottom: 0.65rem;
+}
+
+.m3-tracker-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.m3-tracker-bar__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-red, #FF2442), var(--color-yellow, #FFDD00));
+}
+
+.m3-membership-card {
+    padding: 1.75rem;
+    background: var(--bg-surface, #12121B);
+    border: 1px solid rgba(255, 221, 0, 0.25);
+    margin-bottom: 1.25rem;
+}
+
+.m3-tier-perks {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #D5D7E3;
+}
+
+/* Unified WooCommerce Obsidian Styles */
+.m3-wc-nav-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    align-items: center;
+}
+
+.store-card__fulfillment {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--color-lime, #00FF7F);
+    margin-bottom: 1rem;
+}
+
+.store-card__title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.store-card__title a:hover {
+    color: var(--color-lime, #00FF7F);
+}
+
+.woocommerce-m3-shell .shop_table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-surface, #12121B);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.woocommerce-m3-shell .shop_table th,
+.woocommerce-m3-shell .shop_table td {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--color-white, #F4F4F6);
+}
+
+.woocommerce-m3-shell .shop_table th {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.74rem;
+    color: #9A9DB0;
+    letter-spacing: 0.08em;
+}
+
+.m3-wc-single-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: start;
+}
+
+.m3-wc-single-media img {
+    width: 100%;
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.m3-wc-single-price {
+    font-family: var(--font-display, 'Anton', sans-serif);
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+.m3-wc-cart-summary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background: var(--bg-surface, #12121B);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.m3-wc-cart-total {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    font-family: var(--font-mono, monospace);
+}
+
+.m3-wc-cart-total strong {
+    font-family: var(--font-display, 'Anton', sans-serif);
+    font-size: 2rem;
+    color: var(--color-lime, #00FF7F);
+}
+
+.m3-wc-checkout-grid,
+.m3-wc-account-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 2.25rem;
+    align-items: start;
+}
+
+.m3-wc-order-review {
+    padding: 1.75rem;
+    background: var(--bg-surface, #12121B);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Single Project Optional Video Player Stage */
+.case-study-video-player,
+.case-study-video-iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    background: #000;
+    border: 0;
+}
+
+.case-study-video-embed iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+}
+
+/* Responsive Refinements (Laptop 961-1180px, Tablet <= 960px, Mobile <= 640px) */
+@media (min-width: 961px) and (max-width: 1180px) {
+    .main-navigation .nav-menu {
+        gap: 0.7rem;
+    }
+    .main-navigation .nav-menu > li > a {
+        font-size: 0.74rem;
+        letter-spacing: 0.06em;
+        padding-left: 0.35rem;
+        padding-right: 0.35rem;
+    }
+}
+
+@media (max-width: 960px) {
+    .m3-resource-search-row {
+        grid-template-columns: 1fr 1fr;
+    }
+    .m3-resource-search-field {
+        grid-column: 1 / -1;
+    }
+    .m3-wc-single-grid,
+    .m3-wc-checkout-grid,
+    .m3-wc-account-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .m3-resource-search-row {
+        grid-template-columns: 1fr;
+    }
+    .m3-member-topbar {
+        padding: 1.25rem;
+    }
+    .woocommerce-m3-shell .shop_table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+
 
 
 

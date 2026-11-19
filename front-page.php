@@ -156,40 +156,52 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
                                     <div class="pillar-card pillar-card--yellow">
                                         <div class="pillar-top">
                                             <span class="pillar-badge text-yellow">01</span>
-                                            <h4 class="pillar-title">CINEMA-GRADE EQUIPMENT</h4>
+                                            <h4 class="pillar-title"><?php echo esc_html(get_theme_mod('mileym3dia_pillar_1_title', 'CINEMA-GRADE EQUIPMENT')); ?></h4>
                                         </div>
-                                        <p class="pillar-desc">Shot on RED, Sony FX, and Blackmagic cinema cameras with pro lighting &amp; audio.</p>
+                                        <p class="pillar-desc"><?php echo esc_html(get_theme_mod('mileym3dia_pillar_1_desc', 'Shot on RED, Sony FX, and Blackmagic cinema cameras with pro lighting & audio.')); ?></p>
                                     </div>
                                     <div class="pillar-card pillar-card--lime">
                                         <div class="pillar-top">
                                             <span class="pillar-badge text-lime">02</span>
-                                            <h4 class="pillar-title">INTEGRATED BRAND &amp; WEB</h4>
+                                            <h4 class="pillar-title"><?php echo esc_html(get_theme_mod('mileym3dia_pillar_2_title', 'INTEGRATED BRAND & WEB')); ?></h4>
                                         </div>
-                                        <p class="pillar-desc">Visual identity, graphic design, and custom web builds that match your media.</p>
+                                        <p class="pillar-desc"><?php echo esc_html(get_theme_mod('mileym3dia_pillar_2_desc', 'Visual identity, graphic design, and custom web builds that match your media.')); ?></p>
                                     </div>
                                     <div class="pillar-card pillar-card--blue">
                                         <div class="pillar-top">
                                             <span class="pillar-badge text-blue">03</span>
-                                            <h4 class="pillar-title">FAST 7–14 DAY DELIVERY</h4>
+                                            <h4 class="pillar-title"><?php echo esc_html(get_theme_mod('mileym3dia_pillar_3_title', 'FAST 7–14 DAY DELIVERY')); ?></h4>
                                         </div>
-                                        <p class="pillar-desc">Clear milestones, direct communication, and on-time final masters.</p>
+                                        <p class="pillar-desc"><?php echo esc_html(get_theme_mod('mileym3dia_pillar_3_desc', 'Clear milestones, direct communication, and on-time final masters.')); ?></p>
                                     </div>
                                     <div class="pillar-card pillar-card--red">
                                         <div class="pillar-top">
                                             <span class="pillar-badge text-red">04</span>
-                                            <h4 class="pillar-title">FULL COMMERCIAL RIGHTS</h4>
+                                            <h4 class="pillar-title"><?php echo esc_html(get_theme_mod('mileym3dia_pillar_4_title', 'FULL COMMERCIAL RIGHTS')); ?></h4>
                                         </div>
-                                        <p class="pillar-desc">Every package includes complete commercial licensing for your brand or release.</p>
+                                        <p class="pillar-desc"><?php echo esc_html(get_theme_mod('mileym3dia_pillar_4_desc', 'Every package includes complete commercial licensing for your brand or release.')); ?></p>
                                     </div>
                                 </div>
 
+                                <?php
+                                $studio_cta1_text = get_theme_mod('mileym3dia_about_cta_1_text', 'MORE ABOUT THE STUDIO');
+                                $studio_cta1_url  = get_theme_mod('mileym3dia_about_cta_1_url', mileym3dia_get_page_url('about'));
+                                if (empty($studio_cta1_url) || '/about/' === $studio_cta1_url) {
+                                    $studio_cta1_url = mileym3dia_get_page_url('about');
+                                }
+                                $studio_cta2_text = get_theme_mod('mileym3dia_about_cta_2_text', 'BOOK A CONSULTATION');
+                                $studio_cta2_url  = get_theme_mod('mileym3dia_about_cta_2_url', mileym3dia_get_page_url('contact'));
+                                if (empty($studio_cta2_url) || '/contact/' === $studio_cta2_url) {
+                                    $studio_cta2_url = mileym3dia_get_page_url('contact');
+                                }
+                                ?>
                                 <div class="studio-actions">
-                                    <a href="<?php echo esc_url(mileym3dia_get_page_url('about')); ?>" class="btn btn--accent-yellow">
-                                        <span class="btn-text"><?php esc_html_e('MORE ABOUT THE STUDIO', 'm3-big-red'); ?></span>
+                                    <a href="<?php echo esc_url($studio_cta1_url); ?>" class="btn btn--accent-yellow">
+                                        <span class="btn-text"><?php echo esc_html($studio_cta1_text); ?></span>
                                         <span class="btn-arrow">↗</span>
                                     </a>
-                                    <a href="<?php echo esc_url(mileym3dia_get_page_url('contact')); ?>" class="btn btn--streetwear-outline">
-                                        <span class="btn-text"><?php esc_html_e('BOOK A CONSULTATION', 'm3-big-red'); ?></span>
+                                    <a href="<?php echo esc_url($studio_cta2_url); ?>" class="btn btn--streetwear-outline">
+                                        <span class="btn-text"><?php echo esc_html($studio_cta2_text); ?></span>
                                     </a>
                                 </div>
                             </div>
@@ -232,18 +244,130 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
             'order' => (int) get_theme_mod('mileym3dia_section_order_work', 20),
             'render' => function () {
                 $fallback_defaults = array(
-                    1 => array('slug' => 'nightfall-apparel-campaign', 'title' => 'NIGHTFALL APPAREL CAMPAIGN', 'cat' => 'VIDEO PRODUCTION & LOOKBOOK', 'year' => '2026', 'desc' => 'Full commercial video production, street lookbook photography, and social campaign rollout for Nightfall Atelier.', 'accent' => 'red'),
-                    2 => array('slug' => 'static-frequency-tour-visuals', 'title' => 'STATIC FREQUENCY TOUR & VISUALS', 'cat' => 'MUSIC VIDEO & AUDIO PRODUCTION', 'year' => '2026', 'desc' => 'Music video direction, custom live tour visuals, and surround audio mastering for independent recording artist Static Frequency.', 'accent' => 'yellow'),
-                    3 => array('slug' => 'monolith-audio-hardware', 'title' => 'MONOLITH AUDIO HARDWARE', 'cat' => 'BRAND IDENTITY & WEB DESIGN', 'year' => '2025', 'desc' => 'Complete visual identity, custom typography, packaging design, and e-commerce web design for Monolith Labs.', 'accent' => 'lime'),
-                    4 => array('slug' => 'apex-motorsport-identity', 'title' => 'APEX MOTORSPORT IDENTITY', 'cat' => 'BRANDING & PHOTOGRAPHY', 'year' => '2025', 'desc' => 'Custom brand identity system, team apparel graphics, and trackside photography for Apex Racing.', 'accent' => 'blue'),
+                    1 => array('slug' => 'nightfall-apparel-campaign', 'title' => 'NIGHTFALL APPAREL CAMPAIGN', 'cat' => 'VIDEO PRODUCTION & LOOKBOOK', 'year' => '2026', 'client' => 'NIGHTFALL ATELIER', 'desc' => 'Full commercial video production, street lookbook photography, and social campaign rollout for Nightfall Atelier.', 'accent' => 'red'),
+                    2 => array('slug' => 'static-frequency-tour-visuals', 'title' => 'STATIC FREQUENCY TOUR & VISUALS', 'cat' => 'MUSIC VIDEO & AUDIO PRODUCTION', 'year' => '2026', 'client' => 'STATIC FREQUENCY', 'desc' => 'Music video direction, custom live tour visuals, and surround audio mastering for independent recording artist Static Frequency.', 'accent' => 'yellow'),
+                    3 => array('slug' => 'monolith-audio-hardware', 'title' => 'MONOLITH AUDIO HARDWARE', 'cat' => 'BRAND IDENTITY & WEB DESIGN', 'year' => '2025', 'client' => 'MONOLITH LABS', 'desc' => 'Complete visual identity, custom typography, packaging design, and e-commerce web design for Monolith Labs.', 'accent' => 'lime'),
+                    4 => array('slug' => 'apex-motorsport-identity', 'title' => 'APEX MOTORSPORT IDENTITY', 'cat' => 'BRANDING & PHOTOGRAPHY', 'year' => '2025', 'client' => 'APEX RACING CO.', 'desc' => 'Custom brand identity system, team apparel graphics, and trackside photography for Apex Racing.', 'accent' => 'blue'),
                 );
 
-                $p1_title = get_theme_mod('mileym3dia_proj_1_title', $fallback_defaults[1]['title']);
-                $p1_cat   = get_theme_mod('mileym3dia_proj_1_cat', $fallback_defaults[1]['cat']);
-                $p1_year  = get_theme_mod('mileym3dia_proj_1_year', $fallback_defaults[1]['year']);
-                $p1_desc  = get_theme_mod('mileym3dia_proj_1_desc', $fallback_defaults[1]['desc']);
-                $p1_img   = mileym3dia_get_project_image_url(1);
-                $p1_link  = mileym3dia_get_project_url($fallback_defaults[1]['slug']);
+                $accent_map = array(
+                    'video-production' => 'red',
+                    'video'            => 'red',
+                    'photography'      => 'blue',
+                    'photo'            => 'blue',
+                    'branding-design'  => 'lime',
+                    'branding'         => 'lime',
+                    'web-design'       => 'yellow',
+                    'web'              => 'yellow',
+                    'music-audio'      => 'yellow',
+                    'audio'            => 'yellow',
+                );
+                $accent_cycle = array('red', 'yellow', 'lime', 'blue');
+
+                $project_items = array();
+                $count_limit   = max(1, (int) get_theme_mod('mileym3dia_portfolio_count', 4));
+
+                if (mileym3dia_has_projects() && class_exists('WP_Query')) {
+                    $work_query = new WP_Query(array(
+                        'post_type'      => 'project',
+                        'posts_per_page' => $count_limit,
+                        'post_status'    => 'publish',
+                        'orderby'        => array('menu_order' => 'ASC', 'ID' => 'ASC'),
+                    ));
+
+                    if ($work_query && !empty($work_query->posts)) {
+                        $slot = 1;
+                        foreach ($work_query->posts as $p_post) {
+                            $pid   = (int) $p_post->ID;
+                            $def   = isset($fallback_defaults[$slot]) ? $fallback_defaults[$slot] : $fallback_defaults[1];
+                            $terms = taxonomy_exists('project_category') ? get_the_terms($pid, 'project_category') : array();
+
+                            $cat_names = array();
+                            $first_slug = '';
+                            if ($terms && !is_wp_error($terms)) {
+                                foreach ($terms as $t) {
+                                    $cat_names[] = strtoupper($t->name);
+                                    if ('' === $first_slug) {
+                                        $first_slug = $t->slug;
+                                    }
+                                }
+                            }
+                            $cat_display = !empty($cat_names) ? implode(' & ', array_slice($cat_names, 0, 2)) : $def['cat'];
+
+                            $custom_accent = get_post_meta($pid, '_project_accent', true);
+                            if (!empty($custom_accent)) {
+                                $accent = $custom_accent;
+                            } elseif ($first_slug && isset($accent_map[$first_slug])) {
+                                $accent = $accent_map[$first_slug];
+                            } else {
+                                $accent = $accent_cycle[($slot - 1) % 4];
+                            }
+
+                            $title  = $p_post->post_title ?: $def['title'];
+                            $year   = get_post_meta($pid, '_project_year', true) ?: $def['year'];
+                            $client = get_post_meta($pid, '_project_client', true) ?: $def['client'];
+                            $desc   = $p_post->post_excerpt ?: (wp_trim_words(strip_tags($p_post->post_content), 22) ?: $def['desc']);
+                            $img    = (function_exists('has_post_thumbnail') && has_post_thumbnail($pid))
+                                ? get_the_post_thumbnail_url($pid, 'mileym3dia-large')
+                                : mileym3dia_get_project_image_url($slot);
+                            $link   = get_permalink($pid);
+
+                            // Honor non-default Customizer overrides for slots 1-4
+                            if ($slot <= 4) {
+                                $mod_title = get_theme_mod("mileym3dia_proj_{$slot}_title", $def['title']);
+                                if (!empty($mod_title) && $mod_title !== $def['title']) {
+                                    $title = $mod_title;
+                                }
+                                $mod_cat = get_theme_mod("mileym3dia_proj_{$slot}_cat", $def['cat']);
+                                if (!empty($mod_cat) && $mod_cat !== $def['cat']) {
+                                    $cat_display = $mod_cat;
+                                }
+                                $mod_year = get_theme_mod("mileym3dia_proj_{$slot}_year", $def['year']);
+                                if (!empty($mod_year) && $mod_year !== $def['year']) {
+                                    $year = $mod_year;
+                                }
+                                $mod_client = get_theme_mod("mileym3dia_proj_{$slot}_client", $def['client']);
+                                if (!empty($mod_client) && $mod_client !== $def['client']) {
+                                    $client = $mod_client;
+                                }
+                                $mod_desc = get_theme_mod("mileym3dia_proj_{$slot}_desc", $def['desc']);
+                                if (!empty($mod_desc) && $mod_desc !== $def['desc']) {
+                                    $desc = $mod_desc;
+                                }
+                            }
+
+                            $project_items[] = array(
+                                'title'  => $title,
+                                'cat'    => $cat_display,
+                                'year'   => $year,
+                                'client' => $client,
+                                'desc'   => $desc,
+                                'img'    => $img,
+                                'link'   => $link,
+                                'accent' => $accent,
+                            );
+                            $slot++;
+                        }
+                    }
+                }
+
+                if (empty($project_items)) {
+                    foreach ($fallback_defaults as $idx => $item) {
+                        $project_items[] = array(
+                            'title'  => get_theme_mod("mileym3dia_proj_{$idx}_title", $item['title']),
+                            'cat'    => get_theme_mod("mileym3dia_proj_{$idx}_cat", $item['cat']),
+                            'year'   => get_theme_mod("mileym3dia_proj_{$idx}_year", $item['year']),
+                            'client' => get_theme_mod("mileym3dia_proj_{$idx}_client", $item['client']),
+                            'desc'   => get_theme_mod("mileym3dia_proj_{$idx}_desc", $item['desc']),
+                            'img'    => mileym3dia_get_project_image_url($idx),
+                            'link'   => mileym3dia_get_project_url($item['slug']),
+                            'accent' => $item['accent'],
+                        );
+                    }
+                }
+
+                $premier    = array_shift($project_items);
+                $companions = $project_items;
                 ?>
                 <section class="work-section section-loose bg-shade-base" id="work">
                     <div class="container container--wide">
@@ -264,59 +388,55 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
                         </div>
 
                         <div class="work-showcase-editorial">
-                            <article class="work-premier-card">
-                                <div class="work-premier-media">
-                                    <img src="<?php echo esc_url($p1_img); ?>" alt="<?php echo esc_attr($p1_title); ?>" class="work-premier-img" loading="lazy" />
-                                    <div class="work-card-overlay"></div>
-                                    <span class="work-premier-tag text-mono"><?php echo esc_html($p1_year); ?></span>
-                                </div>
-                                <div class="work-premier-content">
-                                    <div class="work-premier-meta-top">
-                                        <div class="work-premier-top">
-                                            <span class="work-premier-badge text-mono">FEATURED PREMIERE</span>
-                                            <span class="work-premier-cat text-mono text-red"><?php echo esc_html($p1_cat); ?></span>
-                                        </div>
-                                        <h3 class="work-premier-title"><?php echo esc_html($p1_title); ?></h3>
-                                        <p class="work-premier-desc"><?php echo esc_html($p1_desc); ?></p>
+                            <?php if ($premier) : ?>
+                                <article class="work-premier-card">
+                                    <div class="work-premier-media">
+                                        <img src="<?php echo esc_url($premier['img']); ?>" alt="<?php echo esc_attr($premier['title']); ?>" class="work-premier-img" loading="lazy" />
+                                        <div class="work-card-overlay"></div>
+                                        <span class="work-premier-tag text-mono"><?php echo esc_html($premier['year']); ?></span>
                                     </div>
-                                    <div class="work-premier-footer">
-                                        <a href="<?php echo esc_url($p1_link); ?>" class="work-premier-cta">
-                                            <span><?php esc_html_e('EXPLORE FULL CASE STUDY', 'm3-big-red'); ?></span>
-                                            <span class="arrow">↗</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <div class="work-companion-grid">
-                                <?php for ($idx = 2; $idx <= 4; $idx++) :
-                                    $item    = $fallback_defaults[$idx];
-                                    $c_title = get_theme_mod("mileym3dia_proj_{$idx}_title", $item['title']);
-                                    $c_cat   = get_theme_mod("mileym3dia_proj_{$idx}_cat", $item['cat']);
-                                    $c_year  = get_theme_mod("mileym3dia_proj_{$idx}_year", $item['year']);
-                                    $c_desc  = get_theme_mod("mileym3dia_proj_{$idx}_desc", $item['desc']);
-                                    $c_img   = mileym3dia_get_project_image_url($idx);
-                                    $c_link  = mileym3dia_get_project_url($item['slug']);
-                                ?>
-                                    <article class="work-companion-card work-companion-card--<?php echo esc_attr($item['accent']); ?>">
-                                        <div class="work-companion-media">
-                                            <img src="<?php echo esc_url($c_img); ?>" alt="<?php echo esc_attr($c_title); ?>" class="work-companion-img" loading="lazy" />
-                                            <span class="work-companion-year"><?php echo esc_html($c_year); ?></span>
-                                        </div>
-                                        <div class="work-companion-body">
-                                            <div class="work-companion-meta">
-                                                <span class="text-mono text-<?php echo esc_attr($item['accent']); ?>"><?php echo esc_html($c_cat); ?></span>
+                                    <div class="work-premier-content">
+                                        <div class="work-premier-meta-top">
+                                            <div class="work-premier-top">
+                                                <span class="work-premier-badge text-mono">FEATURED PREMIERE</span>
+                                                <span class="work-premier-cat text-mono text-<?php echo esc_attr($premier['accent']); ?>"><?php echo esc_html($premier['cat']); ?></span>
                                             </div>
-                                            <h3 class="work-companion-title"><?php echo esc_html($c_title); ?></h3>
-                                            <p class="work-companion-desc"><?php echo esc_html($c_desc); ?></p>
-                                            <a href="<?php echo esc_url($c_link); ?>" class="work-companion-link">
-                                                <span><?php esc_html_e('VIEW PROJECT', 'm3-big-red'); ?></span>
+                                            <h3 class="work-premier-title"><?php echo esc_html($premier['title']); ?></h3>
+                                            <p class="work-premier-desc"><?php echo esc_html($premier['desc']); ?></p>
+                                        </div>
+                                        <div class="work-premier-footer">
+                                            <a href="<?php echo esc_url($premier['link']); ?>" class="work-premier-cta">
+                                                <span><?php esc_html_e('EXPLORE FULL CASE STUDY', 'm3-big-red'); ?></span>
                                                 <span class="arrow">↗</span>
                                             </a>
                                         </div>
-                                    </article>
-                                <?php endfor; ?>
-                            </div>
+                                    </div>
+                                </article>
+                            <?php endif; ?>
+
+                            <?php if (!empty($companions)) : ?>
+                                <div class="work-companion-grid">
+                                    <?php foreach ($companions as $c_item) : ?>
+                                        <article class="work-companion-card work-companion-card--<?php echo esc_attr($c_item['accent']); ?>">
+                                            <div class="work-companion-media">
+                                                <img src="<?php echo esc_url($c_item['img']); ?>" alt="<?php echo esc_attr($c_item['title']); ?>" class="work-companion-img" loading="lazy" />
+                                                <span class="work-companion-year"><?php echo esc_html($c_item['year']); ?></span>
+                                            </div>
+                                            <div class="work-companion-body">
+                                                <div class="work-companion-meta">
+                                                    <span class="text-mono text-<?php echo esc_attr($c_item['accent']); ?>"><?php echo esc_html($c_item['cat']); ?></span>
+                                                </div>
+                                                <h3 class="work-companion-title"><?php echo esc_html($c_item['title']); ?></h3>
+                                                <p class="work-companion-desc"><?php echo esc_html($c_item['desc']); ?></p>
+                                                <a href="<?php echo esc_url($c_item['link']); ?>" class="work-companion-link">
+                                                    <span><?php esc_html_e('VIEW PROJECT', 'm3-big-red'); ?></span>
+                                                    <span class="arrow">↗</span>
+                                                </a>
+                                            </div>
+                                        </article>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </section>
@@ -329,13 +449,7 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
         $m3_home_sections['services'] = array(
             'order' => (int) get_theme_mod('mileym3dia_section_order_services', 30),
             'render' => function () {
-                $services_defaults = array(
-                    1 => array('title' => 'Video Production', 'tag' => 'COMMERCIALS · MUSIC VIDEOS · REELS', 'desc' => 'Cinema-grade music videos, brand commercials, documentaries, aerial drone capture, and professional DaVinci Resolve color grading.', 'subtags' => 'Music Videos, Brand Films, Drone 4K, Color Grading', 'accent' => 'red'),
-                    2 => array('title' => 'Photography', 'tag' => 'EDITORIAL · PRODUCT · PRESS KITS', 'desc' => 'High-impact brand lookbooks, studio & on-location portraits, artist press photos, commercial product photography, and retouching.', 'subtags' => 'Lookbooks, Artist Press Kits, Product Stills, Retouching', 'accent' => 'yellow'),
-                    3 => array('title' => 'Branding & Graphic Design', 'tag' => 'IDENTITY · LOGOS · PACKAGING', 'desc' => 'Memorable logo systems, typography, brand guidelines, merch & apparel graphics, album artwork, and physical packaging.', 'subtags' => 'Logo Systems, Brand Guides, Merch Graphics, Packaging', 'accent' => 'lime'),
-                    4 => array('title' => 'Web Design & Development', 'tag' => 'CUSTOM SITES · E-COMMERCE · UI/UX', 'desc' => 'Fast, modern, custom-designed websites, artist & agency portfolios, landing pages, and WooCommerce / Shopify storefronts.', 'subtags' => 'Custom WordPress, E-Commerce, Mobile UI/UX, Landing Pages', 'accent' => 'blue'),
-                    5 => array('title' => 'Music & Audio Production', 'tag' => 'RECORDING · MIXING · SOUND DESIGN', 'desc' => 'Original music production, custom scoring for film & commercials, vocal mixing, mastering, and clean audio post-production.', 'subtags' => 'Custom Scoring, Stem Mixing, Mastering, Sound Design', 'accent' => 'red'),
-                );
+                $services_list = function_exists('mileym3dia_get_services') ? mileym3dia_get_services() : array();
                 ?>
                 <section class="disciplines-section section-loose bg-shade-elevated" id="services">
                     <div class="container container--wide">
@@ -356,17 +470,18 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
                         </div>
 
                         <div class="disciplines-list">
-                            <?php foreach ($services_defaults as $idx => $srv) :
-                                $s_title   = get_theme_mod("mileym3dia_service_{$idx}_title", $srv['title']);
-                                $s_tag     = get_theme_mod("mileym3dia_service_{$idx}_tag", $srv['tag']);
-                                $s_desc    = get_theme_mod("mileym3dia_service_{$idx}_desc", $srv['desc']);
-                                $s_subtags = array_filter(array_map('trim', explode(',', get_theme_mod("mileym3dia_service_{$idx}_subtags", $srv['subtags']))));
-                                $accent    = $srv['accent'];
+                            <?php foreach ($services_list as $idx => $srv) :
+                                $s_num     = !empty($srv['num']) ? $srv['num'] : str_pad((string) ($idx + 1), 2, '0', STR_PAD_LEFT);
+                                $s_title   = $srv['title'];
+                                $s_tag     = $srv['tag'];
+                                $s_desc    = $srv['desc'];
+                                $s_subtags = !empty($srv['subtags']) && is_array($srv['subtags']) ? $srv['subtags'] : array();
+                                $accent    = !empty($srv['accent']) ? $srv['accent'] : 'red';
                             ?>
                                 <a href="<?php echo esc_url(mileym3dia_get_page_url('services')); ?>" class="discipline-row discipline-row--<?php echo esc_attr($accent); ?>">
                                     <div class="discipline-indicator"></div>
                                     <div class="discipline-col-num">
-                                        <span class="discipline-number">0<?php echo (int) $idx; ?></span>
+                                        <span class="discipline-number"><?php echo esc_html($s_num); ?></span>
                                     </div>
                                     <div class="discipline-col-title">
                                         <span class="discipline-tag text-<?php echo esc_attr($accent); ?>"><?php echo esc_html($s_tag); ?></span>
@@ -403,7 +518,7 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
                     1 => array(
                         'color'    => 'blue',
                         'featured' => false,
-                        'period'   => 'HALF-DAY',
+                        'period'   => get_theme_mod('mileym3dia_tier_1_period', 'HALF-DAY'),
                         'badge'    => get_theme_mod('mileym3dia_tier_1_badge', 'ENTRY TIER'),
                         'price'    => '$' . ltrim(get_theme_mod('mileym3dia_tier_1_price', '350'), '$'),
                         'title'    => get_theme_mod('mileym3dia_tier_1_title', 'SINGLE SHOOT OR DESIGN'),
@@ -416,7 +531,7 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
                     2 => array(
                         'color'    => 'yellow',
                         'featured' => true,
-                        'period'   => 'FULL-DAY',
+                        'period'   => get_theme_mod('mileym3dia_tier_2_period', 'FULL-DAY'),
                         'badge'    => get_theme_mod('mileym3dia_tier_2_badge', 'MOST POPULAR'),
                         'price'    => '$' . ltrim(get_theme_mod('mileym3dia_tier_2_price', '750'), '$'),
                         'title'    => get_theme_mod('mileym3dia_tier_2_title', 'CREATOR & BRAND LAUNCH'),
@@ -429,7 +544,7 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
                     3 => array(
                         'color'    => 'red',
                         'featured' => false,
-                        'period'   => 'MULTI-DAY',
+                        'period'   => get_theme_mod('mileym3dia_tier_3_period', 'MULTI-DAY'),
                         'badge'    => get_theme_mod('mileym3dia_tier_3_badge', 'ALL-IN-ONE STUDIO'),
                         'price'    => '$' . ltrim(get_theme_mod('mileym3dia_tier_3_price', '1,450'), '$'),
                         'title'    => get_theme_mod('mileym3dia_tier_3_title', 'FULL PRODUCTION + WEB'),
@@ -440,17 +555,20 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
                         'pkg'      => 'full',
                     ),
                 );
+                $pricing_eyebrow = get_theme_mod('mileym3dia_pricing_eyebrow', get_theme_mod('mileym3dia_pricing_teaser_eyebrow', '04 / TRANSPARENT INVESTMENT'));
+                $pricing_title   = get_theme_mod('mileym3dia_pricing_teaser_title', 'PACKAGES & CUSTOM BUNDLES');
+                $pricing_desc    = get_theme_mod('mileym3dia_pricing_teaser_desc', 'No hidden fees. Choose a ready-to-shoot package or bundle 3+ services from $95 and automatically save 10%.');
                 ?>
                 <section class="pricing-matrix-section section-loose bg-shade-base" id="pricing">
                     <div class="container container--wide">
                         <div class="section-header">
                             <div class="section-header-left">
-                                <span class="section-label text-yellow"><?php echo esc_html(get_theme_mod('mileym3dia_pricing_teaser_eyebrow', '04 / TRANSPARENT INVESTMENT')); ?></span>
-                                <h2 class="section-title section-title--xl">PACKAGES &amp; CUSTOM BUNDLES</h2>
+                                <span class="section-label text-yellow"><?php echo esc_html($pricing_eyebrow); ?></span>
+                                <h2 class="section-title section-title--xl"><?php echo esc_html($pricing_title); ?></h2>
                             </div>
                             <div class="section-header-right">
                                 <p class="section-header-desc">
-                                    No hidden fees. Choose a ready-to-shoot package or bundle 3+ services from $95 and automatically save 10%.
+                                    <?php echo esc_html($pricing_desc); ?>
                                 </p>
                                 <a href="<?php echo esc_url(mileym3dia_get_page_url('services')); ?>#pricing" class="text-link-arrow">
                                     <span><?php esc_html_e('FULL PRICING DIRECTORY', 'm3-big-red'); ?></span>
@@ -477,7 +595,7 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
                                                 <li><span class="text-<?php echo esc_attr($tc['color']); ?>">✓</span> <?php echo esc_html($fl); ?></li>
                                             <?php endforeach; ?>
                                         </ul>
-                                        <a href="<?php echo esc_url(add_query_arg('pkg', $tc['pkg'], mileym3dia_get_page_url('contact'))); ?>" class="btn <?php echo esc_attr($tc['btn_cls']); ?>" style="width:100%; justify-content:center; margin-top:1rem;">
+                                        <a href="<?php echo esc_url(add_query_arg('tier', $tc['pkg'], mileym3dia_get_page_url('contact'))); ?>" class="btn <?php echo esc_attr($tc['btn_cls']); ?>" style="width:100%; justify-content:center; margin-top:1rem;">
                                             <span><?php echo esc_html($tc['btn']); ?></span>
                                         </a>
                                     </div>
@@ -516,17 +634,18 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
             'render' => function () {
                 $store_items = array_slice(mileym3dia_get_store_products(), 0, 3);
                 $store_url   = mileym3dia_get_page_url('store');
+                $store_title = get_theme_mod('mileym3dia_store_title', 'THE STUDIO STORE');
                 ?>
                 <section class="store-home-section section-loose bg-shade-elevated" id="store">
                     <div class="container container--wide">
                         <div class="section-header">
                             <div class="section-header-left">
-                                <span class="section-label text-lime"><?php echo esc_html(get_theme_mod('mileym3dia_store_eyebrow', 'STUDIO STORE // DIGITAL & PHYSICAL')); ?></span>
-                                <h2 class="section-title section-title--xl"><?php echo esc_html(get_theme_mod('mileym3dia_store_title', 'THE STUDIO STORE')); ?></h2>
+                                <span class="section-label text-lime"><?php echo esc_html(get_theme_mod('mileym3dia_store_eyebrow', 'STUDIO STORE // WOOCOMMERCE DIGITAL & PHYSICAL')); ?></span>
+                                <h2 class="section-title section-title--xl"><?php echo esc_html($store_title); ?></h2>
                             </div>
                             <div class="section-header-right">
                                 <p class="section-header-desc">
-                                    Production-tested 35mm LUTs, analog stem vaults, lookbook layout systems, and studio gear ready for instant checkout.
+                                    Production-tested 35mm LUTs, analog stem vaults, lookbook layout systems, and studio gear powered by WooCommerce.
                                 </p>
                                 <a href="<?php echo esc_url($store_url); ?>" class="text-link-arrow">
                                     <span><?php esc_html_e('ENTER FULL STUDIO STORE', 'm3-big-red'); ?></span>
@@ -536,25 +655,31 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
                         </div>
 
                         <div class="store-grid store-grid--home">
-                            <?php foreach ($store_items as $item) : ?>
+                            <?php foreach ($store_items as $item) :
+                                $prod_link = !empty($item['permalink']) ? $item['permalink'] : add_query_arg('cat', $item['category_slug'], $store_url);
+                                $add_link  = !empty($item['add_to_cart_url']) ? $item['add_to_cart_url'] : $store_url;
+                            ?>
                                 <article class="store-card">
-                                    <div class="store-card__media">
+                                    <a href="<?php echo esc_url($prod_link); ?>" class="store-card__media">
                                         <img src="<?php echo esc_url($item['image']); ?>" alt="<?php echo esc_attr($item['title']); ?>" loading="lazy" />
                                         <?php if (!empty($item['badge'])) : ?>
                                             <span class="store-card__badge"><?php echo esc_html($item['badge']); ?></span>
                                         <?php endif; ?>
                                         <span class="store-card__price-tag"><?php echo esc_html($item['price']); ?></span>
-                                    </div>
+                                    </a>
                                     <div class="store-card__body">
                                         <div class="store-card__meta">
                                             <span class="store-card__category"><?php echo esc_html($item['category_label']); ?></span>
                                             <span class="store-card__format"><?php echo esc_html($item['format']); ?></span>
                                         </div>
-                                        <h3 class="store-card__title"><?php echo esc_html($item['title']); ?></h3>
+                                        <h3 class="store-card__title"><a href="<?php echo esc_url($prod_link); ?>"><?php echo esc_html($item['title']); ?></a></h3>
                                         <p class="store-card__desc"><?php echo esc_html($item['desc']); ?></p>
                                         <div class="store-card__actions">
-                                            <a href="<?php echo esc_url(add_query_arg('cat', $item['category_slug'], $store_url)); ?>" class="btn btn--streetwear-red btn--full">
-                                                <span>SHOP IN STUDIO STORE →</span>
+                                            <a href="<?php echo esc_url($add_link); ?>" class="btn btn--streetwear-red">
+                                                <span><?php echo esc_html($item['btn_text']); ?></span>
+                                            </a>
+                                            <a href="<?php echo esc_url($prod_link); ?>" class="btn btn--streetwear-outline">
+                                                <span>DETAILS →</span>
                                             </a>
                                         </div>
                                     </div>

@@ -23,19 +23,34 @@ while (have_posts()) : the_post();
     $cat_name   = $cat_obj ? $cat_obj->name : (!empty($proj_fallback['cat_name']) ? $proj_fallback['cat_name'] : 'CREATIVE PRODUCTION');
     $cat_slug   = $cat_obj ? $cat_obj->slug : (!empty($proj_fallback['cat_slug']) ? $proj_fallback['cat_slug'] : 'video');
 
-    // Map category to brand color accent
+    // Map category to brand color accent (canonical 5 service categories + legacy short slugs)
     $accent_map = array(
-        'video'    => 'red',
-        'photo'    => 'blue',
-        'branding' => 'lime',
-        'audio'    => 'yellow',
+        'video-production' => 'red',
+        'video'            => 'red',
+        'photography'      => 'blue',
+        'photo'            => 'blue',
+        'branding-design'  => 'lime',
+        'branding'         => 'lime',
+        'web-design'       => 'yellow',
+        'web'              => 'yellow',
+        'music-audio'      => 'yellow',
+        'audio'            => 'yellow',
     );
-    $accent = $accent_map[$cat_slug] ?? (!empty($proj_fallback['accent']) ? $proj_fallback['accent'] : 'red');
+    $custom_accent = get_post_meta(get_the_ID(), '_project_accent', true);
+    if (!empty($custom_accent)) {
+        $accent = $custom_accent;
+    } else {
+        $accent = $accent_map[$cat_slug] ?? (!empty($proj_fallback['accent']) ? $proj_fallback['accent'] : 'red');
+    }
 
     $client   = $meta['client'] ?: get_post_meta(get_the_ID(), '_project_client', true) ?: ($proj_fallback['client'] ?? 'NIGHTFALL ATELIER');
     $year     = $meta['year'] ?: get_post_meta(get_the_ID(), '_project_year', true) ?: ($proj_fallback['year'] ?? get_the_date('Y'));
+    $timeline = get_post_meta(get_the_ID(), '_project_timeline', true) ?: ($proj_fallback['timeline'] ?? '4-Week Cycle');
     $services = $meta['services'] ?: get_post_meta(get_the_ID(), '_project_services', true) ?: ($proj_fallback['services'] ?? 'Commercial Production / Art Direction');
     $url      = $meta['url'] ?: get_post_meta(get_the_ID(), '_project_url', true) ?: ($proj_fallback['url'] ?? '');
+
+    $challenge_title = get_post_meta(get_the_ID(), '_project_challenge_title', true) ?: ($proj_fallback['challenge_title'] ?? 'Defining the Visual Identity & Cinematic Scope');
+    $solution_title  = get_post_meta(get_the_ID(), '_project_solution_title', true) ?: ($proj_fallback['solution_title'] ?? 'Precision Lighting, Color Mastery & Delivery');
 
     // Specific case study fields with fallbacks
     $challenge = get_post_meta(get_the_ID(), '_project_challenge', true);
@@ -52,6 +67,14 @@ while (have_posts()) : the_post();
             : 'Our in-house production team handled the entire pipeline from concept treatment to master delivery. Utilizing RED and Sony cinema camera packages, custom focal-length lighting setups, DaVinci Resolve color grading, and bespoke audio sound design, we crafted a cohesive narrative that outperformed engagement targets by over 140%.';
     }
 
+    $specs_raw = get_post_meta(get_the_ID(), '_project_specs', true);
+    if (empty($specs_raw)) {
+        $specs_raw = !empty($proj_fallback['specs'])
+            ? $proj_fallback['specs']
+            : "Camera: RED Digital Cinema · Sony Cinema Line\nColor Pipeline: DaVinci Resolve Studio RAW Grading\nSound & Score: Bespoke Studio Sound Design & Master\nDeliverables: 4K Master, Social Reels, Still Lookbook";
+    }
+    $specs_lines = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string) $specs_raw))));
+
     $stats = get_post_meta(get_the_ID(), '_project_stats', true);
     if (empty($stats) || !is_array($stats)) {
         $stats = !empty($proj_fallback['stats']) ? $proj_fallback['stats'] : array(
@@ -61,6 +84,17 @@ while (have_posts()) : the_post();
             array('num' => '1.8M+', 'label' => 'Multi-Platform Reach'),
         );
     }
+
+    $gallery_meta = get_post_meta(get_the_ID(), '_project_gallery', true);
+    $gallery_urls = array();
+    if (is_array($gallery_meta)) {
+        $gallery_urls = array_values(array_filter($gallery_meta));
+    } elseif (is_string($gallery_meta) && '' !== trim($gallery_meta)) {
+        $gallery_urls = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $gallery_meta))));
+    }
+    $gallery_frame_1 = !empty($gallery_urls[0]) ? $gallery_urls[0] : mileym3dia_get_project_image_url(2);
+    $gallery_frame_2 = !empty($gallery_urls[1]) ? $gallery_urls[1] : mileym3dia_get_project_image_url(3);
+    $gallery_frame_3 = !empty($gallery_urls[2]) ? $gallery_urls[2] : mileym3dia_get_project_image_url(4);
 
     $raw_title = get_the_title();
     $words = explode(' ', trim($raw_title));
@@ -107,7 +141,7 @@ while (have_posts()) : the_post();
                 </div>
                 <div class="meta-dock-item">
                     <span class="dock-label"><?php esc_html_e('YEAR & TIMELINE', 'mileym3dia'); ?></span>
-                    <span class="dock-value"><?php echo esc_html($year); ?> &middot; <?php esc_html_e('4-Week Cycle', 'mileym3dia'); ?></span>
+                    <span class="dock-value"><?php echo esc_html($year); ?> &middot; <?php echo esc_html($timeline); ?></span>
                 </div>
                 <div class="meta-dock-item">
                     <span class="dock-label"><?php esc_html_e('SERVICES DELIVERED', 'mileym3dia'); ?></span>
@@ -132,8 +166,21 @@ while (have_posts()) : the_post();
     <!-- 02. FULL-WIDTH CINEMA FEATURE MEDIA -->
     <section class="case-study-feature-media">
         <div class="container container--wide">
+            <?php $video_url = get_post_meta(get_the_ID(), '_project_video_url', true); ?>
             <div class="feature-media-frame">
-                <?php if (has_post_thumbnail()) : ?>
+                <?php if (!empty($video_url)) :
+                    $is_direct_video = preg_match('/\.(mp4|webm|ogg)(\?.*)?$/i', $video_url);
+                ?>
+                    <?php if ($is_direct_video) : ?>
+                        <video class="case-study-video-player" controls playsinline preload="metadata" poster="<?php echo esc_url(has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'full') : mileym3dia_get_project_image_url($proj_slot)); ?>">
+                            <source src="<?php echo esc_url($video_url); ?>" type="video/mp4" />
+                        </video>
+                    <?php elseif (function_exists('wp_oembed_get') && ($embed_html = wp_oembed_get($video_url))) : ?>
+                        <div class="case-study-video-embed"><?php echo $embed_html; ?></div>
+                    <?php else : ?>
+                        <iframe class="case-study-video-iframe" src="<?php echo esc_url($video_url); ?>" title="<?php echo esc_attr(get_the_title() . ' Video'); ?>" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    <?php endif; ?>
+                <?php elseif (has_post_thumbnail()) : ?>
                     <?php the_post_thumbnail('mileym3dia-hero', array('class' => 'feature-media-image')); ?>
                 <?php else : ?>
                     <img src="<?php echo esc_url(mileym3dia_get_project_image_url($hero_slot)); ?>" alt="<?php the_title_attribute(); ?>" class="feature-media-image" />
@@ -156,7 +203,7 @@ while (have_posts()) : the_post();
                         <span class="pill-number">01</span>
                         <span class="pill-title text-<?php echo esc_attr($accent); ?>"><?php esc_html_e('THE CREATIVE CHALLENGE', 'mileym3dia'); ?></span>
                     </div>
-                    <h2 class="col-headline"><?php esc_html_e('Defining the Visual Identity & Cinematic Scope', 'mileym3dia'); ?></h2>
+                    <h2 class="col-headline"><?php echo esc_html($challenge_title); ?></h2>
                     <div class="col-body-text">
                         <p><?php echo esc_html($challenge); ?></p>
                         <?php if (trim(get_the_content())) : ?>
@@ -172,16 +219,21 @@ while (have_posts()) : the_post();
                         <span class="pill-number">02</span>
                         <span class="pill-title text-<?php echo esc_attr($accent); ?>"><?php esc_html_e('THE PRODUCTION EXECUTION', 'mileym3dia'); ?></span>
                     </div>
-                    <h2 class="col-headline"><?php esc_html_e('Precision Lighting, Color Mastery & Delivery', 'mileym3dia'); ?></h2>
+                    <h2 class="col-headline"><?php echo esc_html($solution_title); ?></h2>
                     <div class="col-body-text">
                         <p><?php echo esc_html($solution); ?></p>
                         <div class="case-study-specs-card">
                             <span class="specs-title"><?php esc_html_e('PRODUCTION RIG & PIPELINE', 'mileym3dia'); ?></span>
                             <ul class="specs-list">
-                                <li><strong><?php esc_html_e('Camera:', 'mileym3dia'); ?></strong> RED Digital Cinema &middot; Sony Cinema Line</li>
-                                <li><strong><?php esc_html_e('Color Pipeline:', 'mileym3dia'); ?></strong> DaVinci Resolve Studio RAW Grading</li>
-                                <li><strong><?php esc_html_e('Sound & Score:', 'mileym3dia'); ?></strong> Bespoke Studio Sound Design &amp; Master</li>
-                                <li><strong><?php esc_html_e('Deliverables:', 'mileym3dia'); ?></strong> 4K Master, Social Reels, Still Lookbook</li>
+                                <?php foreach ($specs_lines as $s_line) :
+                                    if (strpos($s_line, ':') !== false) :
+                                        list($s_lbl, $s_val) = explode(':', $s_line, 2);
+                                ?>
+                                        <li><strong><?php echo esc_html(trim($s_lbl)); ?>:</strong> <?php echo esc_html(trim($s_val)); ?></li>
+                                    <?php else : ?>
+                                        <li><?php echo esc_html($s_line); ?></li>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                             </ul>
                         </div>
                     </div>
@@ -215,15 +267,15 @@ while (have_posts()) : the_post();
 
             <div class="case-study-gallery-grid">
                 <div class="gallery-item gallery-item--wide">
-                    <img src="<?php echo esc_url(mileym3dia_get_project_image_url(2)); ?>" alt="<?php the_title_attribute(); ?> Stills" loading="lazy" />
+                    <img src="<?php echo esc_url($gallery_frame_1); ?>" alt="<?php the_title_attribute(); ?> Stills" loading="lazy" />
                     <span class="gallery-caption"><?php esc_html_e('FRAME 01 · CINEMATOGRAPHY STILL', 'mileym3dia'); ?></span>
                 </div>
                 <div class="gallery-item">
-                    <img src="<?php echo esc_url(mileym3dia_get_project_image_url(3)); ?>" alt="<?php the_title_attribute(); ?> Detail" loading="lazy" />
+                    <img src="<?php echo esc_url($gallery_frame_2); ?>" alt="<?php the_title_attribute(); ?> Detail" loading="lazy" />
                     <span class="gallery-caption"><?php esc_html_e('FRAME 02 · DETAIL & COMPOSITION', 'mileym3dia'); ?></span>
                 </div>
                 <div class="gallery-item">
-                    <img src="<?php echo esc_url(mileym3dia_get_project_image_url(4)); ?>" alt="<?php the_title_attribute(); ?> Editorial" loading="lazy" />
+                    <img src="<?php echo esc_url($gallery_frame_3); ?>" alt="<?php the_title_attribute(); ?> Editorial" loading="lazy" />
                     <span class="gallery-caption"><?php esc_html_e('FRAME 03 · EDITORIAL LOOKBOOK', 'mileym3dia'); ?></span>
                 </div>
             </div>
