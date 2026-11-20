@@ -156,7 +156,7 @@ $vault_files = !empty($vault_query['items']) ? $vault_query['items'] : array();
                             <form method="post" action="<?php echo esc_url($hub_url); ?>" class="m3-logout-form">
                                 <?php if (function_exists('wp_nonce_field')) { wp_nonce_field('mileym3dia_logout_action', 'mileym3dia_logout_nonce'); } ?>
                                 <input type="hidden" name="mileym3dia_action" value="logout_user" />
-                                <button type="submit" class="btn btn--streetwear-red"><span>SIGN OUT</span></button>
+                                <button type="submit" class="btn btn--page-accent"><span>SIGN OUT</span></button>
                             </form>
                         </div>
                     </div>
@@ -278,7 +278,7 @@ $vault_files = !empty($vault_query['items']) ? $vault_query['items'] : array();
                                         <textarea id="profile-bio" name="profile_bio" rows="3" placeholder="Tell our studio team about your visual style, camera setup, or upcoming releases..."><?php echo esc_textarea($user_bio); ?></textarea>
                                     </div>
 
-                                    <button type="submit" class="btn btn--streetwear-red btn--full">
+                                    <button type="submit" class="btn btn--page-accent btn--full">
                                         <span>SAVE PROFILE CHANGES →</span>
                                     </button>
                                 </form>
@@ -322,7 +322,7 @@ $vault_files = !empty($vault_query['items']) ? $vault_query['items'] : array();
                                         <textarea id="brief-details" name="brief_details" rows="4" placeholder="Describe your creative vision, deliverables, references, and budget range..." required></textarea>
                                     </div>
 
-                                    <button type="submit" class="btn btn--streetwear-red btn--full">
+                                    <button type="submit" class="btn btn--page-accent btn--full">
                                         <span>SUBMIT BRIEF TO STUDIO →</span>
                                     </button>
                                 </form>
@@ -350,7 +350,7 @@ $vault_files = !empty($vault_query['items']) ? $vault_query['items'] : array();
                                     <li><?php echo in_array($user_tier, array('pro', 'agency'), true) ? '✓' : '○'; ?> Pro 8K RAW PowerGrades &amp; Retainer Priority</li>
                                 </ul>
                                 <?php if (!in_array($user_tier, array('pro', 'agency'), true)) : ?>
-                                    <a href="<?php echo esc_url(home_url('/product/priority-4k-retainer-day-pass/')); ?>" class="btn btn--streetwear-red btn--full">
+                                    <a href="<?php echo esc_url(home_url('/product/priority-4k-retainer-day-pass/')); ?>" class="btn btn--page-accent btn--full">
                                         <span>UPGRADE TO PRO TIER →</span>
                                     </a>
                                 <?php endif; ?>
@@ -428,7 +428,7 @@ $vault_files = !empty($vault_query['items']) ? $vault_query['items'] : array();
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn--streetwear-red btn--full">
+                                <button type="submit" class="btn btn--page-accent btn--full">
                                     <span><?php echo esc_html(get_theme_mod('mileym3dia_hub_register_btn', 'REGISTER FREE ACCOUNT →')); ?></span>
                                 </button>
                             </form>
@@ -463,7 +463,7 @@ $vault_files = !empty($vault_query['items']) ? $vault_query['items'] : array();
                                     <a href="<?php echo esc_url(add_query_arg('tab', 'reset', $hub_url) . '#portal-access'); ?>" class="hub-forgot-link" data-switch-tab="reset">Reset Password</a>
                                 </div>
 
-                                <button type="submit" class="btn btn--streetwear-red btn--full">
+                                <button type="submit" class="btn btn--page-accent btn--full">
                                     <span><?php echo esc_html(get_theme_mod('mileym3dia_hub_login_btn', 'SIGN IN TO PORTAL →')); ?></span>
                                 </button>
                             </form>
@@ -485,7 +485,7 @@ $vault_files = !empty($vault_query['items']) ? $vault_query['items'] : array();
                                     <input type="text" id="reset-user-login" name="user_login" placeholder="username or email@studio.com" required />
                                 </div>
 
-                                <button type="submit" class="btn btn--streetwear-red btn--full">
+                                <button type="submit" class="btn btn--page-accent btn--full">
                                     <span>SEND RESET LINK →</span>
                                 </button>
                             </form>
@@ -605,11 +605,11 @@ $vault_files = !empty($vault_query['items']) ? $vault_query['items'] : array();
                                     <?php echo esc_html($vf['btn_text']); ?> ↓
                                 </a>
                             <?php elseif ('pro' === $access) : ?>
-                                <a href="<?php echo esc_url(home_url('/product/priority-4k-retainer-day-pass/')); ?>" class="btn btn--streetwear-red btn--full">
+                                <a href="<?php echo esc_url(home_url('/product/priority-4k-retainer-day-pass/')); ?>" class="btn btn--page-accent btn--full">
                                     UPGRADE TO PRO TO UNLOCK →
                                 </a>
                             <?php else : ?>
-                                <a href="<?php echo esc_url(add_query_arg('tab', 'register', $hub_url) . '#portal-access'); ?>" class="btn btn--streetwear-red btn--full">
+                                <a href="<?php echo esc_url(add_query_arg('tab', 'register', $hub_url) . '#portal-access'); ?>" class="btn btn--page-accent btn--full">
                                     SIGN IN / REGISTER FREE TO DOWNLOAD →
                                 </a>
                             <?php endif; ?>

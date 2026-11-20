@@ -223,13 +223,14 @@ function mileym3dia_scripts() {
         '--color-purple'       => get_theme_mod('mileym3dia_color_purple', '#8B38DC'),
         '--color-yellow'       => get_theme_mod('mileym3dia_color_yellow', '#FFDD00'),
         '--color-lime'         => get_theme_mod('mileym3dia_color_lime', '#D4F329'),
+        '--color-electric-green' => get_theme_mod('mileym3dia_accent_services', '#39FF14'),
         '--color-blue'         => get_theme_mod('mileym3dia_color_blue', '#258DFF'),
         '--accent-work'        => get_theme_mod('mileym3dia_accent_work', '#8B38DC'),
-        '--accent-services'    => get_theme_mod('mileym3dia_accent_services', '#D4F329'),
+        '--accent-services'    => get_theme_mod('mileym3dia_accent_services', '#39FF14'),
         '--accent-about'       => get_theme_mod('mileym3dia_accent_about', '#EF252C'),
         '--accent-store'       => get_theme_mod('mileym3dia_accent_store', '#D4F329'),
         '--accent-resources'   => get_theme_mod('mileym3dia_accent_resources', '#258DFF'),
-        '--accent-creator-hub' => get_theme_mod('mileym3dia_accent_creator_hub', '#8B38DC'),
+        '--accent-creator-hub' => get_theme_mod('mileym3dia_accent_creator_hub', '#258DFF'),
         '--accent-blog'        => get_theme_mod('mileym3dia_accent_blog', '#EF252C'),
         '--accent-contact'     => get_theme_mod('mileym3dia_accent_contact', '#EF252C'),
     );
@@ -375,16 +376,6 @@ function mileym3dia_custom_excerpt($limit) {
  */
 function mileym3dia_widgets_init() {
     register_sidebar(array(
-        'name'          => __('Header', 'mileym3dia'),
-        'id'            => 'header-1',
-        'description'   => __('Header widgets.', 'mileym3dia'),
-        'before_widget' => '<div id="%1$s" class="header-widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<span class="screen-reader-text">',
-        'after_title'   => '</span>',
-    ));
-
-    register_sidebar(array(
         'name'          => __('Blog Sidebar', 'mileym3dia'),
         'id'            => 'sidebar-blog',
         'description'   => __('Blog sidebar widgets.', 'mileym3dia'),
@@ -394,11 +385,21 @@ function mileym3dia_widgets_init() {
         'after_title'   => '</h2>',
     ));
 
+    register_sidebar(array(
+        'name'          => __('Header', 'mileym3dia'),
+        'id'            => 'header-1',
+        'description'   => __('Optional header widgets.', 'mileym3dia'),
+        'before_widget' => '<div id="%1$s" class="header-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<span class="screen-reader-text">',
+        'after_title'   => '</span>',
+    ));
+
     for ($i = 1; $i <= 4; $i++) {
         register_sidebar(array(
-            'name'          => sprintf(__('Footer %d', 'mileym3dia'), $i),
+            'name'          => sprintf(__('Footer %d (Opt-In via Customizer)', 'mileym3dia'), $i),
             'id'            => 'footer-' . $i,
-            'description'   => sprintf(__('Footer column %d widgets.', 'mileym3dia'), $i),
+            'description'   => sprintf(__('Optional footer column %d widgets. Enable "Show Optional Footer Widget Columns" in Customizer to display.', 'mileym3dia'), $i),
             'before_widget' => '<div id="%1$s" class="footer-widget %2$s">',
             'after_widget'  => '</div>',
             'before_title'  => '<h3 class="footer-widget-title">',
@@ -1313,16 +1314,17 @@ function mileym3dia_default_nav_menu() {
     $is_services  = is_page('services') || is_page_template('page-services.php');
     $is_work      = is_page('work') || is_page('portfolio') || is_page_template('page-portfolio.php') || is_page_template('page-work.php') || is_post_type_archive('project') || is_singular('project');
     $is_store     = is_page('store') || is_page('shop') || is_page_template('page-store.php') || (function_exists('is_woocommerce') && is_woocommerce());
-    $is_blog      = is_home() || is_page('blog') || is_page('resources') || is_page_template('page-blog.php') || is_page_template('page-resources.php') || (is_archive() && !is_post_type_archive('project')) || is_singular('post');
+    $is_resources = is_page('resources') || is_page_template('page-resources.php');
     $is_hub       = is_page('creator-hub') || is_page_template('page-creator-hub.php');
+    $is_blog      = is_home() || is_page('blog') || is_page_template('page-blog.php') || (is_archive() && !is_post_type_archive('project')) || is_singular('post');
     $is_contact   = is_page('contact') || is_page_template('page-contact.php');
 
     echo '<ul class="nav-menu">';
-    echo '<li class="nav-item' . ($is_home ? ' active current-menu-item' : '') . '"><a href="' . esc_url(home_url('/')) . '" data-number="01">' . esc_html__('HOME', 'm3-big-red') . '</a></li>';
+    echo '<li class="nav-item' . ($is_home ? ' active current-menu-item' : '') . '"><a href="' . esc_url(home_url('/')) . '" data-number="01">' . esc_html__('Home', 'm3-big-red') . '</a></li>';
 
-    // ABOUT with dropdown
+    // About with dropdown
     echo '<li class="nav-item has-dropdown menu-item-has-children' . ($is_about ? ' active current-menu-item' : '') . '">';
-    echo '<a href="' . esc_url(mileym3dia_get_page_url('about')) . '" data-number="02">' . esc_html__('ABOUT', 'm3-big-red') . ' <span class="nav-caret" aria-hidden="true">▾</span></a>';
+    echo '<a href="' . esc_url(mileym3dia_get_page_url('about')) . '" data-number="02">' . esc_html__('About', 'm3-big-red') . ' <span class="nav-caret" aria-hidden="true">▾</span></a>';
     echo '<ul class="sub-menu">';
     echo '<li><a href="' . esc_url(mileym3dia_get_page_url('about')) . '#overview">' . esc_html__('Agency Overview & Vision', 'm3-big-red') . '</a></li>';
     echo '<li><a href="' . esc_url(mileym3dia_get_page_url('about')) . '#process">' . esc_html__('Production Pipeline & Process', 'm3-big-red') . '</a></li>';
@@ -1330,22 +1332,22 @@ function mileym3dia_default_nav_menu() {
     echo '</ul>';
     echo '</li>';
 
-    // SERVICES with dropdown (Packages & Bundle Builder live inside Services)
+    // Services with dropdown
     echo '<li class="nav-item has-dropdown menu-item-has-children' . ($is_services ? ' active current-menu-item' : '') . '">';
-    echo '<a href="' . esc_url(mileym3dia_get_page_url('services')) . '" data-number="03">' . esc_html__('SERVICES', 'm3-big-red') . ' <span class="nav-caret" aria-hidden="true">▾</span></a>';
+    echo '<a href="' . esc_url(mileym3dia_get_page_url('services')) . '" data-number="03">' . esc_html__('Services', 'm3-big-red') . ' <span class="nav-caret" aria-hidden="true">▾</span></a>';
     echo '<ul class="sub-menu">';
-    echo '<li><a href="' . esc_url(mileym3dia_get_page_url('services')) . '#services">' . esc_html__('Core Creative Disciplines', 'm3-big-red') . '</a></li>';
-    echo '<li><a href="' . esc_url(mileym3dia_get_page_url('services')) . '#pricing">' . esc_html__('Curated Packages ($350 - $1,450)', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url(mileym3dia_get_page_url('services')) . '#services">' . esc_html__('Core Creative Services', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url(mileym3dia_get_page_url('services')) . '#pricing">' . esc_html__('Packages ($350 - $1,450)', 'm3-big-red') . '</a></li>';
     echo '<li><a href="' . esc_url(mileym3dia_get_page_url('services')) . '?view=bundle#bundle">' . esc_html__('Custom Bundle Builder (Save 10%)', 'm3-big-red') . '</a></li>';
     echo '<li><a href="' . esc_url(mileym3dia_get_page_url('services')) . '#quote">' . esc_html__('Request Custom Quote', 'm3-big-red') . '</a></li>';
     echo '</ul>';
     echo '</li>';
 
-    // WORK with dropdown (dynamically populated from published `project` CPT posts)
+    // Portfolio with dropdown
     echo '<li class="nav-item has-dropdown menu-item-has-children' . ($is_work ? ' active current-menu-item' : '') . '">';
-    echo '<a href="' . esc_url(mileym3dia_get_work_page_url()) . '" data-number="04">' . esc_html__('WORK', 'm3-big-red') . ' <span class="nav-caret" aria-hidden="true">▾</span></a>';
+    echo '<a href="' . esc_url(mileym3dia_get_work_page_url()) . '" data-number="04">' . esc_html__('Portfolio', 'm3-big-red') . ' <span class="nav-caret" aria-hidden="true">▾</span></a>';
     echo '<ul class="sub-menu">';
-    echo '<li><a href="' . esc_url(mileym3dia_get_work_page_url()) . '">' . esc_html__('All Featured Productions', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url(mileym3dia_get_work_page_url()) . '">' . esc_html__('All Projects', 'm3-big-red') . '</a></li>';
     $nav_projects = array();
     if (post_type_exists('project') && class_exists('WP_Query')) {
         $nav_proj_q = new WP_Query(array(
@@ -1371,42 +1373,38 @@ function mileym3dia_default_nav_menu() {
     echo '</ul>';
     echo '</li>';
 
-    // STORE with dropdown
+    // Digital Shop with dropdown
     $store_url = mileym3dia_get_page_url('store');
     echo '<li class="nav-item has-dropdown menu-item-has-children' . ($is_store ? ' active current-menu-item' : '') . '">';
-    echo '<a href="' . esc_url($store_url) . '" data-number="05">' . esc_html__('STORE', 'm3-big-red') . ' <span class="nav-caret" aria-hidden="true">▾</span></a>';
+    echo '<a href="' . esc_url($store_url) . '" data-number="05">' . esc_html__('Digital Shop', 'm3-big-red') . ' <span class="nav-caret" aria-hidden="true">▾</span></a>';
     echo '<ul class="sub-menu">';
-    echo '<li><a href="' . esc_url($store_url) . '">' . esc_html__('All Studio Products', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url($store_url) . '">' . esc_html__('All Products', 'm3-big-red') . '</a></li>';
     echo '<li><a href="' . esc_url(add_query_arg('cat', 'luts-video', $store_url)) . '">' . esc_html__('LUTs & Video Packs', 'm3-big-red') . '</a></li>';
     echo '<li><a href="' . esc_url(add_query_arg('cat', 'audio-stems', $store_url)) . '">' . esc_html__('Audio & Stem Vaults', 'm3-big-red') . '</a></li>';
     echo '<li><a href="' . esc_url(add_query_arg('cat', 'templates-guides', $store_url)) . '">' . esc_html__('Templates & Guides', 'm3-big-red') . '</a></li>';
-    echo '<li><a href="' . esc_url(add_query_arg('cat', 'merch-passes', $store_url)) . '">' . esc_html__('Merch & Studio Passes', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url(add_query_arg('cat', 'merch-passes', $store_url)) . '">' . esc_html__('Merch & Passes', 'm3-big-red') . '</a></li>';
     echo '</ul>';
     echo '</li>';
 
-    // JOURNAL & RESOURCES with dropdown
-    echo '<li class="nav-item has-dropdown menu-item-has-children' . ($is_blog ? ' active current-menu-item' : '') . '">';
-    echo '<a href="' . esc_url(mileym3dia_get_blog_page_url()) . '" data-number="06">' . esc_html__('JOURNAL', 'm3-big-red') . ' <span class="nav-caret" aria-hidden="true">▾</span></a>';
-    echo '<ul class="sub-menu">';
-    echo '<li><a href="' . esc_url(mileym3dia_get_blog_page_url()) . '">' . esc_html__('Studio Journal (All Posts)', 'm3-big-red') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/category/video-production/')) . '">' . esc_html__('Video Production', 'm3-big-red') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/category/branding-web/')) . '">' . esc_html__('Branding & Web', 'm3-big-red') . '</a></li>';
-    echo '<li><a href="' . esc_url(mileym3dia_get_page_url('resources')) . '">' . esc_html__('Free Creator Resources', 'm3-big-red') . '</a></li>';
-    echo '</ul>';
-    echo '</li>';
+    // Resources
+    echo '<li class="nav-item' . ($is_resources ? ' active current-menu-item' : '') . '"><a href="' . esc_url(mileym3dia_get_page_url('resources')) . '" data-number="06">' . esc_html__('Resources', 'm3-big-red') . '</a></li>';
 
-    // CREATOR HUB / REGISTRATION with dropdown
+    // Creator Hub with dropdown
     $hub_url = mileym3dia_get_page_url('creator-hub');
     echo '<li class="nav-item has-dropdown menu-item-has-children' . ($is_hub ? ' active current-menu-item' : '') . '">';
-    echo '<a href="' . esc_url($hub_url) . '" data-number="07">' . esc_html__('PORTAL', 'm3-big-red') . ' <span class="nav-caret" aria-hidden="true">▾</span></a>';
+    echo '<a href="' . esc_url($hub_url) . '" data-number="07">' . esc_html__('Creator Hub', 'm3-big-red') . ' <span class="nav-caret" aria-hidden="true">▾</span></a>';
     echo '<ul class="sub-menu">';
-    echo '<li><a href="' . esc_url(add_query_arg('tab', 'register', $hub_url)) . '">' . esc_html__('Create Account / Register', 'm3-big-red') . '</a></li>';
-    echo '<li><a href="' . esc_url(add_query_arg('tab', 'login', $hub_url)) . '">' . esc_html__('Client & Member Sign In', 'm3-big-red') . '</a></li>';
-    echo '<li><a href="' . esc_url($hub_url) . '#member-vault">' . esc_html__('Deliverables & Download Vault', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url(add_query_arg('tab', 'register', $hub_url)) . '">' . esc_html__('Create Account', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url(add_query_arg('tab', 'login', $hub_url)) . '">' . esc_html__('Member Sign In', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url($hub_url) . '#member-vault">' . esc_html__('Member Vault', 'm3-big-red') . '</a></li>';
     echo '</ul>';
     echo '</li>';
 
-    echo '<li class="nav-item' . ($is_contact ? ' active current-menu-item' : '') . '"><a href="' . esc_url(mileym3dia_get_page_url('contact')) . '" data-number="08">' . esc_html__('CONTACT', 'm3-big-red') . '</a></li>';
+    // Blog
+    echo '<li class="nav-item' . ($is_blog ? ' active current-menu-item' : '') . '"><a href="' . esc_url(mileym3dia_get_blog_page_url()) . '" data-number="08">' . esc_html__('Blog', 'm3-big-red') . '</a></li>';
+
+    // Contact
+    echo '<li class="nav-item' . ($is_contact ? ' active current-menu-item' : '') . '"><a href="' . esc_url(mileym3dia_get_page_url('contact')) . '" data-number="09">' . esc_html__('Contact', 'm3-big-red') . '</a></li>';
     echo '</ul>';
 }
 
@@ -1416,20 +1414,21 @@ function mileym3dia_default_mobile_nav_menu() {
     $is_services  = is_page('services') || is_page_template('page-services.php');
     $is_work      = is_page('work') || is_page('portfolio') || is_page_template('page-portfolio.php') || is_page_template('page-work.php') || is_post_type_archive('project') || is_singular('project');
     $is_store     = is_page('store') || is_page('shop') || is_page_template('page-store.php') || (function_exists('is_woocommerce') && is_woocommerce());
-    $is_blog      = is_home() || is_page('blog') || is_page('resources') || is_page_template('page-blog.php') || is_page_template('page-resources.php') || (is_archive() && !is_post_type_archive('project')) || is_singular('post');
+    $is_resources = is_page('resources') || is_page_template('page-resources.php');
     $is_hub       = is_page('creator-hub') || is_page_template('page-creator-hub.php');
+    $is_blog      = is_home() || is_page('blog') || is_page_template('page-blog.php') || (is_archive() && !is_post_type_archive('project')) || is_singular('post');
     $is_contact   = is_page('contact') || is_page_template('page-contact.php');
 
     $store_url = mileym3dia_get_page_url('store');
     $hub_url   = mileym3dia_get_page_url('creator-hub');
 
     echo '<ul class="mobile-nav-menu">';
-    echo '<li class="mobile-nav-item' . ($is_home ? ' active' : '') . '"><a href="' . esc_url(home_url('/')) . '" data-number="01"><span class="nav-num">01</span><span class="nav-label">' . esc_html__('HOME', 'm3-big-red') . '</span><span class="nav-tag">STUDIO</span></a></li>';
+    echo '<li class="mobile-nav-item' . ($is_home ? ' active' : '') . '"><a href="' . esc_url(home_url('/')) . '" data-number="01"><span class="nav-num">01</span><span class="nav-label">' . esc_html__('Home', 'm3-big-red') . '</span></a></li>';
 
-    // ABOUT
+    // About
     echo '<li class="mobile-nav-item mobile-nav-has-children' . ($is_about ? ' active' : '') . '">';
     echo '<div class="mobile-nav-link-row">';
-    echo '<a href="' . esc_url(mileym3dia_get_page_url('about')) . '" data-number="02"><span class="nav-num">02</span><span class="nav-label">' . esc_html__('ABOUT', 'm3-big-red') . '</span><span class="nav-tag">AGENCY</span></a>';
+    echo '<a href="' . esc_url(mileym3dia_get_page_url('about')) . '" data-number="02"><span class="nav-num">02</span><span class="nav-label">' . esc_html__('About', 'm3-big-red') . '</span></a>';
     echo '<button type="button" class="mobile-sub-toggle" aria-label="Toggle submenu">▾</button>';
     echo '</div>';
     echo '<ul class="mobile-sub-menu">';
@@ -1439,28 +1438,28 @@ function mileym3dia_default_mobile_nav_menu() {
     echo '</ul>';
     echo '</li>';
 
-    // SERVICES
+    // Services
     echo '<li class="mobile-nav-item mobile-nav-has-children' . ($is_services ? ' active' : '') . '">';
     echo '<div class="mobile-nav-link-row">';
-    echo '<a href="' . esc_url(mileym3dia_get_page_url('services')) . '" data-number="03"><span class="nav-num">03</span><span class="nav-label">' . esc_html__('SERVICES', 'm3-big-red') . '</span><span class="nav-tag">CAPABILITIES</span></a>';
+    echo '<a href="' . esc_url(mileym3dia_get_page_url('services')) . '" data-number="03"><span class="nav-num">03</span><span class="nav-label">' . esc_html__('Services', 'm3-big-red') . '</span></a>';
     echo '<button type="button" class="mobile-sub-toggle" aria-label="Toggle submenu">▾</button>';
     echo '</div>';
     echo '<ul class="mobile-sub-menu">';
-    echo '<li><a href="' . esc_url(mileym3dia_get_page_url('services')) . '#services">' . esc_html__('Creative Disciplines', 'm3-big-red') . '</a></li>';
-    echo '<li><a href="' . esc_url(mileym3dia_get_page_url('services')) . '#pricing">' . esc_html__('Curated Packages ($350 - $1,450)', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url(mileym3dia_get_page_url('services')) . '#services">' . esc_html__('Core Creative Services', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url(mileym3dia_get_page_url('services')) . '#pricing">' . esc_html__('Packages ($350 - $1,450)', 'm3-big-red') . '</a></li>';
     echo '<li><a href="' . esc_url(mileym3dia_get_page_url('services')) . '?view=bundle#bundle">' . esc_html__('Custom Bundle Builder', 'm3-big-red') . '</a></li>';
     echo '<li><a href="' . esc_url(mileym3dia_get_page_url('services')) . '#quote">' . esc_html__('Request Custom Quote', 'm3-big-red') . '</a></li>';
     echo '</ul>';
     echo '</li>';
 
-    // WORK
+    // Portfolio
     echo '<li class="mobile-nav-item mobile-nav-has-children' . ($is_work ? ' active' : '') . '">';
     echo '<div class="mobile-nav-link-row">';
-    echo '<a href="' . esc_url(mileym3dia_get_work_page_url()) . '" data-number="04"><span class="nav-num">04</span><span class="nav-label">' . esc_html__('WORK', 'm3-big-red') . '</span><span class="nav-tag">PORTFOLIO</span></a>';
+    echo '<a href="' . esc_url(mileym3dia_get_work_page_url()) . '" data-number="04"><span class="nav-num">04</span><span class="nav-label">' . esc_html__('Portfolio', 'm3-big-red') . '</span></a>';
     echo '<button type="button" class="mobile-sub-toggle" aria-label="Toggle submenu">▾</button>';
     echo '</div>';
     echo '<ul class="mobile-sub-menu">';
-    echo '<li><a href="' . esc_url(mileym3dia_get_work_page_url()) . '">' . esc_html__('All Case Studies', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url(mileym3dia_get_work_page_url()) . '">' . esc_html__('All Projects', 'm3-big-red') . '</a></li>';
     $mob_projects = array();
     if (post_type_exists('project') && class_exists('WP_Query')) {
         $mob_proj_q = new WP_Query(array(
@@ -1486,46 +1485,41 @@ function mileym3dia_default_mobile_nav_menu() {
     echo '</ul>';
     echo '</li>';
 
-    // STORE
+    // Digital Shop
     echo '<li class="mobile-nav-item mobile-nav-has-children' . ($is_store ? ' active' : '') . '">';
     echo '<div class="mobile-nav-link-row">';
-    echo '<a href="' . esc_url($store_url) . '" data-number="05"><span class="nav-num">05</span><span class="nav-label">' . esc_html__('STORE', 'm3-big-red') . '</span><span class="nav-tag">SHOP</span></a>';
+    echo '<a href="' . esc_url($store_url) . '" data-number="05"><span class="nav-num">05</span><span class="nav-label">' . esc_html__('Digital Shop', 'm3-big-red') . '</span></a>';
     echo '<button type="button" class="mobile-sub-toggle" aria-label="Toggle submenu">▾</button>';
     echo '</div>';
     echo '<ul class="mobile-sub-menu">';
-    echo '<li><a href="' . esc_url($store_url) . '">' . esc_html__('All Studio Products', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url($store_url) . '">' . esc_html__('All Products', 'm3-big-red') . '</a></li>';
     echo '<li><a href="' . esc_url(add_query_arg('cat', 'luts-video', $store_url)) . '">' . esc_html__('LUTs & Video Packs', 'm3-big-red') . '</a></li>';
     echo '<li><a href="' . esc_url(add_query_arg('cat', 'audio-stems', $store_url)) . '">' . esc_html__('Audio & Stem Vaults', 'm3-big-red') . '</a></li>';
     echo '<li><a href="' . esc_url(add_query_arg('cat', 'templates-guides', $store_url)) . '">' . esc_html__('Templates & Guides', 'm3-big-red') . '</a></li>';
     echo '</ul>';
     echo '</li>';
 
-    // JOURNAL & RESOURCES
-    echo '<li class="mobile-nav-item mobile-nav-has-children' . ($is_blog ? ' active' : '') . '">';
-    echo '<div class="mobile-nav-link-row">';
-    echo '<a href="' . esc_url(mileym3dia_get_blog_page_url()) . '" data-number="06"><span class="nav-num">06</span><span class="nav-label">' . esc_html__('JOURNAL', 'm3-big-red') . '</span><span class="nav-tag">BLOG & TOOLS</span></a>';
-    echo '<button type="button" class="mobile-sub-toggle" aria-label="Toggle submenu">▾</button>';
-    echo '</div>';
-    echo '<ul class="mobile-sub-menu">';
-    echo '<li><a href="' . esc_url(mileym3dia_get_blog_page_url()) . '">' . esc_html__('All Articles', 'm3-big-red') . '</a></li>';
-    echo '<li><a href="' . esc_url(mileym3dia_get_page_url('resources')) . '">' . esc_html__('Free Creator Resources', 'm3-big-red') . '</a></li>';
-    echo '</ul>';
-    echo '</li>';
+    // Resources
+    echo '<li class="mobile-nav-item' . ($is_resources ? ' active' : '') . '"><a href="' . esc_url(mileym3dia_get_page_url('resources')) . '" data-number="06"><span class="nav-num">06</span><span class="nav-label">' . esc_html__('Resources', 'm3-big-red') . '</span></a></li>';
 
-    // CREATOR HUB / REGISTRATION
+    // Creator Hub
     echo '<li class="mobile-nav-item mobile-nav-has-children' . ($is_hub ? ' active' : '') . '">';
     echo '<div class="mobile-nav-link-row">';
-    echo '<a href="' . esc_url($hub_url) . '" data-number="07"><span class="nav-num">07</span><span class="nav-label">' . esc_html__('PORTAL', 'm3-big-red') . '</span><span class="nav-tag">REGISTER</span></a>';
+    echo '<a href="' . esc_url($hub_url) . '" data-number="07"><span class="nav-num">07</span><span class="nav-label">' . esc_html__('Creator Hub', 'm3-big-red') . '</span></a>';
     echo '<button type="button" class="mobile-sub-toggle" aria-label="Toggle submenu">▾</button>';
     echo '</div>';
     echo '<ul class="mobile-sub-menu">';
     echo '<li><a href="' . esc_url(add_query_arg('tab', 'register', $hub_url)) . '">' . esc_html__('Create Account', 'm3-big-red') . '</a></li>';
-    echo '<li><a href="' . esc_url(add_query_arg('tab', 'login', $hub_url)) . '">' . esc_html__('Client Sign In', 'm3-big-red') . '</a></li>';
-    echo '<li><a href="' . esc_url($hub_url) . '#member-vault">' . esc_html__('Download Vault', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url(add_query_arg('tab', 'login', $hub_url)) . '">' . esc_html__('Member Sign In', 'm3-big-red') . '</a></li>';
+    echo '<li><a href="' . esc_url($hub_url) . '#member-vault">' . esc_html__('Member Vault', 'm3-big-red') . '</a></li>';
     echo '</ul>';
     echo '</li>';
 
-    echo '<li class="mobile-nav-item' . ($is_contact ? ' active' : '') . '"><a href="' . esc_url(mileym3dia_get_page_url('contact')) . '" data-number="08"><span class="nav-num">08</span><span class="nav-label">' . esc_html__('CONTACT', 'm3-big-red') . '</span><span class="nav-tag">BOOKING</span></a></li>';
+    // Blog
+    echo '<li class="mobile-nav-item' . ($is_blog ? ' active' : '') . '"><a href="' . esc_url(mileym3dia_get_blog_page_url()) . '" data-number="08"><span class="nav-num">08</span><span class="nav-label">' . esc_html__('Blog', 'm3-big-red') . '</span></a></li>';
+
+    // Contact
+    echo '<li class="mobile-nav-item' . ($is_contact ? ' active' : '') . '"><a href="' . esc_url(mileym3dia_get_page_url('contact')) . '" data-number="09"><span class="nav-num">09</span><span class="nav-label">' . esc_html__('Contact', 'm3-big-red') . '</span></a></li>';
     echo '</ul>';
 }
 

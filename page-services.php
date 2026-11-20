@@ -121,7 +121,7 @@ if (strpos($services_raw_title, '<') === false) {
     <section class="pricing-section section-loose bg-shade-base" id="pricing">
         <div class="container container--wide">
             <div class="section-header text-center">
-                <span class="section-label text-yellow">TRANSPARENT PRODUCTION PRICING</span>
+                <span class="section-label text-accent">TRANSPARENT PRODUCTION PRICING</span>
                 <h2 class="section-title section-title--xl">PACKAGES &amp; CUSTOM BUNDLES</h2>
                 <p class="section-header-desc pricing-header-desc">
                     Choose a ready-to-shoot package or switch to the Interactive Bundle Builder to mix and match individual services from $95.
@@ -132,12 +132,12 @@ if (strpos($services_raw_title, '<') === false) {
                     <button type="button" class="pricing-tab-btn active" id="tabBtnPackages" data-tab="packages" role="tab" aria-selected="true" aria-controls="viewPackages">
                         <span class="tab-badge">01</span>
                         <span class="tab-label">CURATED PACKAGES</span>
-                        <span class="tab-meta text-yellow">$350 – $1,450</span>
+                        <span class="tab-meta text-accent">$350 – $1,450</span>
                     </button>
                     <button type="button" class="pricing-tab-btn" id="tabBtnBundle" data-tab="bundle" role="tab" aria-selected="false" aria-controls="viewBundle">
                         <span class="tab-badge">02</span>
                         <span class="tab-label">CUSTOM BUNDLE BUILDER</span>
-                        <span class="tab-meta text-lime">SAVE 10% (3+ SERVICES)</span>
+                        <span class="tab-meta text-accent">SAVE 10% (3+ SERVICES)</span>
                     </button>
                 </div>
             </div>
@@ -148,12 +148,12 @@ if (strpos($services_raw_title, '<') === false) {
 
                 <div class="pricing-switch-banner">
                     <div class="switch-banner-content">
-                        <span class="switch-banner-tag text-lime">LOOKING FOR INDIVIDUAL DELIVERABLES?</span>
+                        <span class="switch-banner-tag text-accent">LOOKING FOR INDIVIDUAL DELIVERABLES?</span>
                         <p class="switch-banner-text">
                             Need a single vertical reel ($95), cover art ($125), vocal mix ($150), or photo session ($225)? Mix &amp; match your own bundle.
                         </p>
                     </div>
-                    <button type="button" class="btn btn--accent-lime js-open-bundle-tab">
+                    <button type="button" class="btn btn--page-accent js-open-bundle-tab">
                         <span class="btn-text">OPEN BUNDLE BUILDER (FROM $95)</span>
                         <span class="btn-arrow">⚡</span>
                     </button>
@@ -229,11 +229,11 @@ if (strpos($services_raw_title, '<') === false) {
     <!-- CONTACT CTA (#quote) -->
     <section class="contact-cta section-loose bg-shade-elevated" id="quote">
         <div class="container container--wide cta-content text-center">
-            <span class="contact-eyebrow text-lime">CUSTOM SCOPES AVAILABLE</span>
+            <span class="contact-eyebrow text-accent">CUSTOM SCOPES AVAILABLE</span>
             <h2 class="contact-headline">NEED A CUSTOM PRODUCTION QUOTE?</h2>
             <p class="contact-subhead">Tell us what you are building and we will put together a tailored production plan and budget.</p>
             <div class="hero-action-buttons" style="justify-content:center; margin-top:2rem;">
-                <a href="<?php echo esc_url(mileym3dia_get_page_url('contact')); ?>" class="btn btn--accent-lime">
+                <a href="<?php echo esc_url(mileym3dia_get_page_url('contact')); ?>" class="btn btn--page-accent">
                     <span class="btn-text"><?php esc_html_e('REQUEST A CUSTOM QUOTE', 'mileym3dia'); ?></span>
                     <span class="btn-arrow">↗</span>
                 </a>

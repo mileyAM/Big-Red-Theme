@@ -138,11 +138,11 @@ function mileym3dia_customize_register($wp_customize) {
     mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_yellow', 'mileym3dia_colors', __('Highlight Yellow Accent', 'm3-big-red'), '#FFDD00');
 
     mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_about', 'mileym3dia_colors', __('About Page Accent', 'm3-big-red'), '#EF252C');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_services', 'mileym3dia_colors', __('Services & Pricing Page Accent', 'm3-big-red'), '#D4F329');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_work', 'mileym3dia_colors', __('Portfolio / Work Page Accent', 'm3-big-red'), '#8B38DC');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_store', 'mileym3dia_colors', __('Digital Shop Page Accent', 'm3-big-red'), '#D4F329');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_resources', 'mileym3dia_colors', __('Resources Page Accent', 'm3-big-red'), '#258DFF');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_creator_hub', 'mileym3dia_colors', __('Creator Hub Page Accent', 'm3-big-red'), '#8B38DC');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_services', 'mileym3dia_colors', __('Services & Pricing Page Accent (Electric Green)', 'm3-big-red'), '#39FF14');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_work', 'mileym3dia_colors', __('Portfolio / Work Page Accent (Purple)', 'm3-big-red'), '#8B38DC');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_store', 'mileym3dia_colors', __('Digital Shop Page Accent (Lime)', 'm3-big-red'), '#D4F329');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_resources', 'mileym3dia_colors', __('Resources Page Accent (Blue)', 'm3-big-red'), '#258DFF');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_creator_hub', 'mileym3dia_colors', __('Creator Hub Page Accent (Blue)', 'm3-big-red'), '#258DFF');
     mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_blog', 'mileym3dia_colors', __('Blog / Journal Page Accent', 'm3-big-red'), '#EF252C');
     mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_contact', 'mileym3dia_colors', __('Contact Page Accent', 'm3-big-red'), '#EF252C');
 
@@ -584,6 +584,7 @@ function mileym3dia_customize_register($wp_customize) {
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_contact_location', 'mileym3dia_contact', __('Studio Location', 'm3-big-red'), 'ORLANDO, FL · AVAILABLE WORLDWIDE');
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_contact_availability', 'mileym3dia_contact', __('Booking Status Label', 'm3-big-red'), 'NOW BOOKING NEW PROJECTS');
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_footer_description', 'mileym3dia_contact', __('Footer Studio Description', 'm3-big-red'), 'Full-service creative media agency specializing in video production, photography, branding, web design, and music/audio production.', 'textarea');
+    mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_show_footer_widgets', 'mileym3dia_contact', __('Show Optional Footer Widget Columns (Off by default to prevent accidental WP Archives/Meta widgets)', 'm3-big-red'), false, 'checkbox');
     mileym3dia_add_customizer_field($wp_customize, 'mileym3dia_footer_copyright', 'mileym3dia_contact', __('Footer Copyright Text', 'm3-big-red'), '&copy; ' . date('Y') . ' MILEYM3DIA. All rights reserved.', 'textarea');
 
     $social_platforms = array(

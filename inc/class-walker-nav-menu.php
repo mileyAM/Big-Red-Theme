@@ -30,161 +30,49 @@ class Mileym3dia_Walker_Nav_Menu extends Walker_Nav_Menu {
     }
 
     /**
-     * Resolves the canonical tag for a navigation label.
+     * Optional mobile subtag: strictly uses the WordPress Menu Item Description if set,
+     * never injects hardcoded labels like "ARCHIVE" or "REPOSITORY".
      */
-    public static function get_subtag_for_item($title) {
-        $clean = strtoupper(trim(strip_tags($title)));
-        $map = array(
-            'HOME'        => 'START',
-            'ABOUT'       => 'MANIFESTO',
-            'SERVICES'    => 'DISCIPLINES',
-            'WORK'        => 'PORTFOLIO',
-            'PORTFOLIO'   => 'ARCHIVE',
-            'STORE'       => 'SHOP',
-            'SHOP'        => 'STORE',
-            'PRICING'     => 'PACKAGES',
-            'BLOG'        => 'JOURNAL',
-            'JOURNAL'     => 'DISPATCHES',
-            'CONTACT'     => 'INQUIRIES',
-            'RESOURCES'   => 'REPOSITORY',
-            'CREATOR HUB' => 'MEMBER STUDIO',
-            'PORTAL'      => 'REGISTER',
-        );
-
-        foreach ($map as $key => $tag) {
-            if (false !== strpos($clean, $key)) {
-                return $tag;
-            }
-        }
-
-        return 'STUDIO';
+    public static function get_subtag_for_item($title, $description = '') {
+        $desc = trim(strip_tags((string) $description));
+        return '' !== $desc ? $desc : '';
     }
 
     /**
-     * Dynamically normalizes menu item URLs to valid WordPress page routes.
+     * Preserves the exact URL configured in WordPress Appearance -> Menus.
+     * Never overrides or rewrites intentional menu destinations based on item titles.
      */
-    public static function resolve_dynamic_url($raw_url, $title) {
+    public static function resolve_dynamic_url($raw_url, $title = '') {
         $trimmed_url = trim((string) $raw_url);
-        $clean_title = strtolower(trim(strip_tags((string) $title)));
-
-        if (preg_match('#/pricing/?$#i', $trimmed_url)) {
-            return mileym3dia_get_pricing_page_url();
-        }
-
-        $has_specific_anchor = (false !== strpos($trimmed_url, '#') && !preg_match('/^(\/)?#[a-z0-9_-]*$/i', $trimmed_url));
-        $is_core_nav_label   = in_array($clean_title, array('home', 'start', 'about', 'manifesto', 'services', 'disciplines', 'work', 'portfolio', 'store', 'shop', 'pricing', 'packages', 'blog', 'journal', 'contact', 'inquiries', 'resources', 'creator hub', 'portal', 'register'), true);
-
-        $is_hash = (
-            '' === $trimmed_url ||
-            '#' === $trimmed_url ||
-            home_url('/') === $trimmed_url ||
-            home_url('/#') === $trimmed_url ||
-            preg_match('/^(\/)?#([a-z0-9_-]+)$/i', $trimmed_url, $hash_match)
-        );
-
-        if (!$is_hash && !($is_core_nav_label && !$has_specific_anchor)) {
-            return $raw_url;
-        }
-
-        // 1. Check title keywords
-        if (false !== strpos($clean_title, 'home') || 'start' === $clean_title) {
-            return home_url('/');
-        }
-        if (false !== strpos($clean_title, 'about') || false !== strpos($clean_title, 'manifesto')) {
-            return mileym3dia_get_page_url('about');
-        }
-        if (false !== strpos($clean_title, 'service') || false !== strpos($clean_title, 'discipline')) {
-            return mileym3dia_get_page_url('services');
-        }
-        if (false !== strpos($clean_title, 'work') || false !== strpos($clean_title, 'portfolio')) {
-            return mileym3dia_get_work_page_url();
-        }
-        if (false !== strpos($clean_title, 'store') || false !== strpos($clean_title, 'shop')) {
-            return mileym3dia_get_page_url('store');
-        }
-        if (false !== strpos($clean_title, 'pricing') || false !== strpos($clean_title, 'package')) {
-            return mileym3dia_get_pricing_page_url();
-        }
-        if (false !== strpos($clean_title, 'blog') || false !== strpos($clean_title, 'journal') || false !== strpos($clean_title, 'dispatch') || false !== strpos($clean_title, 'article')) {
-            return mileym3dia_get_blog_page_url();
-        }
-        if (false !== strpos($clean_title, 'contact') || false !== strpos($clean_title, 'inquir')) {
-            return mileym3dia_get_page_url('contact');
-        }
-        if (false !== strpos($clean_title, 'resource') || false !== strpos($clean_title, 'tool')) {
-            return mileym3dia_get_page_url('resources');
-        }
-        if (false !== strpos($clean_title, 'creator') || false !== strpos($clean_title, 'hub') || false !== strpos($clean_title, 'portal') || false !== strpos($clean_title, 'register')) {
-            return mileym3dia_get_page_url('creator-hub');
-        }
-
-        // 2. Check hash slug if title didn't match
-        if (!empty($hash_match[2])) {
-            $slug = strtolower($hash_match[2]);
-            if ('pricing' === $slug) {
-                return mileym3dia_get_pricing_page_url();
-            }
-            if ('work' === $slug || 'portfolio' === $slug) {
-                return mileym3dia_get_work_page_url();
-            }
-            if ('store' === $slug || 'shop' === $slug) {
-                return mileym3dia_get_page_url('store');
-            }
-            if ('blog' === $slug || 'journal' === $slug) {
-                return mileym3dia_get_blog_page_url();
-            }
-            return mileym3dia_get_page_url($slug);
-        }
-
-        return $raw_url ?: home_url('/');
+        return '' !== $trimmed_url ? $trimmed_url : '#';
     }
 
     /**
-     * Determines whether the item corresponds to the current page view.
+     * Determines whether the item corresponds to the current page view using
+     * WordPress native menu classes and normalized URL path matching (never title matching).
      */
-    protected function is_item_active($item_url, $item_title) {
-        $clean_title = strtolower(trim(strip_tags($item_title)));
-
-        if (is_front_page()) {
-            return (false !== strpos($clean_title, 'home'));
-        }
-
-        if (is_page('about') || is_page_template('page-about.php')) {
-            return (false !== strpos($clean_title, 'about'));
-        }
-
-        if (is_page('services') || is_page_template('page-services.php')) {
-            if (false !== strpos($item_url, '#pricing') || false !== strpos($clean_title, 'pricing')) {
-                return false;
+    protected function is_item_active($item_url, $item_classes = array()) {
+        $native_active = array('current-menu-item', 'current_page_item', 'current-menu-ancestor', 'current-menu-parent', 'current_page_parent');
+        foreach ($native_active as $cls) {
+            if (in_array($cls, (array) $item_classes, true)) {
+                return true;
             }
-            return (false !== strpos($clean_title, 'service'));
         }
 
-        if (is_page('work') || is_page('portfolio') || is_page_template('page-portfolio.php') || is_page_template('page-work.php') || is_post_type_archive('project') || is_singular('project')) {
-            return (false !== strpos($clean_title, 'work') || false !== strpos($clean_title, 'portfolio'));
+        $trimmed_url = trim((string) $item_url);
+        if ('' === $trimmed_url || '#' === $trimmed_url || 0 === strpos($trimmed_url, '#')) {
+            return false;
         }
 
-        if (is_page('store') || is_page('shop') || is_page_template('page-store.php') || (function_exists('is_woocommerce') && is_woocommerce())) {
-            return (false !== strpos($clean_title, 'store') || false !== strpos($clean_title, 'shop'));
+        $item_path = trim((string) wp_parse_url($trimmed_url, PHP_URL_PATH), '/');
+        $req_uri   = isset($_SERVER['REQUEST_URI']) ? (string) wp_unslash($_SERVER['REQUEST_URI']) : '/';
+        $curr_path = trim((string) wp_parse_url($req_uri, PHP_URL_PATH), '/');
+
+        if ('' === $item_path) {
+            return ('' === $curr_path && is_front_page());
         }
 
-        if (is_home() || (is_archive() && !is_post_type_archive('project')) || is_singular('post') || is_search()) {
-            return (false !== strpos($clean_title, 'blog') || false !== strpos($clean_title, 'journal'));
-        }
-
-        if (is_page('contact') || is_page_template('page-contact.php')) {
-            return (false !== strpos($clean_title, 'contact'));
-        }
-
-        if (is_page('resources') || is_page_template('page-resources.php')) {
-            return (false !== strpos($clean_title, 'resource'));
-        }
-
-        if (is_page('creator-hub') || is_page_template('page-creator-hub.php')) {
-            return (false !== strpos($clean_title, 'creator') || false !== strpos($clean_title, 'hub') || false !== strpos($clean_title, 'portal'));
-        }
-
-        return false;
+        return ($item_path === $curr_path);
     }
 
     /**
@@ -195,7 +83,9 @@ class Mileym3dia_Walker_Nav_Menu extends Walker_Nav_Menu {
             $args->walker = $this;
         }
 
-        $this->item_count++;
+        if (0 === (int) $depth) {
+            $this->item_count++;
+        }
         $num_str = str_pad($this->item_count, 2, '0', STR_PAD_LEFT);
 
         $is_mobile = (
@@ -203,10 +93,11 @@ class Mileym3dia_Walker_Nav_Menu extends Walker_Nav_Menu {
             (isset($args->menu_class) && false !== strpos($args->menu_class, 'mobile-nav-menu'))
         );
 
+        $raw_classes  = empty($item->classes) ? array() : (array) $item->classes;
         $resolved_url = self::resolve_dynamic_url($item->url, $item->title);
-        $is_active    = in_array('current-menu-item', (array) $item->classes, true) || $this->is_item_active($resolved_url, $item->title);
+        $is_active    = $this->is_item_active($resolved_url, $raw_classes);
 
-        $classes   = empty($item->classes) ? array() : (array) $item->classes;
+        $classes   = $raw_classes;
         $classes[] = 'menu-item-' . $item->ID;
         $classes[] = $is_mobile ? 'mobile-nav-item' : 'nav-item';
         $classes[] = 'nav-item-depth-' . $depth;
@@ -220,6 +111,9 @@ class Mileym3dia_Walker_Nav_Menu extends Walker_Nav_Menu {
         if ($has_children) {
             $classes[] = 'has-submenu';
             $classes[] = 'has-dropdown';
+            if ($is_mobile) {
+                $classes[] = 'mobile-nav-has-children';
+            }
         }
 
         $class_names = join(' ', array_unique(array_filter($classes)));
@@ -253,25 +147,31 @@ class Mileym3dia_Walker_Nav_Menu extends Walker_Nav_Menu {
         $output .= '<li' . $class_names . '>';
 
         $item_output = isset($args->before) ? $args->before : '';
+        if ($is_mobile && $has_children && 0 === (int) $depth) {
+            $item_output .= '<div class="mobile-nav-link-row">';
+        }
         $item_output .= '<a' . $attributes . '>';
 
-        if ($is_mobile) {
-            $subtag = self::get_subtag_for_item($item_title);
+        if ($is_mobile && 0 === (int) $depth) {
+            $subtag = self::get_subtag_for_item($item_title, isset($item->description) ? $item->description : '');
             $item_output .= '<span class="nav-num">' . esc_html($num_str) . '</span>';
             $item_output .= '<span class="nav-label">' . esc_html($item_title) . '</span>';
-            $item_output .= '<span class="nav-tag">' . esc_html($subtag) . '</span>';
+            if ('' !== $subtag) {
+                $item_output .= '<span class="nav-tag">' . esc_html($subtag) . '</span>';
+            }
         } else {
             $item_output .= isset($args->link_before) ? $args->link_before : '';
             $item_output .= esc_html($item_title);
-            if ($has_children && $depth === 0) {
+            if ($has_children && 0 === (int) $depth) {
                 $item_output .= ' <span class="nav-caret" aria-hidden="true">▾</span>';
             }
             $item_output .= isset($args->link_after) ? $args->link_after : '';
         }
 
         $item_output .= '</a>';
-        if ($is_mobile && $has_children) {
+        if ($is_mobile && $has_children && 0 === (int) $depth) {
             $item_output .= '<button type="button" class="mobile-sub-toggle" aria-label="Toggle submenu">▾</button>';
+            $item_output .= '</div>';
         }
         $item_output .= isset($args->after) ? $args->after : '';
 

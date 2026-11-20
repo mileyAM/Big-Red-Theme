@@ -140,7 +140,7 @@ $type_labels        = array(
 
                     <input type="hidden" name="type" value="<?php echo esc_attr($res_type); ?>" />
 
-                    <button type="submit" class="btn btn--streetwear-red">
+                    <button type="submit" class="btn btn--page-accent">
                         <span><?php esc_html_e('FILTER', 'm3-big-red'); ?></span>
                     </button>
 
@@ -253,11 +253,11 @@ $type_labels        = array(
                                         <?php echo esc_html($res['btn_text']); ?> <?php echo 'download' === $res['type'] ? '↓' : '↗'; ?>
                                     </a>
                                 <?php elseif ('pro' === $access) : ?>
-                                    <a href="<?php echo esc_url($action_url); ?>" class="btn btn--streetwear-red btn--full">
+                                    <a href="<?php echo esc_url($action_url); ?>" class="btn btn--page-accent btn--full">
                                         UNLOCK WITH PRO PASS →
                                     </a>
                                 <?php else : ?>
-                                    <a href="<?php echo esc_url($action_url); ?>" class="btn btn--streetwear-red btn--full">
+                                    <a href="<?php echo esc_url($action_url); ?>" class="btn btn--page-accent btn--full">
                                         FREE ACCOUNT TO UNLOCK →
                                     </a>
                                 <?php endif; ?>

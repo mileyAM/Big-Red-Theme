@@ -18,7 +18,7 @@ $footer_desc   = get_theme_mod('mileym3dia_footer_description', 'Full-service cr
 
     <footer id="siteFooter" class="site-footer" role="contentinfo">
         <div class="footer-container">
-            <?php if (is_active_sidebar('footer-1') || is_active_sidebar('footer-2') || is_active_sidebar('footer-3') || is_active_sidebar('footer-4')) : ?>
+            <?php if (get_theme_mod('mileym3dia_show_footer_widgets', false) && (is_active_sidebar('footer-1') || is_active_sidebar('footer-2') || is_active_sidebar('footer-3') || is_active_sidebar('footer-4'))) : ?>
                 <div class="footer-widgets">
                     <?php for ($i = 1; $i <= 4; $i++) : ?>
                         <?php if (is_active_sidebar('footer-' . $i)) : ?>
@@ -77,28 +77,28 @@ $footer_desc   = get_theme_mod('mileym3dia_footer_description', 'Full-service cr
                                 <span class="footer-dir-heading">STUDIO</span>
                                 <ul class="footer-dir-list">
                                     <li><a href="<?php echo esc_url(home_url('/')); ?>">Home</a></li>
-                                    <li><a href="<?php echo esc_url(mileym3dia_get_page_url('about')); ?>">About Studio</a></li>
-                                    <li><a href="<?php echo esc_url(mileym3dia_get_page_url('services')); ?>">Services &amp; Packages</a></li>
-                                    <li><a href="<?php echo esc_url(mileym3dia_get_work_page_url()); ?>">Selected Work</a></li>
-                                    <li><a href="<?php echo esc_url(mileym3dia_get_page_url('contact')); ?>">Book / Contact</a></li>
+                                    <li><a href="<?php echo esc_url(mileym3dia_get_page_url('about')); ?>">About</a></li>
+                                    <li><a href="<?php echo esc_url(mileym3dia_get_page_url('services')); ?>">Services</a></li>
+                                    <li><a href="<?php echo esc_url(mileym3dia_get_work_page_url()); ?>">Portfolio</a></li>
+                                    <li><a href="<?php echo esc_url(mileym3dia_get_page_url('contact')); ?>">Contact</a></li>
                                 </ul>
                             </div>
                             <div class="footer-dir-col">
-                                <span class="footer-dir-heading">STORE &amp; RESOURCES</span>
+                                <span class="footer-dir-heading">SHOP &amp; RESOURCES</span>
                                 <ul class="footer-dir-list">
-                                    <li><a href="<?php echo esc_url($store_url); ?>">Studio Store</a></li>
+                                    <li><a href="<?php echo esc_url($store_url); ?>">Digital Shop</a></li>
                                     <li><a href="<?php echo esc_url(add_query_arg('cat', 'luts-video', $store_url)); ?>">LUTs &amp; Video Packs</a></li>
                                     <li><a href="<?php echo esc_url(add_query_arg('cat', 'audio-stems', $store_url)); ?>">Audio &amp; Stems</a></li>
-                                    <li><a href="<?php echo esc_url(mileym3dia_get_page_url('resources')); ?>">Creator Resources</a></li>
+                                    <li><a href="<?php echo esc_url(mileym3dia_get_page_url('resources')); ?>">Resources</a></li>
                                 </ul>
                             </div>
                             <div class="footer-dir-col">
-                                <span class="footer-dir-heading">PORTAL &amp; JOURNAL</span>
+                                <span class="footer-dir-heading">CREATOR HUB &amp; BLOG</span>
                                 <ul class="footer-dir-list">
+                                    <li><a href="<?php echo esc_url($portal_url); ?>">Creator Hub</a></li>
                                     <li><a href="<?php echo esc_url(add_query_arg('tab', 'register', $portal_url)); ?>">Create Account</a></li>
-                                    <li><a href="<?php echo esc_url(add_query_arg('tab', 'login', $portal_url)); ?>">Client Sign In</a></li>
                                     <li><a href="<?php echo esc_url($portal_url . '#member-vault'); ?>">Download Vault</a></li>
-                                    <li><a href="<?php echo esc_url(mileym3dia_get_blog_page_url()); ?>">Studio Journal</a></li>
+                                    <li><a href="<?php echo esc_url(mileym3dia_get_blog_page_url()); ?>">Blog</a></li>
                                 </ul>
                             </div>
                         </div>

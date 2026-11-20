@@ -933,7 +933,7 @@ function mileym3dia_get_page_banner_defaults() {
         ),
         'services' => array(
             'label'              => __('Services Page Banner', 'm3-big-red'),
-            'accent'             => 'lime',
+            'accent'             => 'electric-green',
             'desktop_asset'      => 'banners/banner-green-big-ideas.jpg',
             'mobile_asset'       => 'sections/green-hoodie-left.jpg',
             'width'              => 3072,
@@ -1010,7 +1010,7 @@ function mileym3dia_get_page_banner_defaults() {
         ),
         'creator_hub' => array(
             'label'              => __('Creator Hub Page Banner', 'm3-big-red'),
-            'accent'             => 'purple',
+            'accent'             => 'blue',
             'desktop_asset'      => 'banners/plate-cta-purple.jpg',
             'mobile_asset'       => 'sections/cta-purple-left-cameraman.jpg',
             'width'              => 2592,

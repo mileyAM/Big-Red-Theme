@@ -34,16 +34,21 @@
     --color-blue-glow: rgba(37, 141, 255, 0.28);
     --color-lime: #D4F329;
     --color-lime-glow: rgba(212, 243, 41, 0.26);
+    --color-electric-green: #39FF14;
+    --color-electric-green-glow: rgba(57, 255, 20, 0.28);
     --color-yellow: #FFDD00;
     --color-yellow-glow: rgba(255, 221, 0, 0.22);
 
+    /* Adjustable Desktop Banner Softening Overlay (Default 12% Black) */
+    --m3-banner-soften-opacity: 0.12;
+
     /* Customizable Per-Page Brand Accents */
     --accent-about: var(--color-red);
-    --accent-services: var(--color-lime);
+    --accent-services: var(--color-electric-green);
     --accent-work: var(--color-purple);
     --accent-store: var(--color-lime);
     --accent-resources: var(--color-blue);
-    --accent-creator-hub: var(--color-purple);
+    --accent-creator-hub: var(--color-blue);
     --accent-blog: var(--color-red);
     --accent-contact: var(--color-red);
 
@@ -94,8 +99,25 @@ body.accent-about, body.page-about {
 }
 body.accent-services, body.page-services {
     --page-accent: var(--accent-services);
-    --page-accent-glow: var(--color-lime-glow);
+    --page-accent-glow: var(--color-electric-green-glow);
     --page-accent-ink: #080808;
+}
+body.accent-services .text-lime,
+body.accent-services .text-yellow,
+body.page-services .text-lime,
+body.page-services .text-yellow {
+    color: var(--page-accent) !important;
+}
+body.accent-services .btn--accent-lime,
+body.page-services .btn--accent-lime {
+    background: var(--page-accent) !important;
+    border-color: var(--page-accent) !important;
+    color: #080808 !important;
+}
+body.accent-services .pricing-tab-btn.active,
+body.page-services .pricing-tab-btn.active {
+    border-color: var(--page-accent) !important;
+    box-shadow: 0 0 0 1px var(--page-accent), 0 8px 24px var(--page-accent-glow) !important;
 }
 body.accent-work, body.page-work, body.page-portfolio {
     --page-accent: var(--accent-work);
@@ -114,9 +136,18 @@ body.accent-resources, body.page-resources {
 }
 body.accent-creator-hub, body.page-creator-hub {
     --page-accent: var(--accent-creator-hub);
-    --page-accent-glow: var(--color-purple-glow);
+    --page-accent-glow: var(--color-blue-glow);
     --page-accent-ink: #F5F5F0;
     --page-accent-secondary: var(--color-blue);
+}
+body.accent-creator-hub .hub-tab-btn.is-active,
+body.page-creator-hub .hub-tab-btn.is-active {
+    border-bottom-color: var(--page-accent) !important;
+    color: var(--page-accent) !important;
+}
+body.accent-creator-hub .hub-card,
+body.page-creator-hub .hub-card {
+    border-color: rgba(37, 141, 255, 0.22);
 }
 body.accent-blog, body.blog, body.single-post, body.archive:not(.post-type-archive-project), body.search {
     --page-accent: var(--accent-blog);
@@ -506,7 +537,7 @@ body.admin-bar .mobile-navigation {
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 2.25rem;
+    gap: clamp(0.75rem, 1.15vw, 1.35rem);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -522,18 +553,19 @@ body.admin-bar .mobile-navigation {
     align-items: center;
     padding: 0.65rem 0;
     font-family: var(--font-mono);
-    font-size: 0.92rem;
-    letter-spacing: 0.08em;
+    font-size: 0.80rem;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
     font-weight: 700;
     color: #F1F5F9;
+    white-space: nowrap;
     transition: color var(--transition-fast);
 }
 
 .nav-menu .nav-caret {
     display: inline-block;
-    margin-left: 0.45rem;
-    font-size: 0.78rem;
+    margin-left: 0.35rem;
+    font-size: 0.72rem;
     color: var(--color-muted);
     transition: transform var(--transition-fast), color var(--transition-fast);
 }
@@ -541,7 +573,7 @@ body.admin-bar .mobile-navigation {
 .nav-menu .nav-item:hover .nav-caret,
 .nav-menu .nav-item:focus-within .nav-caret {
     transform: rotate(180deg);
-    color: var(--color-lime);
+    color: var(--page-accent);
 }
 
 .nav-menu > li > a::after {
@@ -551,7 +583,7 @@ body.admin-bar .mobile-navigation {
     left: 0;
     right: 0;
     height: 2px;
-    background: var(--color-red);
+    background: var(--page-accent);
     transform: scaleX(0);
     transform-origin: right;
     transition: transform var(--transition-medium);
@@ -11057,6 +11089,7 @@ body.accent-creator-hub .m3-member-pill--pro {
 }
 
 .m3-brand-banner-frame {
+    position: relative;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -11065,6 +11098,15 @@ body.accent-creator-hub .m3-member-pill--pro {
     margin-right: auto;
     background: #080808;
     line-height: 0;
+}
+
+.m3-brand-banner-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, var(--m3-banner-soften-opacity, 0.12));
+    pointer-events: none;
+    z-index: 1;
 }
 
 .m3-brand-banner-img {
