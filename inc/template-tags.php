@@ -934,8 +934,8 @@ function mileym3dia_get_page_banner_defaults() {
         'services' => array(
             'label'              => __('Services Page Banner', 'm3-big-red'),
             'accent'             => 'electric-green',
-            'desktop_asset'      => 'banners/banner-green-big-ideas.jpg',
-            'mobile_asset'       => 'sections/green-hoodie-left.jpg',
+            'desktop_asset'      => 'banners/banner-electric-green-big-ideas.jpg',
+            'mobile_asset'       => 'sections/electric-green-hoodie-left.jpg',
             'width'              => 3072,
             'height'             => 486,
             'alt'                => 'MILEYM3DIA — Big Ideas. Bold Content. Real Impact. Videography, Branding, Graphic Design, Content Creation. 10% Off Your First Project with code M3FIRST10.',
