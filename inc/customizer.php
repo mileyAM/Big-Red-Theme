@@ -126,21 +126,83 @@ function mileym3dia_customize_register($wp_customize) {
         'priority'    => 25,
     ));
 
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_bg_color', 'mileym3dia_colors', __('Dark Base Layer 1 (Deepest Background)', 'm3-big-red'), '#060609');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_bg_elevated', 'mileym3dia_colors', __('Dark Base Layer 2 (Alternating Section Shade)', 'm3-big-red'), '#0C0C12');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_bg_surface', 'mileym3dia_colors', __('Dark Base Layer 3 (Cards & Surfaces)', 'm3-big-red'), '#12121B');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_text_color', 'mileym3dia_colors', __('Primary Text Color', 'm3-big-red'), '#F4F4F6');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_bg_color', 'mileym3dia_colors', __('Dark Base Layer 1 (Obsidian Black)', 'm3-big-red'), '#080808');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_bg_elevated', 'mileym3dia_colors', __('Dark Base Layer 2 (Alternating Section Shade)', 'm3-big-red'), '#0E0E13');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_bg_surface', 'mileym3dia_colors', __('Dark Base Layer 3 (Cards & Surfaces)', 'm3-big-red'), '#14141C');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_text_color', 'mileym3dia_colors', __('Primary Text Color (Off-White)', 'm3-big-red'), '#F5F5F0');
 
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_red', 'mileym3dia_colors', __('Bold Red (Primary Brand Accent)', 'm3-big-red'), '#FF2442');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_yellow', 'mileym3dia_colors', __('Electric Yellow Accent', 'm3-big-red'), '#FFDD00');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_lime', 'mileym3dia_colors', __('Neon Lime Green Accent', 'm3-big-red'), '#00FF7F');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_blue', 'mileym3dia_colors', __('Royal Blue Accent', 'm3-big-red'), '#38BDF8');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_red', 'mileym3dia_colors', __('MILEYM3DIA Red (Primary Brand Accent)', 'm3-big-red'), '#EF252C');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_purple', 'mileym3dia_colors', __('Studio Purple Accent', 'm3-big-red'), '#8B38DC');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_blue', 'mileym3dia_colors', __('Electric Blue Accent', 'm3-big-red'), '#258DFF');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_lime', 'mileym3dia_colors', __('Kinetic Lime Accent', 'm3-big-red'), '#D4F329');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_color_yellow', 'mileym3dia_colors', __('Highlight Yellow Accent', 'm3-big-red'), '#FFDD00');
 
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_work', 'mileym3dia_colors', __('Work / Portfolio Page Accent', 'm3-big-red'), '#FF2442');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_services', 'mileym3dia_colors', __('Services & Pricing Page Accent', 'm3-big-red'), '#00FF7F');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_about', 'mileym3dia_colors', __('About Page Accent', 'm3-big-red'), '#FFDD00');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_resources', 'mileym3dia_colors', __('Blog, Store & Resources Accent', 'm3-big-red'), '#38BDF8');
-    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_contact', 'mileym3dia_colors', __('Contact Page Accent', 'm3-big-red'), '#FF2442');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_about', 'mileym3dia_colors', __('About Page Accent', 'm3-big-red'), '#EF252C');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_services', 'mileym3dia_colors', __('Services & Pricing Page Accent', 'm3-big-red'), '#D4F329');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_work', 'mileym3dia_colors', __('Portfolio / Work Page Accent', 'm3-big-red'), '#8B38DC');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_store', 'mileym3dia_colors', __('Digital Shop Page Accent', 'm3-big-red'), '#D4F329');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_resources', 'mileym3dia_colors', __('Resources Page Accent', 'm3-big-red'), '#258DFF');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_creator_hub', 'mileym3dia_colors', __('Creator Hub Page Accent', 'm3-big-red'), '#8B38DC');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_blog', 'mileym3dia_colors', __('Blog / Journal Page Accent', 'm3-big-red'), '#EF252C');
+    mileym3dia_add_customizer_color($wp_customize, 'mileym3dia_accent_contact', 'mileym3dia_colors', __('Contact Page Accent', 'm3-big-red'), '#EF252C');
+
+    // ============================================
+    // 2C. BRAND BANNERS & PAGE ARTWORK (WORDPRESS-NATIVE)
+    // ============================================
+    if (function_exists('mileym3dia_get_page_banner_defaults')) {
+        $wp_customize->add_panel('mileym3dia_banners_panel', array(
+            'title'       => __('2C. Brand Banners & Page Artwork', 'm3-big-red'),
+            'description' => __('Manage desktop/mobile banner artwork, alt text, focal positioning, overlay mode, editable headings, and functional CTAs for every page. Check "Restore Default Artwork" anytime to revert to the bundled original MILEYM3DIA banners.', 'm3-big-red'),
+            'priority'    => 28,
+        ));
+
+        $banner_priority = 10;
+        foreach (mileym3dia_get_page_banner_defaults() as $b_key => $b_def) {
+            $sec_id = 'mileym3dia_banner_section_' . $b_key;
+            $prefix = 'mileym3dia_banner_' . $b_key . '_';
+
+            $wp_customize->add_section($sec_id, array(
+                'title'       => $b_def['label'],
+                'panel'       => 'mileym3dia_banners_panel',
+                'description' => sprintf(__('Default desktop asset: %s | Default mobile asset: %s', 'm3-big-red'), $b_def['desktop_asset'], $b_def['mobile_asset']),
+                'priority'    => $banner_priority,
+            ));
+            $banner_priority += 10;
+
+            mileym3dia_add_customizer_image($wp_customize, $prefix . 'desktop', $sec_id, __('Desktop Banner Image (Leave empty for bundled default)', 'm3-big-red'), '');
+            mileym3dia_add_customizer_image($wp_customize, $prefix . 'mobile', $sec_id, __('Mobile Banner Image (Optional — Leave empty for bundled default)', 'm3-big-red'), '');
+            mileym3dia_add_customizer_field($wp_customize, $prefix . 'restore_default', $sec_id, __('Restore Default Original MILEYM3DIA Artwork', 'm3-big-red'), false, 'checkbox');
+            mileym3dia_add_customizer_field($wp_customize, $prefix . 'alt', $sec_id, __('Banner Alt Text (Accessibility)', 'm3-big-red'), $b_def['alt']);
+            mileym3dia_add_customizer_field($wp_customize, $prefix . 'mode', $sec_id, __('Display Mode', 'm3-big-red'), $b_def['mode'], 'select', array(
+                'choices' => array(
+                    'intact'  => __('Intact Original Banner + Action Bar Below (Recommended for composite art)', 'm3-big-red'),
+                    'overlay' => __('Clean Plate Background + HTML Text Overlay', 'm3-big-red'),
+                ),
+            ));
+            mileym3dia_add_customizer_field($wp_customize, $prefix . 'position', $sec_id, __('Focal Position', 'm3-big-red'), $b_def['position'], 'select', array(
+                'choices' => array(
+                    'center center' => __('Center', 'm3-big-red'),
+                    'left center'   => __('Left Center', 'm3-big-red'),
+                    'right center'  => __('Right Center', 'm3-big-red'),
+                    'center top'    => __('Top Center', 'm3-big-red'),
+                    'center bottom' => __('Bottom Center', 'm3-big-red'),
+                ),
+            ));
+            mileym3dia_add_customizer_field($wp_customize, $prefix . 'overlay', $sec_id, __('Overlay Scrim Strength (Overlay Mode)', 'm3-big-red'), $b_def['overlay'], 'select', array(
+                'choices' => array(
+                    'none'     => __('None (0%)', 'm3-big-red'),
+                    'subtle'   => __('Subtle (35%)', 'm3-big-red'),
+                    'balanced' => __('Balanced (55%)', 'm3-big-red'),
+                    'deep'     => __('Deep (72%)', 'm3-big-red'),
+                ),
+            ));
+            mileym3dia_add_customizer_field($wp_customize, $prefix . 'eyebrow', $sec_id, __('Banner Eyebrow Label', 'm3-big-red'), $b_def['eyebrow']);
+            mileym3dia_add_customizer_field($wp_customize, $prefix . 'heading', $sec_id, __('Banner Heading', 'm3-big-red'), $b_def['heading']);
+            mileym3dia_add_customizer_field($wp_customize, $prefix . 'subheading', $sec_id, __('Banner Subheading', 'm3-big-red'), $b_def['subheading'], 'textarea');
+            mileym3dia_add_customizer_field($wp_customize, $prefix . 'cta_text', $sec_id, __('Primary CTA Button Text', 'm3-big-red'), $b_def['cta_text']);
+            mileym3dia_add_customizer_field($wp_customize, $prefix . 'cta_url', $sec_id, __('Primary CTA Destination (slug, #anchor, or URL)', 'm3-big-red'), $b_def['cta_url']);
+        }
+    }
 
     // ============================================
     // 2B. HOMEPAGE SECTION POSITION & ORDERING

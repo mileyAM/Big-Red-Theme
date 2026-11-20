@@ -28,54 +28,48 @@ if (is_page()) {
 
 <main id="primary" class="site-main blog-main">
 
-    <!-- FULL-WIDTH BLOG HEADER -->
-    <section class="page-title-section blog-title-section bg-shade-base">
-        <div class="container container--wide">
-            <div class="blog-title-header">
-                <div class="blog-title-left">
-                    <span class="page-subtitle text-blue"><?php echo esc_html(get_theme_mod('mileym3dia_blog_section_eyebrow', '04 / STUDIO JOURNAL')); ?></span>
-                    <h1 class="page-title page-title--mega">
-                        INSIGHTS &amp; <span class="text-blue">ARTICLES</span>
-                    </h1>
-                </div>
-                <div class="blog-title-right">
-                    <p class="blog-description-text">
-                        Behind-the-scenes production breakdowns, cinematography &amp; lighting insights, brand strategy, web design, and studio audio notes.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Category Filter Navigation -->
-            <div class="blog-category-nav">
-                <span class="category-nav-label">TOPICS:</span>
-                <ul class="category-pills">
-                    <li class="category-pill active">
-                        <a href="<?php echo esc_url(mileym3dia_get_blog_page_url()); ?>">ALL ARTICLES</a>
+    <!-- OFFICIAL MILEYM3DIA BLOG BANNER (VISION MEETS EXECUTION — RED / NEUTRAL ACCENT) -->
+    <?php
+    ob_start();
+    ?>
+    <div class="blog-category-nav">
+        <span class="category-nav-label">TOPICS:</span>
+        <ul class="category-pills">
+            <li class="category-pill active">
+                <a href="<?php echo esc_url(mileym3dia_get_blog_page_url()); ?>">ALL ARTICLES</a>
+            </li>
+            <?php
+            $categories = get_categories(array(
+                'orderby'    => 'count',
+                'order'      => 'DESC',
+                'number'     => 6,
+                'hide_empty' => 1,
+            ));
+            if (!empty($categories)) :
+                foreach ($categories as $cat) :
+            ?>
+                    <li class="category-pill">
+                        <a href="<?php echo esc_url(get_category_link($cat->term_id)); ?>">
+                            <?php echo esc_html(strtoupper($cat->name)); ?>
+                            <span class="pill-count"><?php echo esc_html($cat->count); ?></span>
+                        </a>
                     </li>
-                    <?php
-                    $categories = get_categories(array(
-                        'orderby'    => 'count',
-                        'order'      => 'DESC',
-                        'number'     => 6,
-                        'hide_empty' => 1,
-                    ));
-                    if (!empty($categories)) :
-                        foreach ($categories as $cat) :
-                    ?>
-                            <li class="category-pill">
-                                <a href="<?php echo esc_url(get_category_link($cat->term_id)); ?>">
-                                    <?php echo esc_html(strtoupper($cat->name)); ?>
-                                    <span class="pill-count"><?php echo esc_html($cat->count); ?></span>
-                                </a>
-                            </li>
-                    <?php
-                        endforeach;
-                    endif;
-                    ?>
-                </ul>
-            </div>
-        </div>
-    </section>
+            <?php
+                endforeach;
+            endif;
+            ?>
+        </ul>
+    </div>
+    <?php
+    $blog_cats_html = ob_get_clean();
+    if (function_exists('mileym3dia_render_page_banner')) {
+        mileym3dia_render_page_banner('blog', array(
+            'heading_tag'      => 'h1',
+            'override_eyebrow' => get_theme_mod('mileym3dia_blog_section_eyebrow', '04 / STUDIO JOURNAL'),
+            'extra_html'       => $blog_cats_html,
+        ));
+    }
+    ?>
 
     <div class="container container--wide blog-container section-loose">
 

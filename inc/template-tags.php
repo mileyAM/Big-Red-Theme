@@ -884,4 +884,545 @@ function mileym3dia_render_bundle_builder($instance_id = 'main') {
     <?php
 }
 
+/**
+ * Canonical MILEYM3DIA Page Banner Defaults (Asset-First Source of Truth)
+ * Maps each page to its approved original banner artwork, mobile supporting image,
+ * page accent, display mode (intact composite vs clean plate overlay), and editable copy.
+ *
+ * @return array
+ */
+function mileym3dia_get_page_banner_defaults() {
+    return array(
+        'home' => array(
+            'label'              => __('Home Showcase Banner', 'm3-big-red'),
+            'accent'             => 'red',
+            'desktop_asset'      => 'banners/banner-create-capture-elevate.jpg',
+            'mobile_asset'       => 'sections/hoodie-globe-left.jpg',
+            'width'              => 3072,
+            'height'             => 690,
+            'alt'                => 'MILEYM3DIA — Create, Capture, Elevate. Media, Visuals, Branding, and Content. Tell Your Story. We Bring It To Life.',
+            'mode'               => 'intact',
+            'position'           => 'center center',
+            'overlay'            => 'none',
+            'eyebrow'            => 'CREATE • CAPTURE • ELEVATE',
+            'heading'            => 'TELL YOUR STORY. WE BRING IT TO LIFE.',
+            'subheading'         => 'Original MILEYM3DIA cinema production, editorial photography, brand identity, web design, and studio audio.',
+            'cta_text'           => 'START A PROJECT',
+            'cta_url'            => '/contact/',
+            'secondary_cta_text' => 'EXPLORE PORTFOLIO',
+            'secondary_cta_url'  => '/portfolio/',
+        ),
+        'about' => array(
+            'label'              => __('About Page Banner', 'm3-big-red'),
+            'accent'             => 'red',
+            'desktop_asset'      => 'banners/banner-elevate-your-brand.jpg',
+            'mobile_asset'       => 'sections/about-hoodie-graphic.jpg',
+            'width'              => 3072,
+            'height'             => 688,
+            'alt'                => 'MILEYM3DIA — Elevate Your Brand. Media, Visuals, Branding, and Content.',
+            'mode'               => 'intact',
+            'position'           => 'center center',
+            'overlay'            => 'none',
+            'eyebrow'            => '01 / WHO WE ARE',
+            'heading'            => 'ABOUT MILEYM3DIA',
+            'subheading'         => 'A full-service creative production agency uniting directors, photographers, brand designers, web developers, and audio engineers under one roof.',
+            'cta_text'           => 'LET\'S CREATE',
+            'cta_url'            => '/contact/',
+            'secondary_cta_text' => 'VIEW OUR WORK',
+            'secondary_cta_url'  => '/portfolio/',
+        ),
+        'services' => array(
+            'label'              => __('Services Page Banner', 'm3-big-red'),
+            'accent'             => 'lime',
+            'desktop_asset'      => 'banners/banner-green-big-ideas.jpg',
+            'mobile_asset'       => 'sections/green-hoodie-left.jpg',
+            'width'              => 3072,
+            'height'             => 486,
+            'alt'                => 'MILEYM3DIA — Big Ideas. Bold Content. Real Impact. Videography, Branding, Graphic Design, Content Creation. 10% Off Your First Project with code M3FIRST10.',
+            'mode'               => 'intact',
+            'position'           => 'center center',
+            'overlay'            => 'none',
+            'eyebrow'            => '03 / WHAT WE DO',
+            'heading'            => 'SERVICES & CAPABILITIES',
+            'subheading'         => 'Full-spectrum production for businesses, artists, and creators who want work that stands out. Use code M3FIRST10 for 10% off your first project.',
+            'cta_text'           => 'BUILD CUSTOM BUNDLE',
+            'cta_url'            => '#bundle-builder',
+            'secondary_cta_text' => 'BOOK A SHOOT',
+            'secondary_cta_url'  => '/contact/',
+        ),
+        'portfolio' => array(
+            'label'              => __('Portfolio Page Banner', 'm3-big-red'),
+            'accent'             => 'purple',
+            'desktop_asset'      => 'banners/banner-purple-visuals-speak.jpg',
+            'mobile_asset'       => 'sections/purple-hoodie-lens.jpg',
+            'width'              => 3072,
+            'height'             => 504,
+            'alt'                => 'MILEYM3DIA — Visuals That Speak. Branding That Sticks. Content That Connects. High Quality Visuals. Real Results.',
+            'mode'               => 'intact',
+            'position'           => 'center center',
+            'overlay'            => 'none',
+            'eyebrow'            => '02 / SELECTED WORK',
+            'heading'            => 'FEATURED PRODUCTIONS',
+            'subheading'         => 'Recent commercial films, music videos, brand identity systems, web builds, and editorial photography campaigns.',
+            'cta_text'           => 'WORK WITH US',
+            'cta_url'            => '/contact/',
+            'secondary_cta_text' => 'VIEW SERVICES',
+            'secondary_cta_url'  => '/services/',
+        ),
+        'store' => array(
+            'label'              => __('Digital Shop Page Banner', 'm3-big-red'),
+            'accent'             => 'lime',
+            'desktop_asset'      => 'banners/plate-green-big-ideas.jpg',
+            'mobile_asset'       => 'sections/green-m3-art.jpg',
+            'width'              => 3072,
+            'height'             => 486,
+            'alt'                => 'MILEYM3DIA Digital Shop — Lime studio production backdrop featuring branded M3 hoodie.',
+            'mode'               => 'overlay',
+            'layout'             => 'plate-right',
+            'position'           => 'left center',
+            'overlay'            => 'subtle',
+            'eyebrow'            => 'STUDIO STORE // WOOCOMMERCE DIGITAL & PHYSICAL',
+            'heading'            => 'STUDIO STORE',
+            'subheading'         => 'Production-tested LUT packs, analog drum & stem libraries, brand lookbook systems, heavyweight studio merch, and Pro retainer passes.',
+            'cta_text'           => '',
+            'cta_url'            => '',
+            'secondary_cta_text' => '',
+            'secondary_cta_url'  => '',
+        ),
+        'resources' => array(
+            'label'              => __('Resources Page Banner', 'm3-big-red'),
+            'accent'             => 'blue',
+            'desktop_asset'      => 'banners/banner-blue-your-vision.jpg',
+            'mobile_asset'       => 'sections/blue-photographer-right.jpg',
+            'width'              => 3072,
+            'height'             => 510,
+            'alt'                => 'MILEYM3DIA — Your Vision. Our Creation. Limitless Possibilities. Photography, Video Production, Branding, Content Strategy.',
+            'mode'               => 'intact',
+            'position'           => 'center center',
+            'overlay'            => 'none',
+            'eyebrow'            => 'CREATOR RESOURCE DIRECTORY // SCALABLE LIBRARY',
+            'heading'            => 'CREATOR TOOLS & ASSETS',
+            'subheading'         => 'Searchable directory of production-tested LUTs, studio downloads, free creative tools, tutorials, curated links, and partner deals.',
+            'cta_text'           => 'BROWSE LIBRARY',
+            'cta_url'            => '#toolkits',
+            'secondary_cta_text' => 'CREATOR HUB',
+            'secondary_cta_url'  => '/creator-hub/',
+        ),
+        'creator_hub' => array(
+            'label'              => __('Creator Hub Page Banner', 'm3-big-red'),
+            'accent'             => 'purple',
+            'desktop_asset'      => 'banners/plate-cta-purple.jpg',
+            'mobile_asset'       => 'sections/cta-purple-left-cameraman.jpg',
+            'width'              => 2592,
+            'height'             => 411,
+            'alt'                => 'MILEYM3DIA Creator Hub — Purple studio cameraman and branded M3 creator backdrop.',
+            'mode'               => 'overlay',
+            'layout'             => 'plate-center',
+            'position'           => 'center center',
+            'overlay'            => 'subtle',
+            'eyebrow'            => 'CLIENT & CREATOR PORTAL // MEMBER ACCESS',
+            'heading'            => 'CREATOR HUB',
+            'subheading'         => 'Register your free studio account, sign in to track live deliverables, and unlock member-protected production downloads.',
+            'cta_text'           => 'MEMBER PORTAL',
+            'cta_url'            => '#portal-access',
+            'secondary_cta_text' => 'ASSET VAULT',
+            'secondary_cta_url'  => '#member-vault',
+        ),
+        'blog' => array(
+            'label'              => __('Blog / Journal Page Banner', 'm3-big-red'),
+            'accent'             => 'red',
+            'desktop_asset'      => 'banners/banner-vision-meets-execution.jpg',
+            'mobile_asset'       => 'sections/hero-art-hd.jpg',
+            'width'              => 3072,
+            'height'             => 642,
+            'alt'                => 'MILEYM3DIA — Vision Meets Execution. High Quality Visuals. Powerful Impact.',
+            'mode'               => 'intact',
+            'position'           => 'center center',
+            'overlay'            => 'none',
+            'eyebrow'            => '04 / STUDIO JOURNAL',
+            'heading'            => 'INSIGHTS & ARTICLES',
+            'subheading'         => 'Behind-the-scenes production breakdowns, cinematography & lighting insights, brand strategy, web design, and studio audio notes.',
+            'cta_text'           => 'WORK WITH US',
+            'cta_url'            => '/contact/',
+            'secondary_cta_text' => '',
+            'secondary_cta_url'  => '',
+        ),
+        'contact' => array(
+            'label'              => __('Contact Page Banner', 'm3-big-red'),
+            'accent'             => 'red',
+            'desktop_asset'      => 'banners/banner-red-bring-to-life.jpg',
+            'mobile_asset'       => 'sections/cta-red-left-cameraman.jpg',
+            'width'              => 3072,
+            'height'             => 508,
+            'alt'                => 'MILEYM3DIA — We Don\'t Just Create. We Bring It To Life. Let\'s Create Something Legendary.',
+            'mode'               => 'intact',
+            'position'           => 'center center',
+            'overlay'            => 'none',
+            'eyebrow'            => 'START A PROJECT // 24H RESPONSE',
+            'heading'            => 'LET\'S BUILD YOUR NEXT PROJECT.',
+            'subheading'         => 'Tell us about your upcoming video shoot, photography session, brand identity, website, or audio project. We respond within 24 hours.',
+            'cta_text'           => 'JUMP TO BRIEF FORM',
+            'cta_url'            => '#contact-brief',
+            'secondary_cta_text' => '',
+            'secondary_cta_url'  => '',
+        ),
+    );
+}
+
+/**
+ * Resolve a page banner URL or slug cleanly without hard-coded hostnames.
+ *
+ * @param string $url
+ * @return string
+ */
+function mileym3dia_resolve_banner_cta_url($url) {
+    $url = trim((string) $url);
+    if ('' === $url) {
+        return '';
+    }
+    if ('#' === $url[0] || preg_match('#^(https?:|mailto:|tel:)#i', $url)) {
+        return $url;
+    }
+    $slug = trim($url, '/');
+    if ('' === $slug) {
+        return home_url('/');
+    }
+    if (function_exists('mileym3dia_get_page_url')) {
+        return mileym3dia_get_page_url($slug);
+    }
+    return home_url('/' . $slug . '/');
+}
+
+/**
+ * Retrieve resolved Customizer-backed configuration for a page banner.
+ *
+ * @param string $page_key
+ * @return array
+ */
+function mileym3dia_get_page_banner_config($page_key) {
+    $defaults = mileym3dia_get_page_banner_defaults();
+    if (!isset($defaults[$page_key])) {
+        return array();
+    }
+    $def             = $defaults[$page_key];
+    $prefix          = 'mileym3dia_banner_' . $page_key . '_';
+    $restore_default = (bool) get_theme_mod($prefix . 'restore_default', false);
+
+    $default_desktop_url = get_template_directory_uri() . '/assets/images/' . ltrim($def['desktop_asset'], '/');
+    $default_mobile_url  = get_template_directory_uri() . '/assets/images/' . ltrim($def['mobile_asset'], '/');
+
+    $custom_desktop = $restore_default ? '' : trim((string) get_theme_mod($prefix . 'desktop', ''));
+    $custom_mobile  = $restore_default ? '' : trim((string) get_theme_mod($prefix . 'mobile', ''));
+
+    $desktop_url = !empty($custom_desktop) ? $custom_desktop : $default_desktop_url;
+    $mobile_url  = !empty($custom_mobile) ? $custom_mobile : $default_mobile_url;
+
+    $allowed_modes = array('intact', 'overlay');
+    $mode          = get_theme_mod($prefix . 'mode', $def['mode']);
+    if (!in_array($mode, $allowed_modes, true)) {
+        $mode = $def['mode'];
+    }
+
+    $allowed_pos = array('center center', 'left center', 'right center', 'center top', 'center bottom');
+    $position    = get_theme_mod($prefix . 'position', $def['position']);
+    if (!in_array($position, $allowed_pos, true)) {
+        $position = $def['position'];
+    }
+
+    $allowed_overlays = array('none', 'subtle', 'balanced', 'deep');
+    $overlay          = get_theme_mod($prefix . 'overlay', $def['overlay']);
+    if (!in_array($overlay, $allowed_overlays, true)) {
+        $overlay = $def['overlay'];
+    }
+
+    $eyebrow    = get_theme_mod($prefix . 'eyebrow', $def['eyebrow']);
+    $heading    = get_theme_mod($prefix . 'heading', $def['heading']);
+    $subheading = get_theme_mod($prefix . 'subheading', $def['subheading']);
+    $alt        = get_theme_mod($prefix . 'alt', $def['alt']);
+    $cta_text   = get_theme_mod($prefix . 'cta_text', $def['cta_text']);
+    $cta_url    = mileym3dia_resolve_banner_cta_url(get_theme_mod($prefix . 'cta_url', $def['cta_url']));
+    $sec_text   = !empty($def['secondary_cta_text']) ? $def['secondary_cta_text'] : '';
+    $sec_url    = !empty($def['secondary_cta_url']) ? mileym3dia_resolve_banner_cta_url($def['secondary_cta_url']) : '';
+
+    return array(
+        'key'                => $page_key,
+        'accent'             => $def['accent'],
+        'desktop_url'        => $desktop_url,
+        'mobile_url'         => $mobile_url,
+        'width'              => (int) $def['width'],
+        'height'             => (int) $def['height'],
+        'alt'                => $alt,
+        'mode'               => $mode,
+        'layout'             => !empty($def['layout']) ? $def['layout'] : 'plate-center',
+        'position'           => $position,
+        'overlay'            => $overlay,
+        'eyebrow'            => $eyebrow,
+        'heading'            => $heading,
+        'subheading'         => $subheading,
+        'cta_text'           => $cta_text,
+        'cta_url'            => $cta_url,
+        'secondary_cta_text' => $sec_text,
+        'secondary_cta_url'  => $sec_url,
+        'is_default_desktop' => empty($custom_desktop),
+    );
+}
+
+/**
+ * Format a heading with its final word highlighted in the page's accent color.
+ *
+ * @param string $raw_heading
+ * @return string
+ */
+function mileym3dia_format_accent_heading($raw_heading) {
+    $raw_heading = trim((string) $raw_heading);
+    if ('' === $raw_heading) {
+        return '';
+    }
+    if (false !== strpos($raw_heading, '<')) {
+        return wp_kses_post($raw_heading);
+    }
+    $words = preg_split('/\s+/', $raw_heading);
+    if (count($words) > 1) {
+        $last = array_pop($words);
+        return esc_html(implode(' ', $words)) . ' <span class="text-accent">' . esc_html($last) . '</span>';
+    }
+    return '<span class="text-accent">' . esc_html($raw_heading) . '</span>';
+}
+
+/**
+ * Render an asset-first MILEYM3DIA page banner with intentional desktop intact/plate
+ * composition and dedicated mobile artwork + editable HTML controls.
+ *
+ * @param string $page_key
+ * @param array  $args
+ */
+function mileym3dia_render_page_banner($page_key, $args = array()) {
+    $cfg = mileym3dia_get_page_banner_config($page_key);
+    if (empty($cfg)) {
+        return;
+    }
+
+    $opts = wp_parse_args($args, array(
+        'heading_tag'      => 'h1',
+        'show_action_bar'  => true,
+        'extra_html'       => '',
+        'section_class'    => '',
+        'override_heading' => '',
+        'override_subhead' => '',
+        'override_eyebrow' => '',
+    ));
+
+    $heading_tag  = in_array($opts['heading_tag'], array('h1', 'h2', 'h3'), true) ? $opts['heading_tag'] : 'h1';
+    $eyebrow      = '' !== $opts['override_eyebrow'] ? $opts['override_eyebrow'] : $cfg['eyebrow'];
+    $heading      = '' !== $opts['override_heading'] ? $opts['override_heading'] : $cfg['heading'];
+    $subheading   = '' !== $opts['override_subhead'] ? $opts['override_subhead'] : $cfg['subheading'];
+    $heading_html = mileym3dia_format_accent_heading($heading);
+
+    $classes = array(
+        'm3-page-banner',
+        'm3-page-banner--' . sanitize_html_class($cfg['key']),
+        'm3-page-banner--' . sanitize_html_class($cfg['mode']),
+        'm3-page-banner--accent-' . sanitize_html_class($cfg['accent']),
+        'm3-page-banner--overlay-' . sanitize_html_class($cfg['overlay']),
+    );
+    if ('overlay' === $cfg['mode']) {
+        $classes[] = 'm3-page-banner--' . sanitize_html_class($cfg['layout']);
+    }
+    if (!empty($opts['section_class'])) {
+        $classes[] = $opts['section_class'];
+    }
+    ?>
+    <section class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-banner-page="<?php echo esc_attr($cfg['key']); ?>" data-banner-mode="<?php echo esc_attr($cfg['mode']); ?>">
+        <?php if ('intact' === $cfg['mode']) : ?>
+            <!-- DESKTOP & TABLET: Full-Fidelity Intact Original Artwork (Zero Distortion / Zero Overlapping Text) -->
+            <div class="m3-brand-banner-desktop">
+                <figure class="m3-brand-banner-frame">
+                    <img
+                        src="<?php echo esc_url($cfg['desktop_url']); ?>"
+                        alt="<?php echo esc_attr($cfg['alt']); ?>"
+                        width="<?php echo esc_attr((string) $cfg['width']); ?>"
+                        height="<?php echo esc_attr((string) $cfg['height']); ?>"
+                        class="m3-brand-banner-img"
+                        style="object-position: <?php echo esc_attr($cfg['position']); ?>;"
+                        decoding="async"
+                        fetchpriority="high"
+                    />
+                </figure>
+            </div>
+
+            <!-- MOBILE: Dedicated Supporting Artwork + Crisp Legible HTML Copy & Controls -->
+            <div class="m3-brand-banner-mobile">
+                <div class="m3-brand-banner-mobile__media">
+                    <img
+                        src="<?php echo esc_url($cfg['mobile_url']); ?>"
+                        alt="<?php echo esc_attr($cfg['alt']); ?>"
+                        class="m3-brand-banner-mobile__img"
+                        style="object-position: <?php echo esc_attr($cfg['position']); ?>;"
+                        decoding="async"
+                    />
+                    <div class="m3-brand-banner-mobile__scrim"></div>
+                </div>
+            </div>
+
+            <?php if ($opts['show_action_bar']) : ?>
+                <div class="m3-banner-actionbar bg-shade-base">
+                    <div class="container container--wide">
+                        <div class="m3-banner-actionbar__grid">
+                            <div class="m3-banner-actionbar__copy">
+                                <?php if (!empty($eyebrow)) : ?>
+                                    <span class="page-subtitle text-accent"><?php echo esc_html($eyebrow); ?></span>
+                                <?php endif; ?>
+                                <?php if (!empty($heading_html)) : ?>
+                                    <<?php echo $heading_tag; ?> class="m3-banner-actionbar__title"><?php echo $heading_html; ?></<?php echo $heading_tag; ?>>
+                                <?php endif; ?>
+                                <?php if (!empty($subheading)) : ?>
+                                    <p class="m3-banner-actionbar__lead"><?php echo esc_html($subheading); ?></p>
+                                <?php endif; ?>
+                            </div>
+
+                            <?php if (!empty($cfg['cta_text']) && !empty($cfg['cta_url'])) : ?>
+                                <div class="m3-banner-actionbar__actions">
+                                    <a href="<?php echo esc_url($cfg['cta_url']); ?>" class="btn btn--page-accent">
+                                        <span class="btn-text"><?php echo esc_html($cfg['cta_text']); ?></span>
+                                        <span class="btn-arrow">↗</span>
+                                    </a>
+                                    <?php if (!empty($cfg['secondary_cta_text']) && !empty($cfg['secondary_cta_url'])) : ?>
+                                        <a href="<?php echo esc_url($cfg['secondary_cta_url']); ?>" class="btn btn--streetwear-outline">
+                                            <span class="btn-text"><?php echo esc_html($cfg['secondary_cta_text']); ?></span>
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
+                        <?php if (!empty($opts['extra_html'])) : ?>
+                            <div class="m3-banner-actionbar__extra">
+                                <?php echo $opts['extra_html']; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+        <?php else : ?>
+            <!-- PLATE OVERLAY MODE: Clean Original Plate Backdrop + Real HTML Typography & Interactive Controls -->
+            <div class="m3-plate-banner">
+                <picture class="m3-plate-banner__picture">
+                    <source media="(max-width: 767px)" srcset="<?php echo esc_url($cfg['mobile_url']); ?>" />
+                    <img
+                        src="<?php echo esc_url($cfg['desktop_url']); ?>"
+                        alt="<?php echo esc_attr($cfg['alt']); ?>"
+                        width="<?php echo esc_attr((string) $cfg['width']); ?>"
+                        height="<?php echo esc_attr((string) $cfg['height']); ?>"
+                        class="m3-plate-banner__bg"
+                        style="object-position: <?php echo esc_attr($cfg['position']); ?>;"
+                        decoding="async"
+                        fetchpriority="high"
+                    />
+                </picture>
+                <div class="m3-plate-banner__scrim"></div>
+                <div class="container container--wide m3-plate-banner__inner">
+                    <div class="m3-plate-banner__content">
+                        <?php if (!empty($eyebrow)) : ?>
+                            <span class="page-subtitle text-accent"><?php echo esc_html($eyebrow); ?></span>
+                        <?php endif; ?>
+                        <?php if (!empty($heading_html)) : ?>
+                            <<?php echo $heading_tag; ?> class="page-title page-title--mega m3-plate-banner__title"><?php echo $heading_html; ?></<?php echo $heading_tag; ?>>
+                        <?php endif; ?>
+                        <?php if (!empty($subheading)) : ?>
+                            <p class="page-lead m3-plate-banner__lead"><?php echo esc_html($subheading); ?></p>
+                        <?php endif; ?>
+
+                        <?php if (!empty($cfg['cta_text']) && !empty($cfg['cta_url'])) : ?>
+                            <div class="m3-plate-banner__actions">
+                                <a href="<?php echo esc_url($cfg['cta_url']); ?>" class="btn btn--page-accent">
+                                    <span class="btn-text"><?php echo esc_html($cfg['cta_text']); ?></span>
+                                    <span class="btn-arrow">↗</span>
+                                </a>
+                                <?php if (!empty($cfg['secondary_cta_text']) && !empty($cfg['secondary_cta_url'])) : ?>
+                                    <a href="<?php echo esc_url($cfg['secondary_cta_url']); ?>" class="btn btn--streetwear-outline">
+                                        <span class="btn-text"><?php echo esc_html($cfg['secondary_cta_text']); ?></span>
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if (!empty($opts['extra_html'])) : ?>
+                            <div class="m3-plate-banner__extra">
+                                <?php echo $opts['extra_html']; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+    </section>
+    <?php
+}
+
+/**
+ * Render a supporting CTA band backed by the clean MILEYM3DIA CTA plate artwork
+ * (plate-cta-red.jpg or plate-cta-purple.jpg) with real clickable HTML buttons.
+ *
+ * @param string $variant 'red' | 'purple'
+ * @param array  $args
+ */
+function mileym3dia_render_cta_plate_banner($variant = 'red', $args = array()) {
+    $variant   = ('purple' === $variant) ? 'purple' : 'red';
+    $plate_img = get_template_directory_uri() . '/assets/images/banners/' . ('purple' === $variant ? 'plate-cta-purple.jpg' : 'plate-cta-red.jpg');
+    $mob_img   = get_template_directory_uri() . '/assets/images/sections/' . ('purple' === $variant ? 'cta-purple-left-cameraman.jpg' : 'cta-red-left-cameraman.jpg');
+
+    $opts = wp_parse_args($args, array(
+        'id'             => '',
+        'eyebrow'        => 'READY WHEN YOU ARE',
+        'heading'        => 'READY TO BRING YOUR VISION TO LIFE?',
+        'subheading'     => 'Let\'s create something legendary together.',
+        'primary_text'   => 'START YOUR PROJECT',
+        'primary_url'    => mileym3dia_get_page_url('contact'),
+        'secondary_text' => 'VIEW SERVICES',
+        'secondary_url'  => mileym3dia_get_page_url('services'),
+        'footer_html'    => '',
+    ));
+    ?>
+    <section class="m3-cta-plate m3-cta-plate--<?php echo esc_attr($variant); ?>"<?php echo !empty($opts['id']) ? ' id="' . esc_attr($opts['id']) . '"' : ''; ?>>
+        <picture class="m3-cta-plate__picture">
+            <source media="(max-width: 767px)" srcset="<?php echo esc_url($mob_img); ?>" />
+            <img
+                src="<?php echo esc_url($plate_img); ?>"
+                alt="<?php echo esc_attr('MILEYM3DIA studio production backdrop — ' . $opts['heading']); ?>"
+                class="m3-cta-plate__bg"
+                loading="lazy"
+                decoding="async"
+            />
+        </picture>
+        <div class="m3-cta-plate__scrim"></div>
+        <div class="container container--wide m3-cta-plate__inner">
+            <?php if (!empty($opts['eyebrow'])) : ?>
+                <span class="contact-eyebrow text-accent"><?php echo esc_html($opts['eyebrow']); ?></span>
+            <?php endif; ?>
+            <h2 class="m3-cta-plate__heading"><?php echo mileym3dia_format_accent_heading($opts['heading']); ?></h2>
+            <?php if (!empty($opts['subheading'])) : ?>
+                <p class="m3-cta-plate__subhead"><?php echo esc_html($opts['subheading']); ?></p>
+            <?php endif; ?>
+            <div class="hero-action-buttons m3-cta-plate__actions">
+                <?php if (!empty($opts['primary_text']) && !empty($opts['primary_url'])) : ?>
+                    <a href="<?php echo esc_url($opts['primary_url']); ?>" class="btn btn--page-accent">
+                        <span class="btn-text"><?php echo esc_html($opts['primary_text']); ?></span>
+                        <span class="btn-arrow">↗</span>
+                    </a>
+                <?php endif; ?>
+                <?php if (!empty($opts['secondary_text']) && !empty($opts['secondary_url'])) : ?>
+                    <a href="<?php echo esc_url($opts['secondary_url']); ?>" class="btn btn--streetwear-outline">
+                        <span class="btn-text"><?php echo esc_html($opts['secondary_text']); ?></span>
+                    </a>
+                <?php endif; ?>
+            </div>
+            <?php if (!empty($opts['footer_html'])) : ?>
+                <?php echo $opts['footer_html']; ?>
+            <?php endif; ?>
+        </div>
+    </section>
+    <?php
+}
+
 

@@ -5,52 +5,57 @@
 
 /* CSS Custom Properties & Design Tokens */
 :root {
-    /* Layered Dark Base - True Obsidian Black with Deep Carbon Contrast */
-    --bg-base: #050507;
-    --bg-elevated: #090A10;
-    --bg-surface: #0F1118;
-    --bg-card: #131520;
+    /* Layered Dark Base - Official MILEYM3DIA Obsidian Palette */
+    --bg-base: #080808;
+    --bg-elevated: #0E0E13;
+    --bg-surface: #14141C;
+    --bg-card: #171722;
 
     --color-black: var(--bg-base);
     --color-dark: var(--bg-elevated);
-    --color-darker: #06070A;
+    --color-darker: #060608;
     --color-surface: var(--bg-surface);
-    --color-gray: #151722;
-    --color-light-gray: #202334;
-    --color-border: #1F2232;
-    --color-border-subtle: #141622;
-    --color-muted: #CAD1E0;
-    --color-text-sub: #CBD5E1;
-    --color-text-label: #E2E8F0;
-    --color-white: #FFFFFF;
-    --color-off-white: #F8FAFC;
+    --color-gray: #181822;
+    --color-light-gray: #232332;
+    --color-border: #232332;
+    --color-border-subtle: #171722;
+    --color-muted: #C8C8C4;
+    --color-text-sub: #D6D6D1;
+    --color-text-label: #EAEAE4;
+    --color-white: #F5F5F0;
+    --color-off-white: #F5F5F0;
 
-    /* 4 Bold High-Legibility Complementary Accents */
-    --color-red: #FF2442;
-    --color-red-glow: rgba(255, 36, 66, 0.22);
+    /* Official MILEYM3DIA Brand Accents */
+    --color-red: #EF252C;
+    --color-red-glow: rgba(239, 37, 44, 0.28);
+    --color-purple: #8B38DC;
+    --color-purple-glow: rgba(139, 56, 220, 0.28);
+    --color-blue: #258DFF;
+    --color-blue-glow: rgba(37, 141, 255, 0.28);
+    --color-lime: #D4F329;
+    --color-lime-glow: rgba(212, 243, 41, 0.26);
     --color-yellow: #FFDD00;
-    --color-yellow-glow: rgba(255, 221, 0, 0.2);
-    --color-lime: #00FF7F;
-    --color-lime-glow: rgba(0, 255, 127, 0.2);
-    --color-blue: #38BDF8;
-    --color-blue-glow: rgba(56, 189, 248, 0.22);
-    --color-purple: var(--color-yellow);
-    --color-purple-glow: var(--color-yellow-glow);
+    --color-yellow-glow: rgba(255, 221, 0, 0.22);
 
-    /* Customizable Page Accents */
-    --accent-work: var(--color-red);
+    /* Customizable Per-Page Brand Accents */
+    --accent-about: var(--color-red);
     --accent-services: var(--color-lime);
-    --accent-about: var(--color-yellow);
+    --accent-work: var(--color-purple);
+    --accent-store: var(--color-lime);
     --accent-resources: var(--color-blue);
+    --accent-creator-hub: var(--color-purple);
+    --accent-blog: var(--color-red);
     --accent-contact: var(--color-red);
 
     --page-accent: var(--color-red);
     --page-accent-glow: var(--color-red-glow);
+    --page-accent-ink: #F5F5F0;
+    --page-accent-secondary: var(--color-red);
 
     /* Glass & Border Utilities */
-    --glass-bg: rgba(17, 17, 21, 0.92);
-    --glass-border: rgba(255, 255, 255, 0.12);
-    --glass-border-hover: rgba(239, 35, 60, 0.45);
+    --glass-bg: rgba(14, 14, 19, 0.92);
+    --glass-border: rgba(245, 245, 240, 0.12);
+    --glass-border-hover: rgba(239, 37, 44, 0.45);
 
     /* Typography Stacks */
     --font-stencil: 'Anton', 'Bebas Neue', 'Impact', sans-serif;
@@ -75,34 +80,61 @@
 }
 
 /* ============================================
-   PAGE ACCENT SYSTEM (MULTI-ACCENT COMPLEMENTARY PALETTE)
+   PAGE ACCENT SYSTEM (UNIFIED DARK + PAGE ACCENTS)
    ============================================ */
-body.accent-work, body.page-work, body.page-portfolio {
-    --page-accent: var(--accent-work);
+body.home-page {
+    --page-accent: var(--color-red);
     --page-accent-glow: var(--color-red-glow);
+    --page-accent-ink: #F5F5F0;
+}
+body.accent-about, body.page-about {
+    --page-accent: var(--accent-about);
+    --page-accent-glow: var(--color-red-glow);
+    --page-accent-ink: #F5F5F0;
 }
 body.accent-services, body.page-services {
     --page-accent: var(--accent-services);
     --page-accent-glow: var(--color-lime-glow);
+    --page-accent-ink: #080808;
 }
-body.accent-about, body.page-about {
-    --page-accent: var(--accent-about);
-    --page-accent-glow: var(--color-yellow-glow);
+body.accent-work, body.page-work, body.page-portfolio {
+    --page-accent: var(--accent-work);
+    --page-accent-glow: var(--color-purple-glow);
+    --page-accent-ink: #F5F5F0;
 }
-body.accent-blog, body.blog, body.single-post, body.archive:not(.post-type-archive-project), body.search, body.page-resources, body.accent-creator-hub, body.page-creator-hub {
+body.accent-store, body.page-store, body.woocommerce-page {
+    --page-accent: var(--accent-store);
+    --page-accent-glow: var(--color-lime-glow);
+    --page-accent-ink: #080808;
+}
+body.accent-resources, body.page-resources {
     --page-accent: var(--accent-resources);
     --page-accent-glow: var(--color-blue-glow);
+    --page-accent-ink: #F5F5F0;
+}
+body.accent-creator-hub, body.page-creator-hub {
+    --page-accent: var(--accent-creator-hub);
+    --page-accent-glow: var(--color-purple-glow);
+    --page-accent-ink: #F5F5F0;
+    --page-accent-secondary: var(--color-blue);
+}
+body.accent-blog, body.blog, body.single-post, body.archive:not(.post-type-archive-project), body.search {
+    --page-accent: var(--accent-blog);
+    --page-accent-glow: var(--color-red-glow);
+    --page-accent-ink: #F5F5F0;
 }
 body.accent-contact, body.page-contact {
     --page-accent: var(--accent-contact);
     --page-accent-glow: var(--color-red-glow);
+    --page-accent-ink: #F5F5F0;
 }
 
 .text-accent { color: var(--page-accent) !important; }
 .bg-accent { background-color: var(--page-accent) !important; }
 .border-accent { border-color: var(--page-accent) !important; }
 .text-red { color: var(--color-red) !important; }
-.text-yellow, .text-purple { color: var(--color-yellow) !important; }
+.text-purple { color: var(--color-purple) !important; }
+.text-yellow { color: var(--color-yellow) !important; }
 .text-lime { color: var(--color-lime) !important; }
 .text-blue { color: var(--color-blue) !important; }
 .bg-shade-base { background-color: var(--bg-base) !important; }
@@ -10933,6 +10965,421 @@ body.admin-bar .mobile-navigation {
         overflow-x: auto;
     }
 }
+
+/* ============================================
+   MILEYM3DIA — ASSET-FIRST BRAND BANNER & PAGE ACCENT SYSTEM
+   ============================================ */
+
+/* Page-Accent Interactive Button (WCAG contrast-safe across Red, Purple, Blue, Lime) */
+.btn--page-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.92rem 1.75rem;
+    background: var(--page-accent, #EF252C);
+    color: var(--page-accent-ink, #F5F5F0) !important;
+    border: 1px solid var(--page-accent, #EF252C);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    white-space: nowrap;
+}
+
+.btn--page-accent:hover,
+.btn--page-accent:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px var(--page-accent-glow, rgba(239, 37, 44, 0.35));
+    filter: brightness(1.07);
+    color: var(--page-accent-ink, #F5F5F0) !important;
+}
+
+/* Page-Accent Highlights for Navigation, Pills, Borders & Hover States */
+body:not(.home-page) .site-header .nav-menu > li.current-menu-item > a,
+body:not(.home-page) .site-header .nav-menu > li.current_page_item > a,
+body:not(.home-page) .site-header .nav-menu > li > a:hover {
+    color: var(--page-accent) !important;
+}
+
+body:not(.home-page) .btn--header-cta {
+    background: var(--page-accent) !important;
+    border-color: var(--page-accent) !important;
+    color: var(--page-accent-ink) !important;
+}
+
+body:not(.home-page) .btn--header-cta:hover {
+    box-shadow: 0 8px 24px var(--page-accent-glow) !important;
+}
+
+body.accent-work .filter-btn.active,
+body.accent-work .filter-btn:hover,
+body.accent-store .filter-btn.active,
+body.accent-store .filter-btn:hover,
+body.accent-resources .m3-type-tab.is-active,
+body.accent-resources .m3-type-tab:hover {
+    background: var(--page-accent) !important;
+    border-color: var(--page-accent) !important;
+    color: var(--page-accent-ink) !important;
+}
+
+body.accent-creator-hub .hub-tab-btn.is-active,
+body.accent-creator-hub .m3-member-pill--pro {
+    border-color: var(--page-accent-secondary, #258DFF);
+}
+
+/* Page Banner Wrapper */
+.m3-page-banner {
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-base, #080808);
+    padding-top: 76px;
+    overflow: hidden;
+}
+
+.m3-page-banner.m3-home-brand-showcase {
+    padding-top: 0;
+    border-top: 1px solid rgba(245, 245, 240, 0.08);
+    border-bottom: 1px solid rgba(245, 245, 240, 0.08);
+}
+
+/* Desktop & Tablet Intact Full-Fidelity Artwork Stage */
+.m3-brand-banner-desktop {
+    position: relative;
+    width: 100%;
+    background: #080808;
+    border-bottom: 2px solid var(--page-accent, #EF252C);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+.m3-brand-banner-frame {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #080808;
+    line-height: 0;
+}
+
+.m3-brand-banner-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+    image-rendering: auto;
+}
+
+/* Mobile Supporting Artwork Stage (Hidden on Desktop/Tablet) */
+.m3-brand-banner-mobile {
+    display: none;
+}
+
+.m3-brand-banner-mobile__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: #080808;
+    overflow: hidden;
+    border-bottom: 2px solid var(--page-accent, #EF252C);
+}
+
+.m3-brand-banner-mobile__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.m3-brand-banner-mobile__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(8, 8, 8, 0.12) 0%, rgba(8, 8, 8, 0.65) 100%);
+    pointer-events: none;
+}
+
+/* Clean Obsidian Action Bar Directly Below Intact Banners */
+.m3-banner-actionbar {
+    position: relative;
+    padding: 2rem 0 2.25rem;
+    border-bottom: 1px solid rgba(245, 245, 240, 0.08);
+}
+
+.m3-banner-actionbar__grid {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.m3-banner-actionbar__copy {
+    flex: 1 1 520px;
+    min-width: 0;
+}
+
+.m3-banner-actionbar__title {
+    margin: 0.45rem 0 0.65rem;
+    font-family: var(--font-stencil);
+    font-size: clamp(2rem, 3.6vw, 3.25rem);
+    line-height: 1.02;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--color-white, #F5F5F0);
+}
+
+.m3-banner-actionbar__lead {
+    margin: 0;
+    max-width: 740px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-muted, #C8C8C4);
+}
+
+.m3-banner-actionbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+.m3-banner-actionbar__extra {
+    margin-top: 1.5rem;
+    padding-top: 1.35rem;
+    border-top: 1px solid rgba(245, 245, 240, 0.08);
+}
+
+/* Plate Overlay Mode (Digital Shop plate-green-big-ideas.jpg & Creator Hub plate-cta-purple.jpg) */
+.m3-plate-banner {
+    position: relative;
+    width: 100%;
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    background: #080808;
+    border-bottom: 2px solid var(--page-accent, #EF252C);
+    overflow: hidden;
+}
+
+.m3-plate-banner__picture,
+.m3-plate-banner__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.m3-plate-banner__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(8, 8, 8, 0.25) 0%, rgba(8, 8, 8, 0.68) 45%, rgba(8, 8, 8, 0.85) 100%);
+}
+
+.m3-page-banner--overlay-none .m3-plate-banner__scrim {
+    background: none;
+}
+
+.m3-page-banner--overlay-balanced .m3-plate-banner__scrim {
+    background: linear-gradient(180deg, rgba(8, 8, 8, 0.45) 0%, rgba(8, 8, 8, 0.72) 100%);
+}
+
+.m3-page-banner--overlay-deep .m3-plate-banner__scrim {
+    background: linear-gradient(180deg, rgba(8, 8, 8, 0.65) 0%, rgba(8, 8, 8, 0.88) 100%);
+}
+
+.m3-page-banner--plate-center .m3-plate-banner__scrim {
+    background: radial-gradient(ellipse at center, rgba(8, 8, 8, 0.78) 0%, rgba(8, 8, 8, 0.35) 65%, rgba(8, 8, 8, 0.22) 100%);
+}
+
+.m3-plate-banner__inner {
+    position: relative;
+    z-index: 2;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    width: 100%;
+}
+
+.m3-page-banner--plate-right .m3-plate-banner__content {
+    margin-left: auto;
+    max-width: 64%;
+}
+
+.m3-page-banner--plate-center .m3-plate-banner__content {
+    margin: 0 auto;
+    max-width: 760px;
+    text-align: center;
+}
+
+.m3-page-banner--plate-center .m3-plate-banner__lead {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.m3-page-banner--plate-center .m3-plate-banner__actions {
+    justify-content: center;
+}
+
+.m3-plate-banner__title {
+    margin: 0.4rem 0 0.75rem;
+    font-size: clamp(2.4rem, 4.8vw, 4.2rem) !important;
+    line-height: 0.98;
+}
+
+.m3-plate-banner__lead {
+    max-width: 660px;
+    margin: 0 0 1.5rem;
+    color: var(--color-text-sub, #D6D6D1);
+}
+
+.m3-plate-banner__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.m3-plate-banner__extra {
+    margin-top: 1.75rem;
+}
+
+/* Supporting CTA Plate Section (plate-cta-red.jpg / plate-cta-purple.jpg) */
+.m3-cta-plate {
+    position: relative;
+    width: 100%;
+    padding: 4.5rem 0;
+    background: #080808;
+    border-top: 1px solid rgba(245, 245, 240, 0.08);
+    border-bottom: 1px solid rgba(245, 245, 240, 0.08);
+    overflow: hidden;
+}
+
+.m3-cta-plate__picture,
+.m3-cta-plate__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center center;
+    z-index: 0;
+}
+
+.m3-cta-plate__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(ellipse at center, rgba(8, 8, 8, 0.72) 0%, rgba(8, 8, 8, 0.32) 55%, rgba(8, 8, 8, 0.08) 100%);
+    pointer-events: none;
+}
+
+.m3-cta-plate__inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 880px;
+}
+
+.m3-cta-plate__heading {
+    margin: 0.65rem auto 1rem;
+    font-family: var(--font-stencil);
+    font-size: clamp(2.1rem, 4.4vw, 3.8rem);
+    line-height: 1.02;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--color-white, #F5F5F0);
+}
+
+.m3-cta-plate__subhead {
+    margin: 0 auto 2rem;
+    max-width: 640px;
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: var(--color-text-sub, #D6D6D1);
+}
+
+.m3-cta-plate__actions {
+    justify-content: center;
+}
+
+/* Tablet Adjustments (768px - 1024px) */
+@media (max-width: 1024px) {
+    .m3-page-banner--plate-right .m3-plate-banner__content {
+        max-width: 84%;
+    }
+    .m3-banner-actionbar {
+        padding: 1.65rem 0 1.85rem;
+    }
+}
+
+/* Mobile Deliberate Composition (<= 767px) — Never shrink wide banners to unreadable strips */
+@media (max-width: 767px) {
+    .m3-page-banner {
+        padding-top: 66px;
+    }
+    .m3-brand-banner-desktop {
+        display: none;
+    }
+    .m3-brand-banner-mobile {
+        display: block;
+    }
+    .m3-banner-actionbar {
+        padding: 1.45rem 0 1.75rem;
+    }
+    .m3-banner-actionbar__grid {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.15rem;
+    }
+    .m3-banner-actionbar__copy {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+    .m3-banner-actionbar__title {
+        font-size: clamp(1.85rem, 8.2vw, 2.45rem);
+    }
+    .m3-banner-actionbar__actions,
+    .m3-plate-banner__actions,
+    .m3-cta-plate__actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .m3-banner-actionbar__actions .btn,
+    .m3-plate-banner__actions .btn,
+    .m3-cta-plate__actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .m3-plate-banner {
+        min-height: 320px;
+    }
+    .m3-plate-banner__scrim {
+        background: linear-gradient(180deg, rgba(8, 8, 8, 0.58) 0%, rgba(8, 8, 8, 0.88) 100%);
+    }
+    .m3-page-banner--plate-right .m3-plate-banner__content,
+    .m3-page-banner--plate-center .m3-plate-banner__content {
+        margin-left: 0;
+        max-width: 100%;
+        text-align: left;
+    }
+    .m3-cta-plate {
+        padding: 3.25rem 0;
+    }
+}
+
 
 
 

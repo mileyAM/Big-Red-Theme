@@ -15,7 +15,7 @@ get_header();
 // Hero Customizer Values
 $hero_bg = get_theme_mod('mileym3dia_hero_slide1_image');
 if (empty($hero_bg)) {
-    $hero_bg = mileym3dia_asset_image_url('hero-cinematic.jpg');
+    $hero_bg = get_template_directory_uri() . '/assets/images/sections/hero-composite-hd.jpg';
 }
 $hero_eyebrow     = get_theme_mod('mileym3dia_hero_eyebrow', 'FULL-SERVICE CREATIVE MEDIA AGENCY');
 $hero_line_1      = get_theme_mod('mileym3dia_hero_headline_1', 'WE CREATE');
@@ -103,6 +103,17 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
             </section>
         <?php endif; ?>
     <?php endif; ?>
+
+    <!-- OFFICIAL MILEYM3DIA BRAND SHOWCASE BANNER (CREATE / CAPTURE / ELEVATE) -->
+    <?php
+    if (function_exists('mileym3dia_render_page_banner')) {
+        mileym3dia_render_page_banner('home', array(
+            'heading_tag'     => 'h2',
+            'show_action_bar' => false,
+            'section_class'   => 'm3-home-brand-showcase',
+        ));
+    }
+    ?>
 
     <!-- OPTIONAL WORDPRESS EDITOR CONTENT (WHEN STATIC PAGE IS USED) -->
     <?php if (is_page()) : ?>
@@ -764,50 +775,38 @@ $cta_sec_url      = get_theme_mod('mileym3dia_hero_cta_secondary_url', mileym3di
         $m3_home_sections['contact'] = array(
             'order' => (int) get_theme_mod('mileym3dia_section_order_contact', 70),
             'render' => function () {
+                $contact_email = get_theme_mod('mileym3dia_contact_email', 'hello@mileym3dia.com');
+                ob_start();
                 ?>
-                <section class="contact-cta section-loose bg-shade-elevated" id="contact">
-                    <div class="contact-ambient-glow"></div>
-                    <div class="container container--wide contact-container">
-                        <div class="contact-header">
-                            <span class="contact-eyebrow text-red"><?php echo esc_html(get_theme_mod('mileym3dia_contact_eyebrow', 'READY WHEN YOU ARE')); ?></span>
-                            <h2 class="contact-headline">
-                                <?php echo esc_html(get_theme_mod('mileym3dia_contact_cta', "LET'S BUILD YOUR NEXT PROJECT.")); ?>
-                            </h2>
-                            <p class="contact-subhead">
-                                <?php echo esc_html(get_theme_mod('mileym3dia_contact_subhead', 'Tell us about your upcoming video shoot, photography session, brand identity, website, or audio project. We respond to all inquiries within 24 hours.')); ?>
-                            </p>
-                        </div>
-
-                        <div class="contact-action-zone">
-                            <div class="hero-action-buttons">
-                                <a href="<?php echo esc_url(mileym3dia_get_page_url('contact')); ?>" class="btn btn--streetwear-red">
-                                    <span class="btn-text"><?php esc_html_e('START YOUR PROJECT BRIEF', 'm3-big-red'); ?></span>
-                                    <span class="btn-arrow">↗</span>
-                                </a>
-                                <?php $contact_email = get_theme_mod('mileym3dia_contact_email', 'hello@mileym3dia.com'); ?>
-                                <a href="mailto:<?php echo esc_attr($contact_email); ?>" class="btn btn--streetwear-outline">
-                                    <span class="btn-text"><?php echo esc_html($contact_email); ?></span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="contact-footer-telemetry">
-                            <div class="telemetry-box">
-                                <span class="box-label">STUDIO LOCATION</span>
-                                <span class="box-val"><?php echo esc_html(get_theme_mod('mileym3dia_contact_location', 'ORLANDO, FL · AVAILABLE WORLDWIDE')); ?></span>
-                            </div>
-                            <div class="telemetry-box">
-                                <span class="box-label">BOOKING STATUS</span>
-                                <span class="box-val box-val--active">● <?php echo esc_html(get_theme_mod('mileym3dia_contact_availability', 'NOW BOOKING NEW PROJECTS')); ?></span>
-                            </div>
-                            <div class="telemetry-box">
-                                <span class="box-label">RESPONSE TIME</span>
-                                <span class="box-val">WITHIN 24 HOURS</span>
-                            </div>
-                        </div>
+                <div class="contact-footer-telemetry">
+                    <div class="telemetry-box">
+                        <span class="box-label">STUDIO LOCATION</span>
+                        <span class="box-val"><?php echo esc_html(get_theme_mod('mileym3dia_contact_location', 'ORLANDO, FL · AVAILABLE WORLDWIDE')); ?></span>
                     </div>
-                </section>
+                    <div class="telemetry-box">
+                        <span class="box-label">BOOKING STATUS</span>
+                        <span class="box-val box-val--active">● <?php echo esc_html(get_theme_mod('mileym3dia_contact_availability', 'NOW BOOKING NEW PROJECTS')); ?></span>
+                    </div>
+                    <div class="telemetry-box">
+                        <span class="box-label">RESPONSE TIME</span>
+                        <span class="box-val">WITHIN 24 HOURS</span>
+                    </div>
+                </div>
                 <?php
+                $telemetry_html = ob_get_clean();
+                if (function_exists('mileym3dia_render_cta_plate_banner')) {
+                    mileym3dia_render_cta_plate_banner('red', array(
+                        'id'             => 'contact',
+                        'eyebrow'        => get_theme_mod('mileym3dia_contact_eyebrow', 'READY WHEN YOU ARE'),
+                        'heading'        => get_theme_mod('mileym3dia_contact_cta', "LET'S BUILD YOUR NEXT PROJECT."),
+                        'subheading'     => get_theme_mod('mileym3dia_contact_subhead', 'Tell us about your upcoming video shoot, photography session, brand identity, website, or audio project. We respond to all inquiries within 24 hours.'),
+                        'primary_text'   => __('START YOUR PROJECT BRIEF', 'm3-big-red'),
+                        'primary_url'    => mileym3dia_get_page_url('contact'),
+                        'secondary_text' => $contact_email,
+                        'secondary_url'  => 'mailto:' . $contact_email,
+                        'footer_html'    => $telemetry_html,
+                    ));
+                }
             },
         );
     }

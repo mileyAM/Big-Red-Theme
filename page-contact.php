@@ -63,40 +63,14 @@ get_header();
 
 <main id="primary" class="site-main contact-page-main">
 
-    <!-- FULL-WIDTH CONTACT HEADER -->
-    <section class="page-title-section contact-hero-section bg-shade-base">
-        <div class="container container--wide">
-            <div class="contact-hero-header">
-                <span class="page-subtitle text-red"><?php echo esc_html(get_theme_mod('mileym3dia_contact_eyebrow', 'START A PROJECT')); ?></span>
-                <?php
-                $contact_raw_title = get_theme_mod('mileym3dia_contact_cta', "LET'S BUILD YOUR NEXT PROJECT.");
-                if (strpos($contact_raw_title, '<') === false) {
-                    $parts = explode('BUILD ', $contact_raw_title, 2);
-                    if (count($parts) === 2) {
-                        $contact_title_html = esc_html($parts[0]) . 'BUILD <span class="text-red">' . esc_html($parts[1]) . '</span>';
-                    } else {
-                        $words = explode(' ', trim($contact_raw_title));
-                        if (count($words) > 2) {
-                            $last_two = array_slice($words, -2);
-                            $first_part = array_slice($words, 0, -2);
-                            $contact_title_html = esc_html(implode(' ', $first_part)) . ' <span class="text-red">' . esc_html(implode(' ', $last_two)) . '</span>';
-                        } else {
-                            $contact_title_html = '<span class="text-red">' . esc_html($contact_raw_title) . '</span>';
-                        }
-                    }
-                } else {
-                    $contact_title_html = wp_kses_post($contact_raw_title);
-                }
-                ?>
-                <h1 class="page-title page-title--mega">
-                    <?php echo $contact_title_html; ?>
-                </h1>
-                <p class="page-lead">
-                    <?php echo esc_html(get_theme_mod('mileym3dia_contact_subhead', 'Tell us about your upcoming video shoot, photography session, brand identity, website, or audio project. We respond to all inquiries within 24 hours.')); ?>
-                </p>
-            </div>
-        </div>
-    </section>
+    <!-- OFFICIAL MILEYM3DIA CONTACT BANNER (BRING TO LIFE — RED ACCENT) -->
+    <?php
+    if (function_exists('mileym3dia_render_page_banner')) {
+        mileym3dia_render_page_banner('contact', array(
+            'heading_tag' => 'h1',
+        ));
+    }
+    ?>
 
     <?php while (have_posts()) : the_post(); ?>
         <?php if (trim(get_the_content())) : ?>
@@ -110,7 +84,7 @@ get_header();
         <?php endif; ?>
     <?php endwhile; ?>
 
-    <section class="section-loose contact-page-section bg-shade-elevated">
+    <section class="section-loose contact-page-section bg-shade-elevated" id="contact-brief">
         <div class="container container--wide">
             <div class="contact-layout-grid">
 

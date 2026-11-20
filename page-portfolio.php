@@ -20,34 +20,14 @@ if (function_exists('has_post_thumbnail') && has_post_thumbnail()) {
 
 <main id="primary" class="site-main portfolio-page-main">
 
-    <!-- FULL-WIDTH PORTFOLIO HEADER -->
-    <section class="page-title-section portfolio-hero-section bg-shade-base"<?php echo !empty($portfolio_hero_bg) ? ' style="background-image: linear-gradient(180deg, rgba(6,6,9,0.78) 0%, rgba(6,6,9,0.95) 100%), url(\'' . esc_url($portfolio_hero_bg) . '\'); background-size: cover; background-position: center;"' : ''; ?>>
-        <div class="container container--wide">
-            <div class="portfolio-hero-header">
-                <span class="page-subtitle text-red"><?php echo esc_html(get_theme_mod('mileym3dia_portfolio_eyebrow', '02 / SELECTED WORK')); ?></span>
-                <?php
-                $portfolio_raw_title = get_theme_mod('mileym3dia_portfolio_hero_title', get_theme_mod('mileym3dia_portfolio_title', 'FEATURED PRODUCTIONS'));
-                if (strpos($portfolio_raw_title, '<') === false) {
-                    $words = explode(' ', trim($portfolio_raw_title));
-                    if (count($words) > 1) {
-                        $last_word = array_pop($words);
-                        $portfolio_title_html = esc_html(implode(' ', $words)) . ' <span class="text-red">' . esc_html($last_word) . '</span>';
-                    } else {
-                        $portfolio_title_html = '<span class="text-red">' . esc_html($portfolio_raw_title) . '</span>';
-                    }
-                } else {
-                    $portfolio_title_html = wp_kses_post($portfolio_raw_title);
-                }
-                ?>
-                <h1 class="page-title page-title--mega">
-                    <?php echo $portfolio_title_html; ?>
-                </h1>
-                <p class="page-lead">
-                    <?php echo esc_html(get_theme_mod('mileym3dia_portfolio_desc', 'Recent commercial films, music videos, brand identity systems, web builds, and photography campaigns.')); ?>
-                </p>
-            </div>
-        </div>
-    </section>
+    <!-- OFFICIAL MILEYM3DIA PORTFOLIO BANNER (VISUALS THAT SPEAK — PURPLE ACCENT) -->
+    <?php
+    if (function_exists('mileym3dia_render_page_banner')) {
+        mileym3dia_render_page_banner('portfolio', array(
+            'heading_tag' => 'h1',
+        ));
+    }
+    ?>
 
     <?php while (have_posts()) : the_post(); ?>
         <?php if (trim(get_the_content())) : ?>
@@ -237,23 +217,20 @@ if (function_exists('has_post_thumbnail') && has_post_thumbnail()) {
         </div>
     </section>
 
-    <!-- CONTACT CTA -->
-    <section class="contact-cta section-loose bg-shade-base">
-        <div class="container container--wide cta-content text-center">
-            <span class="contact-eyebrow text-red">START YOUR PRODUCTION</span>
-            <h2 class="contact-headline"><?php echo esc_html(get_theme_mod('mileym3dia_contact_cta', "LET'S BUILD YOUR NEXT PROJECT.")); ?></h2>
-            <p class="contact-subhead">Ready to shoot a commercial, music video, photo lookbook, or launch a new brand identity and website?</p>
-            <div class="hero-action-buttons" style="justify-content:center; margin-top:2rem;">
-                <a href="<?php echo esc_url(mileym3dia_get_page_url('contact')); ?>" class="btn btn--streetwear-red">
-                    <span class="btn-text"><?php esc_html_e('START A PROJECT', 'mileym3dia'); ?></span>
-                    <span class="btn-arrow">↗</span>
-                </a>
-                <a href="<?php echo esc_url(mileym3dia_get_pricing_page_url()); ?>" class="btn btn--streetwear-outline">
-                    <span class="btn-text"><?php esc_html_e('VIEW PACKAGES & PRICING', 'mileym3dia'); ?></span>
-                </a>
-            </div>
-        </div>
-    </section>
+    <!-- CONTACT CTA (PURPLE PLATE) -->
+    <?php
+    if (function_exists('mileym3dia_render_cta_plate_banner')) {
+        mileym3dia_render_cta_plate_banner('purple', array(
+            'eyebrow'        => 'START YOUR PRODUCTION',
+            'heading'        => get_theme_mod('mileym3dia_contact_cta', 'READY TO BRING YOUR VISION TO LIFE?'),
+            'subheading'     => 'Ready to shoot a commercial, music video, photo lookbook, or launch a new brand identity and website?',
+            'primary_text'   => __('START A PROJECT', 'm3-big-red'),
+            'primary_url'    => mileym3dia_get_page_url('contact'),
+            'secondary_text' => __('VIEW PACKAGES & PRICING', 'm3-big-red'),
+            'secondary_url'  => mileym3dia_get_pricing_page_url(),
+        ));
+    }
+    ?>
 
 </main>
 

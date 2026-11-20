@@ -39,35 +39,40 @@ if (strpos($store_title, '<') === false) {
 
 <main id="primary" class="site-main">
 
-    <!-- FULL-WIDTH STORE HERO -->
-    <section class="page-title-section bg-shade-base">
-        <div class="container container--wide">
-            <span class="page-subtitle text-lime"><?php echo esc_html($store_eyebrow); ?></span>
-            <h1 class="page-title page-title--mega">
-                <?php echo $store_title_html; ?>
-            </h1>
-            <p class="page-lead"><?php echo esc_html($store_subtitle); ?></p>
-
-            <div class="store-hero-bar">
-                <div class="store-hero-badges">
-                    <span class="store-pill"><span class="store-pill__dot"></span> INSTANT DIGITAL DOWNLOADS</span>
-                    <span class="store-pill">WOOCOMMERCE CHECKOUT</span>
-                    <span class="store-pill">DIGITAL &amp; PHYSICAL READY</span>
-                </div>
-                <div class="m3-wc-nav-actions">
-                    <a href="<?php echo esc_url($cart_url); ?>" class="btn btn--streetwear-red store-cart-trigger">
-                        <span>CART (<span id="store-cart-count"><?php echo esc_html((string) $cart_count); ?></span>) →</span>
-                    </a>
-                    <a href="<?php echo esc_url($checkout_url); ?>" class="btn btn--streetwear-outline">
-                        <span>CHECKOUT</span>
-                    </a>
-                    <a href="<?php echo esc_url($account_url); ?>" class="btn btn--streetwear-outline">
-                        <span>MY ACCOUNT &amp; DOWNLOADS</span>
-                    </a>
-                </div>
-            </div>
+    <!-- OFFICIAL MILEYM3DIA DIGITAL SHOP BANNER (LIME PLATE + WOOCOMMERCE CONTROLS) -->
+    <?php
+    ob_start();
+    ?>
+    <div class="store-hero-bar">
+        <div class="store-hero-badges">
+            <span class="store-pill"><span class="store-pill__dot"></span> INSTANT DIGITAL DOWNLOADS</span>
+            <span class="store-pill">WOOCOMMERCE CHECKOUT</span>
+            <span class="store-pill">DIGITAL &amp; PHYSICAL READY</span>
         </div>
-    </section>
+        <div class="m3-wc-nav-actions">
+            <a href="<?php echo esc_url($cart_url); ?>" class="btn btn--page-accent store-cart-trigger">
+                <span>CART (<span id="store-cart-count"><?php echo esc_html((string) $cart_count); ?></span>) →</span>
+            </a>
+            <a href="<?php echo esc_url($checkout_url); ?>" class="btn btn--streetwear-outline">
+                <span>CHECKOUT</span>
+            </a>
+            <a href="<?php echo esc_url($account_url); ?>" class="btn btn--streetwear-outline">
+                <span>MY ACCOUNT &amp; DOWNLOADS</span>
+            </a>
+        </div>
+    </div>
+    <?php
+    $store_extra_html = ob_get_clean();
+    if (function_exists('mileym3dia_render_page_banner')) {
+        mileym3dia_render_page_banner('store', array(
+            'heading_tag'      => 'h1',
+            'override_eyebrow' => $store_eyebrow,
+            'override_heading' => $store_title,
+            'override_subhead' => $store_subtitle,
+            'extra_html'       => $store_extra_html,
+        ));
+    }
+    ?>
 
     <?php while (have_posts()) : the_post(); ?>
         <?php if (trim(get_the_content())) : ?>

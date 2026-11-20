@@ -39,20 +39,14 @@ if (strpos($services_raw_title, '<') === false) {
 
 <main id="primary" class="site-main">
 
-    <!-- FULL-WIDTH SERVICES HERO -->
-    <section class="page-title-section services-hero-banner bg-shade-base">
-        <div class="services-hero-bg" style="background-image: url('<?php echo esc_url($services_hero_bg); ?>');"></div>
-        <div class="services-hero-overlay"></div>
-        <div class="container container--wide services-hero-inner">
-            <span class="page-subtitle text-lime"><?php echo esc_html(get_theme_mod('mileym3dia_services_eyebrow', '03 / WHAT WE DO')); ?></span>
-            <h1 class="page-title page-title--mega">
-                <?php echo $services_title_html; ?>
-            </h1>
-            <p class="page-lead">
-                <?php echo esc_html(get_theme_mod('mileym3dia_services_description', 'Full-spectrum production for businesses, artists, and creators who want work that stands out.')); ?>
-            </p>
-        </div>
-    </section>
+    <!-- OFFICIAL MILEYM3DIA SERVICES BANNER (BIG IDEAS — LIME ACCENT) -->
+    <?php
+    if (function_exists('mileym3dia_render_page_banner')) {
+        mileym3dia_render_page_banner('services', array(
+            'heading_tag' => 'h1',
+        ));
+    }
+    ?>
 
     <?php while (have_posts()) : the_post(); ?>
         <?php if (trim(get_the_content())) : ?>

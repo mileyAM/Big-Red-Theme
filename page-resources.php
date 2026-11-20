@@ -63,34 +63,14 @@ $type_labels        = array(
 
 <main id="primary" class="site-main resources-page-main">
 
-    <!-- FULL-WIDTH RESOURCES HEADER -->
-    <section class="page-title-section resources-hero-section bg-shade-base">
-        <div class="container container--wide">
-            <div class="resources-hero-header">
-                <span class="page-subtitle text-blue">CREATOR RESOURCE DIRECTORY // SCALABLE LIBRARY</span>
-                <?php
-                $resources_raw_title = get_theme_mod('mileym3dia_resources_title', 'CREATOR TOOLS & ASSETS');
-                if (strpos($resources_raw_title, '<') === false) {
-                    $words = explode(' ', trim($resources_raw_title));
-                    if (count($words) > 1) {
-                        $last_word = array_pop($words);
-                        $resources_title_html = esc_html(implode(' ', $words)) . ' <span class="text-blue">' . esc_html($last_word) . '</span>';
-                    } else {
-                        $resources_title_html = '<span class="text-blue">' . esc_html($resources_raw_title) . '</span>';
-                    }
-                } else {
-                    $resources_title_html = wp_kses_post($resources_raw_title);
-                }
-                ?>
-                <h1 class="page-title page-title--mega">
-                    <?php echo $resources_title_html; ?>
-                </h1>
-                <p class="page-lead">
-                    <?php echo esc_html(get_theme_mod('mileym3dia_resources_subtitle', 'Searchable directory of production-tested LUTs, studio downloads, free creative tools, tutorials, curated links, and partner deals managed directly from WordPress.')); ?>
-                </p>
-            </div>
-        </div>
-    </section>
+    <!-- OFFICIAL MILEYM3DIA RESOURCES BANNER (YOUR VISION — BLUE ACCENT) -->
+    <?php
+    if (function_exists('mileym3dia_render_page_banner')) {
+        mileym3dia_render_page_banner('resources', array(
+            'heading_tag' => 'h1',
+        ));
+    }
+    ?>
 
     <?php while (have_posts()) : the_post(); ?>
         <?php if (trim(get_the_content())) : ?>

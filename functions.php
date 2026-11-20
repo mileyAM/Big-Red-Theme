@@ -211,24 +211,27 @@ function mileym3dia_scripts() {
     wp_enqueue_style('mileym3dia-main', get_template_directory_uri() . '/css/main.css', array('mileym3dia-style'), file_exists($main_css_path) ? filemtime($main_css_path) : MILEYM3DIA_VERSION);
 
     $custom_colors = array(
-        '--bg-base'            => get_theme_mod('mileym3dia_bg_color', '#060609'),
-        '--bg-elevated'        => get_theme_mod('mileym3dia_bg_elevated', '#0C0C12'),
-        '--bg-surface'         => get_theme_mod('mileym3dia_bg_surface', '#12121B'),
-        '--color-black'        => get_theme_mod('mileym3dia_bg_color', '#060609'),
-        '--color-dark'         => get_theme_mod('mileym3dia_bg_elevated', '#0C0C12'),
-        '--color-surface'      => get_theme_mod('mileym3dia_bg_surface', '#12121B'),
-        '--color-white'        => get_theme_mod('mileym3dia_text_color', '#F4F4F6'),
-        '--color-off-white'    => get_theme_mod('mileym3dia_text_color', '#F4F4F6'),
-        '--color-red'          => get_theme_mod('mileym3dia_color_red', '#FF2442'),
+        '--bg-base'            => get_theme_mod('mileym3dia_bg_color', '#080808'),
+        '--bg-elevated'        => get_theme_mod('mileym3dia_bg_elevated', '#0E0E13'),
+        '--bg-surface'         => get_theme_mod('mileym3dia_bg_surface', '#14141C'),
+        '--color-black'        => get_theme_mod('mileym3dia_bg_color', '#080808'),
+        '--color-dark'         => get_theme_mod('mileym3dia_bg_elevated', '#0E0E13'),
+        '--color-surface'      => get_theme_mod('mileym3dia_bg_surface', '#14141C'),
+        '--color-white'        => get_theme_mod('mileym3dia_text_color', '#F5F5F0'),
+        '--color-off-white'    => get_theme_mod('mileym3dia_text_color', '#F5F5F0'),
+        '--color-red'          => get_theme_mod('mileym3dia_color_red', '#EF252C'),
+        '--color-purple'       => get_theme_mod('mileym3dia_color_purple', '#8B38DC'),
         '--color-yellow'       => get_theme_mod('mileym3dia_color_yellow', '#FFDD00'),
-        '--color-lime'         => get_theme_mod('mileym3dia_color_lime', '#00FF7F'),
-        '--color-blue'         => get_theme_mod('mileym3dia_color_blue', '#38BDF8'),
-        '--color-purple'       => get_theme_mod('mileym3dia_color_yellow', '#FFDD00'),
-        '--accent-work'        => get_theme_mod('mileym3dia_accent_work', '#FF2442'),
-        '--accent-services'    => get_theme_mod('mileym3dia_accent_services', '#00FF7F'),
-        '--accent-about'       => get_theme_mod('mileym3dia_accent_about', '#FFDD00'),
-        '--accent-resources'   => get_theme_mod('mileym3dia_accent_resources', '#38BDF8'),
-        '--accent-contact'     => get_theme_mod('mileym3dia_accent_contact', '#FF2442'),
+        '--color-lime'         => get_theme_mod('mileym3dia_color_lime', '#D4F329'),
+        '--color-blue'         => get_theme_mod('mileym3dia_color_blue', '#258DFF'),
+        '--accent-work'        => get_theme_mod('mileym3dia_accent_work', '#8B38DC'),
+        '--accent-services'    => get_theme_mod('mileym3dia_accent_services', '#D4F329'),
+        '--accent-about'       => get_theme_mod('mileym3dia_accent_about', '#EF252C'),
+        '--accent-store'       => get_theme_mod('mileym3dia_accent_store', '#D4F329'),
+        '--accent-resources'   => get_theme_mod('mileym3dia_accent_resources', '#258DFF'),
+        '--accent-creator-hub' => get_theme_mod('mileym3dia_accent_creator_hub', '#8B38DC'),
+        '--accent-blog'        => get_theme_mod('mileym3dia_accent_blog', '#EF252C'),
+        '--accent-contact'     => get_theme_mod('mileym3dia_accent_contact', '#EF252C'),
     );
 
     $variables = array();
@@ -315,7 +318,9 @@ function mileym3dia_body_classes($classes) {
         $classes[] = 'accent-services';
     } elseif (is_page('about') || is_page_template('page-about.php')) {
         $classes[] = 'accent-about';
-    } elseif (is_home() || (is_archive() && !is_post_type_archive('project')) || is_singular('post') || is_search() || is_page('resources') || is_page_template('page-resources.php')) {
+    } elseif (is_page('resources') || is_page_template('page-resources.php')) {
+        $classes[] = 'accent-resources';
+    } elseif (is_home() || (is_archive() && !is_post_type_archive('project')) || is_singular('post') || is_search()) {
         $classes[] = 'accent-blog';
     } elseif (is_page('contact') || is_page_template('page-contact.php')) {
         $classes[] = 'accent-contact';

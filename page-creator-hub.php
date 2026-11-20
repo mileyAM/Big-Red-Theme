@@ -77,15 +77,16 @@ $vault_files = !empty($vault_query['items']) ? $vault_query['items'] : array();
 
 <main id="primary" class="site-main creator-hub-main">
 
-    <section class="page-title-section creator-hub-title-section bg-shade-base">
-        <div class="container container--wide">
-            <span class="page-subtitle text-blue"><?php echo esc_html($hub_eyebrow); ?></span>
-            <h1 class="page-title page-title--mega">
-                CREATOR <span class="text-blue">HUB</span>
-            </h1>
-            <p class="page-lead"><?php echo esc_html($hub_subtitle); ?></p>
-        </div>
-    </section>
+    <!-- OFFICIAL MILEYM3DIA CREATOR HUB BANNER (PURPLE / BLUE PLATE) -->
+    <?php
+    if (function_exists('mileym3dia_render_page_banner')) {
+        mileym3dia_render_page_banner('creator_hub', array(
+            'heading_tag'      => 'h1',
+            'override_eyebrow' => $hub_eyebrow,
+            'override_subhead' => $hub_subtitle,
+        ));
+    }
+    ?>
 
     <?php while (have_posts()) : the_post(); ?>
         <?php if (trim(get_the_content())) : ?>

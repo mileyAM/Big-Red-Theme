@@ -12,43 +12,29 @@ if (!defined('ABSPATH')) {
 
 get_header();
 
-$about_img = get_theme_mod('mileym3dia_about_image', mileym3dia_asset_image_url('about-image.jpg'));
+$about_img = get_theme_mod('mileym3dia_about_image', '');
 if (empty($about_img)) {
-    $about_img = mileym3dia_asset_image_url('about-image.jpg');
+    $about_img = get_template_directory_uri() . '/assets/images/sections/about-camera-collage.jpg';
 }
-$split2_img = get_theme_mod('mileym3dia_about_split2_image', mileym3dia_asset_image_url('hero-cinematic.jpg'));
+$split2_img = get_theme_mod('mileym3dia_about_split2_image', '');
 if (empty($split2_img)) {
-    $split2_img = mileym3dia_asset_image_url('hero-cinematic.jpg');
+    $split2_img = get_template_directory_uri() . '/assets/images/sections/hoodie-camera-right.jpg';
 }
-
-$about_hero_bg = '';
-if (function_exists('has_post_thumbnail') && has_post_thumbnail()) {
-    $about_hero_bg = get_the_post_thumbnail_url(get_the_ID(), 'full');
-}
-if (empty($about_hero_bg)) {
-    $about_hero_bg = get_theme_mod('mileym3dia_about_hero_image', '');
-}
-$about_hero_title = get_theme_mod('mileym3dia_about_hero_title', '');
 ?>
 
 <main id="primary" class="site-main">
 
-    <!-- FULL-WIDTH PAGE HERO -->
-    <section class="page-title-section page-title-section--about bg-shade-base"<?php echo !empty($about_hero_bg) ? ' style="background-image: linear-gradient(180deg, rgba(6,6,9,0.78) 0%, rgba(6,6,9,0.95) 100%), url(\'' . esc_url($about_hero_bg) . '\'); background-size: cover; background-position: center;"' : ''; ?>>
-        <div class="container container--wide">
-            <span class="page-subtitle text-yellow"><?php echo esc_html(get_theme_mod('mileym3dia_about_eyebrow', '01 / WHO WE ARE')); ?></span>
-            <h1 class="page-title page-title--mega">
-                <?php if (!empty($about_hero_title)) : ?>
-                    <?php echo wp_kses_post($about_hero_title); ?>
-                <?php else : ?>
-                    ABOUT <span class="text-yellow"><?php echo esc_html(get_theme_mod('mileym3dia_brand_prefix', 'MILEYM')); ?><span class="brand-accent-3"><?php echo esc_html(get_theme_mod('mileym3dia_brand_accent_char', '3')); ?></span><?php echo esc_html(get_theme_mod('mileym3dia_brand_suffix', 'DIA')); ?></span>
-                <?php endif; ?>
-            </h1>
-            <p class="page-lead">
-                <?php echo esc_html(get_theme_mod('mileym3dia_about_content', 'MILEYM3DIA is a full-service creative production agency uniting directors, photographers, brand designers, web developers, and audio engineers under one roof.')); ?>
-            </p>
-        </div>
-    </section>
+    <!-- OFFICIAL MILEYM3DIA ABOUT BANNER (ELEVATE YOUR BRAND) -->
+    <?php
+    if (function_exists('mileym3dia_render_page_banner')) {
+        mileym3dia_render_page_banner('about', array(
+            'heading_tag'      => 'h1',
+            'override_eyebrow' => get_theme_mod('mileym3dia_about_eyebrow', ''),
+            'override_heading' => get_theme_mod('mileym3dia_about_hero_title', ''),
+            'override_subhead' => get_theme_mod('mileym3dia_about_content', ''),
+        ));
+    }
+    ?>
 
     <!-- WORDPRESS PAGE EDITOR CONTENT (IF ADDED IN WP ADMIN) -->
     <?php while (have_posts()) : the_post(); ?>
